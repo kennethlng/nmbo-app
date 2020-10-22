@@ -22,13 +22,13 @@ export default function SetProjectTitleInput(props) {
             title
         }, { merge: true })
         .then(function() {
-            onSuccess();
             setIsLoading(false); 
+            if (onSuccess) onSuccess();
         })
         .catch(function(error) {
-            onError(); 
             setIsLoading(false); 
             console.error("Error adding document: ", error);
+            if (onError) onError(); 
         });
     }
 
