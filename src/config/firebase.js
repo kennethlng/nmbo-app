@@ -1,4 +1,4 @@
-export const config = {
+exports.config = {
     apiKey: "AIzaSyBr8xHaUys9dW5aAqVJS6wbjynUg7g1FeA",
     authDomain: "chop-chop-97e18.firebaseapp.com",
     databaseURL: "https://chop-chop-97e18.firebaseio.com",
