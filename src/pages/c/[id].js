@@ -2,6 +2,7 @@ import App from '../../components/App'
 import { db } from '../../lib/firebase'
 import Head from 'next/head'
 import * as META from '../../constants/meta'
+import ProjectTasks from '../../components/ProjectTasks'
 
 export default function Project({ data }) {
     if (data) {
@@ -11,6 +12,7 @@ export default function Project({ data }) {
                     <title>{META.PROJECT_TITLE(data.title)}</title>
                 </Head>
                 {data.title}
+                <ProjectTasks/>
             </App>
         )
     }
