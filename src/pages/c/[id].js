@@ -6,6 +6,7 @@ import * as DB from '../../constants/db'
 import ProjectTasks from '../../components/ProjectTasks'
 import ProjectDoesntExistPlaceholder from '../../components/ProjectDoesntExistPlaceholder'
 import SetProjectTitleInput from '../../components/SetProjectTitleInput'
+import AddProjectTask from '../../components/AddProjectTask'
 
 export default function Project({ data }) {
     return (
@@ -24,6 +25,9 @@ export default function Project({ data }) {
                                             <SetProjectTitleInput
                                                 initialValue={data[DB.TITLE]}
                                             />
+                                        </div>
+                                        <div className="block">
+                                            <AddProjectTask/>
                                         </div>
                                         <div className="block mb-6">
                                             <ProjectTasks/>
