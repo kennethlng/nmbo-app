@@ -1,12 +1,18 @@
 import App from '../components/App'
 import Head from 'next/head'
 import * as META from '../constants/meta'
+import * as ROUTES from '../constants/routes'
 import RecentAuthUserProjectsMenu from '../components/RecentAuthUserProjectsMenu'
 import { AuthUserContext } from '../components/Session'
 import { useContext } from 'react'
+import AddProject from '../components/AddProject'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const authUser = useContext(AuthUserContext);
+  const router = useRouter(); 
+
+  const handleSuccess = (id) => router.push(ROUTES.PROJECT(id))
 
   return (
     <App>
@@ -24,9 +30,9 @@ export default function Home() {
                       <h1 className="title is-1 has-text-weight-bold">
                         Make a checklist
                       </h1>
-                      {/* <AddProject
+                      <AddProject
                         onSuccess={handleSuccess}
-                      /> */}
+                      />
                     </div>
                   </div>
                 </div>
