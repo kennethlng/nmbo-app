@@ -5,11 +5,14 @@ import * as ROUTES from '../../constants/routes'
 import { useRouter } from 'next/router'
 import { AuthUserContext } from '../Session'
 import Logo from '../Logo'
+import SignOutButton from '../SignOutButton'
+import SignInButton from '../SignInButton'
+import SignUpButton from '../SignUpButton'
 
 const Header = ({ pathname }) => {
   const [menuIsActive, setMenuIsActive] = React.useState(false); 
   const router = useRouter();
-  // const authUser = React.useContext(AuthUserContext);
+  const authUser = React.useContext(AuthUserContext);
 
   const handleLogoClick = () => {
     setMenuIsActive(false);
@@ -19,16 +22,6 @@ const Header = ({ pathname }) => {
     } else {
       router.push(ROUTES.HOME);
     }
-  }
-
-  const handleSignOutClick = () => {
-    firebase.signOut()
-      .then(function () {
-        // Sign-out successful.
-        router.push(ROUTES.HOME);
-      }).catch(function (error) {
-        console.log("Error signing out: ", error)
-      });
   }
 
   return (
@@ -90,28 +83,18 @@ const Header = ({ pathname }) => {
             </div>
           </div>
 
-          {/* <div className="navbar-end">
-            {authUser.isAnonymous ? (
-              <div className="navbar-item">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              {authUser && authUser.isAnonymous ? (
                 <div className="buttons">
-                  <a className="button is-primary is-outlined has-text-weight-bold" onClick={() => router.push(ROUTES.SIGN_UP)}>
-                    Create account
-                  </a>
-                  <a className="button is-light" onClick={() => router.push(ROUTES.SIGN_IN)}>
-                    Log in
-                  </a>
+                  <SignUpButton/>
+                  <SignInButton/>
                 </div>
-              </div>
-            ) : (
-                <div className="navbar-item">
-                  <div className="buttons">
-                    <a className="button is-light" onClick={handleSignOutClick}>
-                      Sign out
-                    </a>
-                  </div>
-                </div>
+              ) : (
+                <SignOutButton/>
               )}
-          </div> */}
+            </div>
+          </div>
         </div>
       </nav>
     </header>
