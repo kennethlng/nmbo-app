@@ -108,14 +108,14 @@ export default function ProjectTasksListRow(props) {
                 </div>
             </div>
             <div className="column is-narrow has-text-right">
-                <a className={`${task[DB.IS_HEARTED] ? 'has-text-primary' : 'has-text-grey-light'}`} onClick={handleHeartClick}>
+                <a className={`${task[DB.IS_HEARTED] ? 'has-text-primary' : 'has-text-grey-lighter'}`} onClick={handleHeartClick}>
                     <span className="icon">
                         <i className={`${task[DB.IS_HEARTED] ? 'fas' : 'far'} fa-heart fa-lg`}></i>
                     </span>
                 </a>
             </div>
             <div className="column is-narrow has-text-right">
-                <a className="has-text-grey-light" onClick={handleDeleteClick}>
+                <a className="has-text-grey-lighter" onClick={handleDeleteClick}>
                     <span className="icon">
                         <i className="far fa-times fa-lg"></i>
                     </span>
