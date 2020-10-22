@@ -1,13 +1,13 @@
 import App from '../components/App'
 import Head from 'next/head'
 
-export default function About() {
+export default function PrivacyPolicy() {
   return (
     <App>
       <Head>
-        <title>About | NMBO</title>
+        <title>Privacy Policy | NMBO</title>
       </Head>
-      <p>About Page</p>
+      <p>Privacy Policy Page</p>
     </App>
   )
 }

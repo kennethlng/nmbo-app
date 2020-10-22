@@ -1,13 +1,13 @@
 import App from '../components/App'
 import Head from 'next/head'
 
-export default function About() {
+export default function FAQS() {
   return (
     <App>
       <Head>
-        <title>About | NMBO</title>
+        <title>FAQS | NMBO</title>
       </Head>
-      <p>About Page</p>
+      <p>FAQS Page</p>
     </App>
   )
 }

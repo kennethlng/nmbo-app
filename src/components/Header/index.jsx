@@ -60,10 +60,10 @@ const Header = ({ pathname }) => {
               </a>
 
               <div className="navbar-dropdown is-boxed">
-                <a className="navbar-item">
+                <a className="navbar-item" onClick={() => router.push(ROUTES.TERMS_OF_SERVICE)}>
                   Terms of Service
-                              </a>
-                <a className="navbar-item">
+                </a>
+                <a className="navbar-item" onClick={() => router.push(ROUTES.PRIVACY_POLICY)}>
                   Privacy Policy
                 </a>
                 <a className="navbar-item" onClick={() => router.push(ROUTES.FAQS)}>

@@ -1,20 +1,21 @@
 import App from '../../components/App'
 import { db } from '../../lib/firebase'
 import Head from 'next/head'
+import * as META from '../../constants/meta'
 
 export default function Project({ data }) {
     if (data) {
         return (
             <App>
                 <Head>
-                    <title>{data.title}</title>
+                    <title>{META.PROJECT_TITLE(data.title)}</title>
                 </Head>
                 {data.title}
             </App>
         )
     }
 
-    return <div>Nothing</div>
+    return <div>This project doesn't exist</div>
 }
 
 export async function getServerSideProps(context) {
