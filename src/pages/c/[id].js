@@ -48,9 +48,10 @@ export default function Project({ data }) {
 export async function getServerSideProps(context) {
     const ref = db.collection("projects").doc(context.params.id);
     const doc = await ref.get(); 
+    
     return {
         props: {
-            data: doc.exists ? doc.data() : null
+            data: doc.exists ? JSON.parse(JSON.stringify(doc.data())) : null
         }
     }
 }
