@@ -41,11 +41,9 @@ const Header = ({ pathname }) => {
 
         <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
           <div className="navbar-start">
-            <Link href="/">
-              <a className="navbar-item" onClick={() => router.push(ROUTES.ABOUT)}>
-                About
-              </a>
-            </Link>
+            <a className="navbar-item" onClick={() => router.push(ROUTES.ABOUT)}>
+              About
+            </a>
             
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
