@@ -1,0 +1,90 @@
+[debug] [2020-10-23T06:19:54.697Z] ----------------------------------------------------------------------
+[debug] [2020-10-23T06:19:54.699Z] Command:       /Users/kennethlng/.nvm/versions/node/v10.20.1/bin/node /Users/kennethlng/.nvm/versions/node/v10.20.1/bin/firebase deploy --only functions:onCreateProjectTask
+[debug] [2020-10-23T06:19:54.700Z] CLI Version:   8.11.2
+[debug] [2020-10-23T06:19:54.700Z] Platform:      darwin
+[debug] [2020-10-23T06:19:54.700Z] Node Version:  v10.20.1
+[debug] [2020-10-23T06:19:54.702Z] Time:          Thu Oct 22 2020 23:19:54 GMT-0700 (Pacific Daylight Time)
+[debug] [2020-10-23T06:19:54.702Z] ----------------------------------------------------------------------
+[debug] [2020-10-23T06:19:54.702Z] 
+[debug] [2020-10-23T06:19:54.716Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-10-23T06:19:54.716Z] > authorizing via signed-in user
+[debug] [2020-10-23T06:19:54.717Z] [iam] checking project chop-chop-97e18 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-10-23T06:19:54.720Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/chop-chop-97e18:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2020-10-23T06:19:55.015Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:19:54 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=147","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-10-23T06:19:55.017Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/chop-chop-97e18/serviceAccounts/chop-chop-97e18@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-10-23T06:19:55.187Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:19:55 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'chop-chop-97e18'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$PROJECT_DIR" install
+[info] Running command: npm --prefix "$PROJECT_DIR" run build
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2020-10-23T06:20:24.702Z] > [functions] package.json contents: {
+  "name": "with-firebase-hosting",
+  "version": "5.0.0",
+  "description": "Host Next.js SSR app on Firebase Cloud Functions with Firebase Hosting redirects.",
+  "main": "firebaseFunctions.js",
+  "scripts": {
+    "dev": "next src/",
+    "build": "next build src/",
+    "start": "next start src/",
+    "serve": "npm run build && firebase emulators:start --only functions,hosting",
+    "shell": "npm run build && firebase functions:shell",
+    "deploy": "firebase deploy --only functions,hosting",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "@creativebulma/bulma-divider": "^1.1.0",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "bulma": "^0.9.1",
+    "bulma-pageloader": "^0.3.0",
+    "firebase": "^7.24.0",
+    "firebase-admin": "^8.9.0",
+    "firebase-functions": "^3.3.0",
+    "font-awesome": "^4.7.0",
+    "next": "^9.3.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-toastify": "^6.0.9",
+    "sass": "^1.27.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.1.6",
+    "firebase-tools": "^8.6.0"
+  },
+  "license": "MIT"
+}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2020-10-23T06:20:29.580Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/chop-chop-97e18/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-10-23T06:20:29.581Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/chop-chop-97e18/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-10-23T06:20:29.582Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/chop-chop-97e18/services/cloudbuild.googleapis.com  
+ 
+[debug] [2020-10-23T06:20:29.848Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-10-23T06:20:30.042Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2020-10-23T06:20:30.059Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2020-10-23T06:20:30.060Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/chop-chop-97e18/adminSdkConfig  
+ 
+[debug] [2020-10-23T06:20:30.297Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: preparing . directory for uploading... 
+[debug] [2020-10-23T06:20:30.302Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/chop-chop-97e18/configs  
+ 
+[debug] [2020-10-23T06:20:30.561Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: packaged . (12.13 MB) for uploading 
+[debug] [2020-10-23T06:20:35.903Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/chop-chop-97e18/locations/-/functions  
+ 
+[debug] [2020-10-23T06:20:36.486Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-10-23T06:20:36.491Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/chop-chop-97e18/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-10-23T06:20:37.010Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 23 Oct 2020 06:20:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-10-23T06:20:37.010Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-3ce967ed-7117-45ba-8066-c531df33fbd8/a3d0ee6f-59ae-4365-9c0e-3b5802ce0f5a.zip?GoogleAccessId=service-110931751070@gcf-admin-robot.iam.gserviceaccount.com&Expires=1603435836&Signature=wwf4bmzsV9wsUiwZYw3rk3NXl9ak0G5dY3ujanW8Njd33bJno2RuU2GjUoYjR46dGP1KDqilo9E0f2PWnFPLONLD5Rb7DUUrRtjWi5RBRCSpKshBLvTINaiIQ%2B0il%2FbznpMxph0finHmBNRGRDF%2BFuYx%2BXTm5ZuT6uIiFPwiHRlP1Q2flkt6qHCrTo%2BjjQoB%2BWJPAmPmCVYhss%2FGB0%2ByCV77IlGeWWOAiutfTWtS6HjznU41bZO4aFoG9soX6Q8kcUwE%2FhsLs%2FUCYj%2FM3OPL5dNFnTWIpfty5xZGCoQ7AWFpTkUVxtysjyTMREnyaMM7HGS0P5u8ExXPVLF6OLysZg%3D%3D  
+ <request body omitted>
