@@ -10,20 +10,20 @@ export default function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(function (authUser) {
-          if (authUser) {
-              setAuthUser(authUser)
-          } else {
-              setAuthUser(null);
+        if (authUser) {
+          setAuthUser(authUser)
+        } else {
+          setAuthUser(null);
 
-              auth.signInAnonymously()
-                  .catch(function (error) {
-                      // Handle Errors here.
-                      var errorCode = error.code;
-                      var errorMessage = error.message;
-                      // ...
-                      console.log(errorMessage);
-                  });
-          }
+          auth.signInAnonymously()
+            .catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+              console.log(errorMessage);
+            });
+        }
       })
       
       return () => unsubscribe()
