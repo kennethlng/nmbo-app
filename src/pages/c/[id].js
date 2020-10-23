@@ -1,10 +1,11 @@
 import App from '../../components/App'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { db, firebase } from '../../lib/firebase'
 import Head from 'next/head'
 import * as META from '../../constants/meta'
 import * as DB from '../../constants/db'
+import * as ROUTES from '../../constants/routes'
 import ProjectTasks from '../../components/ProjectTasks'
 import ProjectDoesntExistPlaceholder from '../../components/ProjectDoesntExistPlaceholder'
 import SetProjectTitleInput from '../../components/SetProjectTitleInput'
@@ -30,7 +31,12 @@ export default function Project({ data }) {
     return (
         <App>
             <Head>
-                <title>{META.PROJECT_TITLE(data ? data.title : "🤔")}</title>
+                <title>{data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}</title>
+                <meta name="title" content={data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}/>
+                <meta property="og:url" content={data ? META.URL + ROUTES.PROJECT(router.query.id) : META.URL}/>
+                <meta property="og:title" content={data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}/>
+                <meta property="twitter:url" content={data ? META.URL + ROUTES.PROJECT(router.query.id) : META.URL}/>
+                <meta property="twitter:title" content={data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}/>
             </Head>
             <section className="hero">
                 <div className="hero-body">

@@ -4,7 +4,10 @@ export const DESCRIPTION = "Just copy the link and share it. No account or downl
 export const SIGN_IN_TITLE = "Log in | NMBO";
 export const SIGN_UP_TITLE = "Sign up | NMBO";
 export const ABOUT_TITLE = "About | NMBO";
-export const FAQS_TITLE = "FAQs | NMBO"
+export const FAQS_TITLE = "FAQs | NMBO";
+export const PRIVACY_POLICY_TITLE = "Privacy Policy | NMBO";
+export const TERMS_OF_SERVICE_TITLE = "Terms of Service | NMBO";
 export const PROJECT_TITLE = (projectTitle) => `${projectTitle} | NMBO Checklist`;
 export const IMAGE = ""
-export const URL = "https://nmbo.app/"
+export const URL = "https://nmbo.app"
+export const CHECKLIST_DOESNT_EXIST = "Checklist doesn't exist | NMBO"

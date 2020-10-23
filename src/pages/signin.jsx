@@ -37,7 +37,12 @@ export default function SignIn() {
     return (    
         <App>
             <Head>
-                {META.SIGN_IN_TITLE}
+                <title>{META.SIGN_IN_TITLE}</title>
+                <meta name="title" content={META.SIGN_IN_TITLE} />
+                <meta property="og:url" content={META.URL + ROUTES.SIGN_IN} />
+                <meta property="og:title" content={META.SIGN_IN_TITLE} />
+                <meta property="twitter:url" content={META.URL + ROUTES.SIGN_IN} />
+                <meta property="twitter:title" content={META.SIGN_IN_TITLE} />
             </Head>
             <section className="hero">
                 <div className="hero-body">

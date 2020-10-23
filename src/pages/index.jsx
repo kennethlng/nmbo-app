@@ -18,6 +18,11 @@ export default function Home() {
     <App>
       <Head>
         <title>{META.TITLE}</title>
+        <meta name="title" content={META.TITLE}/>
+        <meta property="og:url" content={META.URL}/>
+        <meta property="og:title" content={META.TITLE}/>
+        <meta property="twitter:url" content={META.URL}/>
+        <meta property="twitter:title" content={META.TITLE}/>
       </Head>
       {authUser ? (
         <div>
