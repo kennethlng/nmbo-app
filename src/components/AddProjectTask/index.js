@@ -21,6 +21,7 @@ export default function AddProjectTask(props) {
         db.collection(DB.PROJECTS).doc(router.query.id).collection(DB.PROJECT_TASKS).add({
             [DB.TITLE]: title,
             [DB.CREATED_BY]: authUser.uid,
+            [DB.MODIFIED_BY]: authUser.uid,
             [DB.IS_HEARTED]: false,
             [DB.IS_COMPLETED]: false 
         })
