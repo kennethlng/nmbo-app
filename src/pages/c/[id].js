@@ -16,7 +16,7 @@ export default function Project({ data }) {
     const authUser = useContext(AuthUserContext); 
 
     useEffect(() => {
-        if (data) {
+        if (data && authUser) {
             db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(router.query.id).set({
                 [DB.ID]: router.query.id,
                 [DB.TITLE]: data[DB.TITLE],
