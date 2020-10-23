@@ -8,6 +8,7 @@ export const FAQS_TITLE = "FAQs | NMBO";
 export const PRIVACY_POLICY_TITLE = "Privacy Policy | NMBO";
 export const TERMS_OF_SERVICE_TITLE = "Terms of Service | NMBO";
 export const PROJECT_TITLE = (projectTitle) => `${projectTitle} | NMBO Checklist`;
-export const IMAGE = ""
-export const URL = "https://nmbo.app"
-export const CHECKLIST_DOESNT_EXIST = "Checklist doesn't exist | NMBO"
+export const IMAGE = "https://github.com/kennethlng/nmbo-app/blob/master/src/assets/images/image_1200x630_20201023_v0.png?raw=true";
+export const URL = "https://nmbo.app";
+export const CHECKLIST_DOESNT_EXIST = "Checklist doesn't exist | NMBO";
+export const LOGO = "https://github.com/kennethlng/nmbo-app/blob/master/src/assets/images/logo_250x75_20201023.png?raw=true";
