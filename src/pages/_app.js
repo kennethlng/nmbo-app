@@ -7,6 +7,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import Head from 'next/head'
 import * as META from '../constants/meta'
+import NProgress from 'nprogress'
+import Router from 'next/router'
+import 'nprogress/nprogress.css'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
@@ -32,6 +35,13 @@ export default function MyApp({ Component, pageProps }) {
       
       return () => unsubscribe()
   }, [])
+
+  Router.events.on('routeChangeStart', (url) => {
+    console.log(`Loading: ${url}`)
+    NProgress.start()
+  })
+  Router.events.on('routeChangeComplete', () => NProgress.done())
+  Router.events.on('routeChangeError', () => NProgress.done())
 
   return (
     <AuthUserContext.Provider value={authUser}>
