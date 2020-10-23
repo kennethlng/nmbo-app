@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as DB from '../../constants/db';
+import { AuthUserContext } from '../Session';
 
 export default function ProjectTasksListRow(props) {
     const { task } = props; 
     const [title, setTitle] = useState(''); 
     const [isLoading, setIsLoading] = useState(false); 
+    const authUser = useContext(AuthUserContext); 
 
     useEffect(() => {
         setTitle(task[DB.TITLE])
@@ -12,7 +14,8 @@ export default function ProjectTasksListRow(props) {
 
     const handleCheckClick = () => {
         task.ref.update({
-            [DB.IS_COMPLETED]: !task[DB.IS_COMPLETED]
+            [DB.IS_COMPLETED]: !task[DB.IS_COMPLETED],
+            [DB.MODIFIED_BY]: authUser.uid
         })
         .then(function() {
             // Document successfully updated
@@ -34,7 +37,8 @@ export default function ProjectTasksListRow(props) {
 
     const handleHeartClick = () => {
         task.ref.update({
-            [DB.IS_HEARTED]: !task[DB.IS_HEARTED]
+            [DB.IS_HEARTED]: !task[DB.IS_HEARTED],
+            [DB.MODIFIED_BY]: authUser.uid
         })
         .then(function() {
             // Document successfully updated
@@ -64,7 +68,8 @@ export default function ProjectTasksListRow(props) {
         setIsLoading(true); 
 
         task.ref.update({
-            [DB.TITLE]: title
+            [DB.TITLE]: title,
+            [DB.MODIFIED_BY]: authUser.uid
         })
         .then(function() {
             // Document successfully updated
