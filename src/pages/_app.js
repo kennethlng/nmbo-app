@@ -1,8 +1,10 @@
 import '../styles/styles.sass'
 import { AuthUserContext } from '../components/Session'
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { auth } from '../lib/firebase'
-import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/css/all.css'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
@@ -31,6 +33,7 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <AuthUserContext.Provider value={authUser}>
+      <ToastContainer/>
       <Component {...pageProps} />  
     </AuthUserContext.Provider>
   )
