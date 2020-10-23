@@ -25,7 +25,7 @@ export default function Project({ data }) {
             }, { merge: true })
             .catch(error => console.log(error))
         }
-    }, [])
+    }, [authUser])
 
     return (
         <App>
