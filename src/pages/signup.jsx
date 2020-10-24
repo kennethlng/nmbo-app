@@ -5,6 +5,7 @@ import * as META from '../constants/meta';
 import { useRouter } from 'next/router';
 import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
+import * as EmailValidator from 'email-validator'
 
 export default function SignUp() {
     const router = useRouter();
@@ -17,7 +18,7 @@ export default function SignUp() {
     const handleSubmit = () => {
         if (loading) return;
 
-        if (email === '') {
+        if (!EmailValidator.validate(email)) {
             setEmailHelp('Please enter a valid email');
             return 
         }
@@ -44,6 +45,16 @@ export default function SignUp() {
         });
     }
 
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        setEmailHelp('');
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setPasswordHelp(''); 
+    }
+
     return (
         <App>
             <Head>
@@ -59,23 +70,23 @@ export default function SignUp() {
                     <div className="container">
                         <div className="columns is-centered">
                             <div className="column is-half">
-                                <h1 className="title is-1 has-text-weight-bold">Sign up</h1>
+                                <h1 className="title is-1 has-text-weight-bold">Create an account</h1>
                                 <h2 className="subtitle is-4 has-text-grey">
-                                    Access your projects anywhere you go
+                                    Access your checklists anywhere you go
                                 </h2>
                                 <div className="block">
                                     <fieldset disabled={loading}>
                                         <div className="field">
                                             <label className="label">Email</label>
                                             <div className="control">
-                                                <input className="input" type="email" onChange={e => setEmail(e.target.value)}/>
+                                                <input className="input" type="email" onChange={handleEmailChange}/>
                                             </div>
                                             <p className="help is-danger">{emailHelp}</p>
                                         </div>
                                         <div className="field">
                                             <label className="label">Password</label>
                                             <div className="control">
-                                                <input className="input" type="password" onChange={e => setPassword(e.target.value)}/>
+                                                <input className="input" type="password" onChange={handlePasswordChange}/>
                                             </div>
                                             <p className="help is-danger">{passwordHelp}</p>
                                         </div>
