@@ -19,6 +19,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "bulma": "^0.9.1",
     "bulma-pageloader": "^0.3.0",
+    "email-validator": "^2.0.4",
     "firebase": "^7.24.0",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0",
