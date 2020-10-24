@@ -83,14 +83,16 @@ const Header = ({ pathname }) => {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              {authUser && authUser.isAnonymous ? (
+              {router.pathname === ROUTES.SIGN_IN || router.pathname === ROUTES.SIGN_UP ? null 
+              : authUser && authUser.isAnonymous ? (
                 <div className="buttons">
                   <SignUpButton/>
                   <SignInButton/>
                 </div>
-              ) : (
-                <SignOutButton/>
-              )}
+                ) : (
+                  <SignOutButton/>
+                )
+              }
             </div>
           </div>
         </div>
