@@ -34,7 +34,7 @@ export default function ProjectTasks() {
     }
 
     return (
-        loading ? <progress className="progress is-small is-primary" max="100">15%</progress> : (
+        loading ? <progress className="progress is-small" max="100">15%</progress> : (
             tasks.length > 0 ? (
                 <div className="mb-6 pb-6">
                     <ProjectTasksList
