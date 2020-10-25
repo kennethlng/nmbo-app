@@ -14,7 +14,18 @@ export default function About() {
         <meta property="twitter:url" content={META.URL + ROUTES.ABOUT} />
         <meta property="twitter:title" content={META.ABOUT_TITLE} />
       </Head>
-      <p>About Page</p>
+      <section className="hero is-medium is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title is-1 is-spaced has-text-weight-bold">
+              {META.SLOGAN}
+            </h1>
+            <h2 className="subtitle is-3">
+              {META.DESCRIPTION}
+            </h2>
+          </div>
+        </div>
+      </section>
     </App>
   )
 }
