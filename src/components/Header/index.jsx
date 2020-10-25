@@ -40,7 +40,7 @@ const Header = ({ pathname }) => {
         </div>
 
         <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
-          <div className="navbar-start">
+          {/* <div className="navbar-start">
             <a className="navbar-item" onClick={() => router.push(ROUTES.ABOUT)}>
               About
             </a>
@@ -79,7 +79,7 @@ const Header = ({ pathname }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="navbar-end">
             <div className="navbar-item">
