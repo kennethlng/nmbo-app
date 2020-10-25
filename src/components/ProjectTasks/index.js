@@ -9,8 +9,11 @@ import NoTasksPlaceholder from './NoTasksPlaceholder';
 export default function ProjectTasks() {
     const router = useRouter();
     const [tasks, setTasks] = useState([]); 
+    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
+        setLoading(true); 
+
         var unsubscribe = db.collection(DB.PROJECTS).doc(router.query.id).collection(DB.PROJECT_TASKS).onSnapshot(function(querySnapshot) {
             var arr = []; 
             querySnapshot.forEach(function(doc) {
@@ -18,6 +21,8 @@ export default function ProjectTasks() {
                 arr.push(task);
             })
             setTasks(arr); 
+
+            setLoading(false); 
         })
 
         return () => unsubscribe();
@@ -29,8 +34,8 @@ export default function ProjectTasks() {
     }
 
     return (
-        <div>
-            {tasks.length > 0 ? (
+        loading ? <progress className="progress is-small is-primary" max="100">15%</progress> : (
+            tasks.length > 0 ? (
                 <div className="mb-6 pb-6">
                     <ProjectTasksList
                         tasks={tasks.filter(task => !task[DB.IS_COMPLETED])}
@@ -44,7 +49,7 @@ export default function ProjectTasks() {
                         </div>
                     ) : null }
                 </div>
-            ) : <NoTasksPlaceholder/>}
-        </div>
+            ) : <NoTasksPlaceholder/>
+        )
     )
 }
