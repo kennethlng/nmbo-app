@@ -8,12 +8,15 @@ import { db } from '../../lib/firebase';
 export default function RecentAuthUserProjectsMenu() {
     const authUser = useContext(AuthUserContext); 
     const [userProjects, setUserProjects] = useState([]); 
+    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
         list(); 
     }, [])
 
     const list = () => {
+        setLoading(true); 
+
         db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).orderBy(DB.OPENED_ON, "desc").get()
         .then(function(querySnapshot) {
             var items = []; 
@@ -22,22 +25,27 @@ export default function RecentAuthUserProjectsMenu() {
                 items.push(item); 
             })
             setUserProjects(items); 
+
+            setLoading(false); 
         }) 
         .catch(function(error) {
             console.log("Error listing current user's created projects: ", error); 
+            setLoading(false); 
         })
     }
 
     return (
-        userProjects.length > 0 ? (
-            <aside className="menu">
-                <p className="menu-label">
-                    My Checklists
-                </p>
-                <UserProjectsMenuList
-                    userProjects={userProjects}
-                />
-            </aside>
-        ) : null 
+        loading ? <progress className="progress is-small" max="100">15%</progress> : (
+            userProjects.length > 0 ? (
+                <aside className="menu">
+                    <p className="menu-label">
+                        My Checklists
+                    </p>
+                    <UserProjectsMenuList
+                        userProjects={userProjects}
+                    />
+                </aside>
+            ) : null 
+        )
     )
 }
