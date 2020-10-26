@@ -1,0 +1,1 @@
+export const autoClose = 3000;

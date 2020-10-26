@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import { auth } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
+import { toast } from 'react-toastify'
+import * as TOAST from '../constants/toast'
 
 export default function SignIn() {
     const router = useRouter();
@@ -34,12 +36,22 @@ export default function SignIn() {
         .then(function() {
             setLoading(false); 
 
+            toast('Successfully signed in!', {
+                autoClose: TOAST.autoClose,
+                hideProgressBar: true
+            })
+
             router.push(ROUTES.HOME);
         })
         .catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(errorMessage); 
+
+            toast('Something went wrong!', {
+                autoClose: TOAST.autoClose,
+                hideProgressBar: true
+            })
 
             setLoading(false); 
         });

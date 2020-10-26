@@ -45,7 +45,9 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <AuthUserContext.Provider value={authUser}>
-      <ToastContainer/>
+      <ToastContainer
+        position="top-center"
+      />
       <Head>
         <meta name="description" content={META.DESCRIPTION}/>
         <meta property="og:description" content={META.DESCRIPTION}/>

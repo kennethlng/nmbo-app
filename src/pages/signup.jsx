@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
+import { toast } from 'react-toastify'
+import * as TOAST from '../constants/toast'
 
 export default function SignUp() {
     const router = useRouter();
@@ -38,9 +40,20 @@ export default function SignUp() {
 
             setLoading(false); 
 
+            toast('Account created!', {
+                autoClose: TOAST.autoClose,
+                hideProgressBar: true
+            })
+
             router.push(ROUTES.HOME)
         }).catch(function (error) {
             console.log("Account linking error", error);
+
+            toast('Something went wrong!', {
+                autoClose: TOAST.autoClose,
+                hideProgressBar: true
+            })
+
             setLoading(false); 
         });
     }
