@@ -8,6 +8,7 @@ export default function SetProjectTitleInput(props) {
     const router = useRouter(); 
     const [title, setTitle] = useState(''); 
     const [isLoading, setIsLoading] = useState(false); 
+    const [isEditing, setIsEditing] = useState(false); 
 
     useEffect(() => {
         setTitle(initialValue); 
@@ -38,27 +39,40 @@ export default function SetProjectTitleInput(props) {
         }
     }
     
-    const handleBlur = () => updateProject(); 
+    const handleBlur = () => {
+        setIsEditing(false); 
+        updateProject();
+    } 
 
     return (
-        <div className="field is-grouped">
-            <div className="control is-expanded">
-                <input 
-                    className="input is-size-3 is-size-4-mobile has-text-weight-bold" 
-                    style={{ 
-                        // border: "none", 
-                        borderColor: "transparent", 
-                        padding: "0px",
-                        boxShadow: "none"
-                    }} 
-                    type="text" 
-                    placeholder="Checklist name"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    onBlur={handleBlur}
-                />
+        isEditing ? (
+            <div className="field is-grouped">
+                <div className="control is-expanded">
+                    <input
+                        className="input is-size-1 is-size-3-mobile has-text-weight-bold"
+                        // style={{
+                        //     border: "none", 
+                        //     borderColor: "transparent",
+                        //     padding: "0px",
+                        //     boxShadow: "none"
+                        // }}
+                        type="text"
+                        autoFocus
+                        placeholder="Checklist name"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        onBlur={handleBlur}
+                    />
+                </div>
             </div>
-        </div>
+        ) : (
+            <div 
+                className="block" 
+                onClick={() => setIsEditing(true)}
+            >
+                <h1 className="title is-1 is-size-3-mobile has-text-weight-bold">{title}</h1>
+            </div>
+        )
     )
 }

@@ -7,6 +7,7 @@ export default function ProjectTasksListRow(props) {
     const [title, setTitle] = useState(''); 
     const [isLoading, setIsLoading] = useState(false); 
     const authUser = useContext(AuthUserContext); 
+    const [isEditing, setIsEditing] = useState(false); 
 
     useEffect(() => {
         setTitle(task[DB.TITLE])
@@ -56,6 +57,7 @@ export default function ProjectTasksListRow(props) {
     }
 
     const handleBlur = () => {
+        setIsEditing(false); 
         updateTaskTitle(); 
     }
 
@@ -82,6 +84,10 @@ export default function ProjectTasksListRow(props) {
         });
     }
 
+    const handleTitleClick = () => {
+        setIsEditing(true)
+    }
+
     return (
         <div className="columns is-mobile px-2">
             <div className="column is-narrow">
@@ -92,33 +98,41 @@ export default function ProjectTasksListRow(props) {
                 </a>
             </div>
             <div className="column has-text-left">
-                <div className="field">
-                    <div className="control">
-                        <input
-                            className="input"
-                            style={{
-                                border: "none", 
-                                borderColor: "transparent",
-                                padding: "0px",
-                                boxShadow: "none",
-                                height: "1.5rem"
-                            }}
-                            type="text"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            onKeyPress={handleKeyPress}
-                            onBlur={handleBlur}
-                        />
+                {isEditing ? (
+                    <div className="field">
+                        <div className="control">
+                            <textarea
+                                className="textarea"
+                                autoFocus
+                                // style={{
+                                //     border: "none", 
+                                //     borderColor: "transparent",
+                                //     padding: "0px",
+                                //     boxShadow: "none",
+                                //     height: "1.5rem"
+                                // }}
+                                type="text"
+                                rows="2"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                onKeyPress={handleKeyPress}
+                                onBlur={handleBlur}
+                            />
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <div onClick={handleTitleClick}>
+                        {title}
+                    </div>
+                )}
             </div>
-            <div className="column is-narrow has-text-right">
+            {/* <div className="column is-narrow has-text-right">
                 <a className={`${task[DB.IS_HEARTED] ? 'has-text-primary' : 'has-text-grey-lighter'}`} onClick={handleHeartClick}>
                     <span className="icon">
                         <i className={`${task[DB.IS_HEARTED] ? 'fas' : 'far'} fa-heart fa-lg`}></i>
                     </span>
                 </a>
-            </div>
+            </div> */}
             <div className="column is-narrow has-text-right">
                 <a className="has-text-grey-lighter" onClick={handleDeleteClick}>
                     <span className="icon">
