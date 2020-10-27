@@ -54,7 +54,7 @@ export default function AddProject(props) {
             <div className="field">
                 <div className="control">
                     <button className={`button is-medium is-primary has-text-weight-bold ${loading ? "is-loading" : ''}`} disabled={loading} onClick={createProject}>
-                        <span>Next</span>
+                        <span>Add items</span>
                     </button>
                 </div>
             </div>
