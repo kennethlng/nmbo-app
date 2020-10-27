@@ -38,33 +38,27 @@ export default function Project({ data }) {
                 <meta property="twitter:url" content={data ? META.URL + ROUTES.PROJECT(router.query.id) : META.URL}/>
                 <meta property="twitter:title" content={data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}/>
             </Head>
-            <section className="hero">
-                <div className="hero-body">
+            {data ? (
+                <section className="section">
                     <div className="container">
                         <div className="columns is-centered">
                             <div className="column is-three-fifths is-two-thirds-tablet">
-                                {data ? (
-                                    <div>
-                                        <div className="block">
-                                            <SetProjectTitleInput
-                                                initialValue={data[DB.TITLE]}
-                                            />
-                                        </div>
-                                        <div className="block">
-                                            <AddProjectTask/>
-                                        </div>
-                                        <div className="block mb-6">
-                                            <ProjectTasks/>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <ProjectDoesntExistPlaceholder/>
-                                )}
+                                <SetProjectTitleInput
+                                    initialValue={data[DB.TITLE]}
+                                />
+                                <div className="block">
+                                    <AddProjectTask />
+                                </div>
+                                <div className="block mb-6">
+                                    <ProjectTasks />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            ) : (
+                <ProjectDoesntExistPlaceholder/>
+            )}
         </App>
     )
 }
