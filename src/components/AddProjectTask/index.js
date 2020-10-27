@@ -57,7 +57,7 @@ export default function AddProjectTask(props) {
                     onKeyPress={handleKeyPress}
                 />
                 <span className="icon is-left">
-                    <i className="fas fa-pen"></i>
+                    <i className="fas fa-plus"></i>
                 </span>
             </div>
             <div className="control">
