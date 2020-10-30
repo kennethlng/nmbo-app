@@ -40,10 +40,13 @@ const Header = () => {
 
         <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
           <div className="navbar-start">
+          </div>
+
+          <div className="navbar-end">
             <a className="navbar-item" onClick={() => router.push(ROUTES.ABOUT)}>
               About
             </a>
-            
+
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 More
@@ -75,9 +78,6 @@ const Header = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="navbar-end">
             <div className="navbar-item">
               {router.pathname === ROUTES.SIGN_IN || router.pathname === ROUTES.SIGN_UP ? null 
               : authUser && authUser.isAnonymous ? (
