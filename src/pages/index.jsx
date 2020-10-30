@@ -43,9 +43,9 @@ export default function Home() {
                 <div className="columns is-centered">
                   <div className="column is-half">
                     <div className="block my-6">
-                      <h1 className="title is-1 has-text-weight-bold">
+                      {/* <h1 className="title is-1 has-text-weight-bold">
                         Make a checklist
-                      </h1>
+                      </h1> */}
                       <AddProject
                         onSuccess={handleSuccess}
                       />

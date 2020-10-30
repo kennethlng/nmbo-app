@@ -42,7 +42,7 @@ export default function AddProject(props) {
             <div className="field">
                 <div className="control">
                     <input 
-                        className="input is-medium" 
+                        className="input is-size-1 is-size-2-tablet is-size-3-mobile has-text-weight-bold" 
                         type="text" 
                         placeholder="Checklist name" 
                         value={newProjectTitle}
@@ -54,7 +54,7 @@ export default function AddProject(props) {
             <div className="field">
                 <div className="control">
                     <button className={`button is-medium is-primary has-text-weight-bold ${loading ? "is-loading" : ''}`} disabled={loading} onClick={createProject}>
-                        <span>Add items</span>
+                        <span>Create checklist</span>
                     </button>
                 </div>
             </div>
