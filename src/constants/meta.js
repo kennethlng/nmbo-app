@@ -7,6 +7,7 @@ export const ABOUT_TITLE = "About | NMBO";
 export const FAQS_TITLE = "FAQs | NMBO";
 export const PRIVACY_POLICY_TITLE = "Privacy Policy | NMBO";
 export const TERMS_OF_SERVICE_TITLE = "Terms of Service | NMBO";
+export const PROJECTS_TITLE = "Checklists | NMBO"; 
 export const PROJECT_TITLE = (projectTitle) => `${projectTitle} | See my checklist on NMBO`;
 export const IMAGE = "https://i.imgur.com/gQ3azKV.png";
 export const URL = "https://nmbo.app";
