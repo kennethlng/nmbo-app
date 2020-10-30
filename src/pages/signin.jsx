@@ -1,13 +1,16 @@
 import App from '../components/App'; 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as ROUTES from '../constants/routes'; 
 import * as META from '../constants/meta'; 
 import { useRouter } from 'next/router';
-import { auth } from '../lib/firebase'
+import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
 import { toast } from 'react-toastify'
 import * as TOAST from '../constants/toast'
+import * as EVENTS from '../constants/events'
+import * as METHODS from '../constants/methods'
+import * as PAGE_TITLE from '../constants/pageTitle'
 
 export default function SignIn() {
     const router = useRouter();
@@ -16,6 +19,14 @@ export default function SignIn() {
     const [loading, setLoading] = useState(false);
     const [emailHelp, setEmailHelp] = useState(''); 
     const [passwordHelp, setPasswordHelp] = useState(''); 
+
+    useEffect(() => {
+        firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
+            page_path: router.pathname,
+            page_title: PAGE_TITLE.SIGN_IN,
+            page_location: window.location.href
+        }); 
+    }, [])
 
     const handleSubmit = () => {
         if (loading) return;
@@ -34,6 +45,10 @@ export default function SignIn() {
 
         auth.signInWithEmailAndPassword(email, password)
         .then(function() {
+            firebase.analytics().logEvent(EVENTS.LOGIN, {
+                method: METHODS.PASSWORD
+            })
+
             setLoading(false); 
 
             toast('Successfully signed in!', {
