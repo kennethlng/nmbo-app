@@ -1,13 +1,16 @@
 import App from '../components/App'; 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as ROUTES from '../constants/routes'; 
 import * as META from '../constants/meta'; 
+import * as METHODS from '../constants/methods';
 import { useRouter } from 'next/router';
 import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
 import { toast } from 'react-toastify'
 import * as TOAST from '../constants/toast'
+import * as EVENTS from '../constants/events'
+import * as PAGE_TITLE from '../constants/pageTitle'
 
 export default function SignUp() {
     const router = useRouter();
@@ -16,6 +19,14 @@ export default function SignUp() {
     const [loading, setLoading] = useState(false);
     const [emailHelp, setEmailHelp] = useState(''); 
     const [passwordHelp, setPasswordHelp] = useState(''); 
+
+    useEffect(() => {
+        firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
+            page_path: router.pathname,
+            page_title: PAGE_TITLE.SIGN_UP,
+            page_location: window.location.href
+        })
+    }, [])
 
     const handleSubmit = () => {
         if (loading) return;
@@ -37,6 +48,11 @@ export default function SignUp() {
         .then(function(usercred) {
             var user = usercred.user;
             console.log("Account linking success", user);
+
+            // Analytics: Log sign-up event
+            firebase.analytics().logEvent(EVENTS.SIGN_UP, {
+                method: METHODS.PASSWORD
+            })
 
             setLoading(false); 
 
