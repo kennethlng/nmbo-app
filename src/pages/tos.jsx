@@ -2,8 +2,23 @@ import App from '../components/App'
 import Head from 'next/head'
 import * as META from '../constants/meta'
 import * as ROUTES from '../constants/routes'
+import * as EVENTS from '../constants/events'
+import * as PAGE_TITLE from '../constants/pageTitle'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { firebase } from '../lib/firebase'
 
 export default function TermsOfService() {
+  const router = useRouter();
+
+  useEffect(() => {
+    firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
+      page_path: router.pathname,
+      page_title: PAGE_TITLE.TERMS_OF_SERVICE,
+      page_location: window.location.href
+    })
+  }, [])
+
   return (
     <App>
       <Head>

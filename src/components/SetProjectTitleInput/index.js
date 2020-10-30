@@ -71,7 +71,7 @@ export default function SetProjectTitleInput(props) {
                 className="block" 
                 onClick={() => setIsEditing(true)}
             >
-                <h1 className="title is-1 is-size-3-mobile has-text-weight-bold">{title}</h1>
+                <p className="is-size-1 is-size-3-mobile has-text-weight-bold">{title}</p>
             </div>
         )
     )

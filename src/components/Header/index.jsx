@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Link from 'next/link'
 import * as SOCIAL from '../../constants/social'
 import * as ROUTES from '../../constants/routes'
 import { useRouter } from 'next/router'
@@ -9,7 +8,7 @@ import SignOutButton from '../SignOutButton'
 import SignInButton from '../SignInButton'
 import SignUpButton from '../SignUpButton'
 
-const Header = ({ pathname }) => {
+const Header = () => {
   const [menuIsActive, setMenuIsActive] = React.useState(false); 
   const router = useRouter();
   const authUser = React.useContext(AuthUserContext);
@@ -40,7 +39,7 @@ const Header = ({ pathname }) => {
         </div>
 
         <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
-          {/* <div className="navbar-start">
+          <div className="navbar-start">
             <a className="navbar-item" onClick={() => router.push(ROUTES.ABOUT)}>
               About
             </a>
@@ -56,9 +55,6 @@ const Header = ({ pathname }) => {
                 </a>
                 <a className="navbar-item" onClick={() => router.push(ROUTES.PRIVACY_POLICY)}>
                   Privacy Policy
-                </a>
-                <a className="navbar-item" onClick={() => router.push(ROUTES.FAQS)}>
-                  FAQs
                 </a>
                 <hr className="navbar-divider" />
                 <div className="navbar-item" onClick={() => setMenuIsActive(false)}>
@@ -79,7 +75,7 @@ const Header = ({ pathname }) => {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className="navbar-end">
             <div className="navbar-item">
