@@ -1,19 +1,25 @@
-const firebase = require('firebase/app'); 
-const { config } = require('../config/firebase'); 
-require('firebase/auth');
-require('firebase/firestore'); 
+import firebase from 'firebase/app';
+import { config } from '../config/firebase'; 
+import 'firebase/auth';
+import 'firebase/firestore'; 
+import 'firebase/analytics'; 
 
-try {
+if (typeof window !== 'undefined' && !firebase.apps.length) {
     firebase.initializeApp(config)
-} catch (error) {
-    if (!/already exists/.test(error.message)) {
-        console.error('Firebase initialization error', error.stack);
-    }
+
+    // To enable analytics
+    if ('measurementId' in config) firebase.analytics(); 
 }
+
+// try {
+//     firebase.initializeApp(config)
+// } catch (error) {
+//     if (!/already exists/.test(error.message)) {
+//         console.error('Firebase initialization error', error.stack);
+//     }
+// }
 
 const auth = firebase.auth();
 const db = firebase.firestore(); 
 
-exports.firebase = firebase;
-exports.auth = auth; 
-exports.db = db; 
+export { auth, db, firebase }
