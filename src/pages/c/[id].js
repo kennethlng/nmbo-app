@@ -1,11 +1,12 @@
 import App from '../../components/App'
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { db, firebase } from '../../lib/firebase'
 import Head from 'next/head'
 import * as META from '../../constants/meta'
 import * as DB from '../../constants/db'
 import * as ROUTES from '../../constants/routes'
+import * as EVENTS from '../../constants/events'
 import ProjectTasks from '../../components/ProjectTasks'
 import ProjectDoesntExistPlaceholder from '../../components/ProjectDoesntExistPlaceholder'
 import SetProjectTitleInput from '../../components/SetProjectTitleInput'
@@ -17,7 +18,27 @@ export default function Project({ data }) {
     const authUser = useContext(AuthUserContext); 
 
     useEffect(() => {
-        if (data && authUser) {
+        if (data) {
+            // Log event for page_view
+            firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
+                page_path: router.pathname,
+                page_title: data[DB.TITLE],
+                page_location: window.location.href
+            })
+
+            // Log event for view_item
+            firebase.analytics().logEvent(EVENTS.VIEW_ITEM, {
+                items: [{ 
+                    item_id: router.query.id, 
+                    item_name: data[DB.TITLE]
+                }]
+            })
+        }
+    }, [])
+
+    useEffect(() => {
+        // Map user_project doc for authUser
+        if (authUser) {
             db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(router.query.id).set({
                 [DB.ID]: router.query.id,
                 [DB.TITLE]: data[DB.TITLE],
