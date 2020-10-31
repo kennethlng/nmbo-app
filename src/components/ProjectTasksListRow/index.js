@@ -121,7 +121,14 @@ export default function ProjectTasksListRow(props) {
                         </div>
                     </div>
                 ) : (
-                    <div onClick={handleTitleClick}>
+                    <div 
+                        onClick={handleTitleClick}
+                        style={{
+                            wordWrap: "break-word",
+                            overflowWrap: "break-word",
+                            // wordBreak: "break-all"
+                        }}
+                    >
                         {title}
                     </div>
                 )}
