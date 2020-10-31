@@ -14,8 +14,13 @@ import 'nprogress/nprogress.css'
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState(null); 
+  const [pageLoaderIsActive, setPageLoaderIsActive] = useState(false); 
 
   useEffect(() => {
+    Router.events.on('routeChangeStart', (url) => NProgress.start())
+    Router.events.on('routeChangeComplete', () => NProgress.done())
+    Router.events.on('routeChangeError', () => NProgress.done())
+
     // AuthStateChanged listener
     const unsubscribe = auth.onAuthStateChanged(function (authUser) {
       if (authUser) {
@@ -36,13 +41,6 @@ export default function MyApp({ Component, pageProps }) {
 
     return () => unsubscribe()
   }, [])
-
-  Router.events.on('routeChangeStart', (url) => {
-    console.log(`Loading: ${url}`)
-    NProgress.start()
-  })
-  Router.events.on('routeChangeComplete', () => NProgress.done())
-  Router.events.on('routeChangeError', () => NProgress.done())
 
   return (
     <AuthUserContext.Provider value={authUser}>
