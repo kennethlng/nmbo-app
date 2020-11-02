@@ -2,6 +2,8 @@
 
 NMBO is a web app I created to make it insanely easy to make a checklist with others and get stuff done together.
 
+![](https://github.com/kennethlng/nmbo-app/blob/master/src/assets/images/Cover@1x.png?raw=true)
+
 1. Go to [https://nmbo.app](https://nmbo.app). 
 2. Create a new checklist or open a previous one.
 3. Copy the link and share it.
