@@ -51,7 +51,7 @@ export default function About() {
         <div className="hero-body">
           <div className="container">
             <div className="columns">
-              <div className="column is-half">
+              <div className="column is-two-thirds">
                 <h1 className="title is-1 has-text-weight-bold">
                   The fastest way to make a checklist with friends
                 </h1>
@@ -88,7 +88,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      <section className="section is-medium">
+      {/* <section className="section is-medium">
         <div className="container">
           <div className="columns is-centered">
             <div className="column is is-half">
@@ -96,8 +96,8 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
-      <section className="section is-medium">
+      </section> */}
+      {/* <section className="section">
         <div className="container">
           <h3 className="title has-text-weight-bold">
             FAQS
@@ -115,7 +115,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <Footer/>
     </App>
   )
