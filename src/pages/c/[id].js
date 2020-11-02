@@ -39,12 +39,24 @@ export default function Project({ data }) {
     useEffect(() => {
         // Map user_project doc for authUser
         if (authUser) {
-            db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(router.query.id).set({
+            let projectId = router.query.id;
+            let batch = db.batch(); 
+
+            let userProjectRef = db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(projectId);
+            batch.set(userProjectRef, {
                 [DB.ID]: router.query.id,
                 [DB.TITLE]: data[DB.TITLE],
                 [DB.CREATED_BY]: data[DB.CREATED_BY],
                 [DB.VISIT_COUNTER]: firebase.firestore.FieldValue.increment(1)
             }, { merge: true })
+
+            let projectUserRef = db.collection(DB.PROJECTS).doc(projectId).collection(DB.PROJECT_USERS).doc(authUser.uid); 
+            batch.set(projectUserRef, {
+                [DB.PHOTO_URL]: authUser.photoURL,
+                [DB.DISPLAY_NAME]: authUser.displayName
+            }, { merge: true })
+
+            batch.commit()
             .catch(error => console.log(error))
         }
     }, [authUser])
