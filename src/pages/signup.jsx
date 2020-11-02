@@ -101,7 +101,7 @@ export default function SignUp() {
                             <div className="column is-half">
                                 <h1 className="title is-1 has-text-weight-bold">Create an account</h1>
                                 <h2 className="subtitle is-4 has-text-grey">
-                                    Access your checklists anywhere you go
+                                    Save your checklists and access them anywhere you go.
                                 </h2>
                                 <div className="block">
                                     <fieldset disabled={loading}>
@@ -121,7 +121,7 @@ export default function SignUp() {
                                         </div>
                                         <div className="field">
                                             <div className="control">
-                                                <button className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} onClick={handleSubmit}>Sign in</button>
+                                                <button className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} onClick={handleSubmit}>Create account</button>
                                             </div>
                                         </div>
                                         <div className="field">
