@@ -1,5 +1,11 @@
 export const PAGE_VIEW = "page_view";
 export const LOGIN = "login";
+export const LOGIN_SUCCESS = "login_success";
+export const LOGIN_ERROR = "login_error"; 
+export const SIGN_UP = "sign_up"; 
+export const SIGN_UP_SUCCESS = "sign_up_success";
+export const SIGN_UP_ERROR = "sign_up_error";
+export const SIGN_OUT_SUCCESS = "sign_out_success";
+export const SIGN_OUT_ERROR = "sign_out_error";
 export const VIEW_ITEM = "view_item";
 export const VIEW_ITEM_LIST = "view_item_list";
-export const SIGN_UP = "sign_up"; 
