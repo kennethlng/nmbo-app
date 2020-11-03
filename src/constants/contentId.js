@@ -1,0 +1,11 @@
+export const HEADER_SIGN_IN_BUTTON = 'header_sign_in_button'; 
+export const HEADER_SIGN_UP_BUTTON = 'header_sign_up_button';
+export const HEADER_SIGN_OUT_BUTTON = 'header_sign_out_button'; 
+export const HEADER_ABOUT_BUTTON = 'header_about_button'; 
+export const HEADER_LOGO_BUTTON = 'header_logo_button'; 
+export const HEADER_TWITTER_BUTTON = 'header_twitter_button'; 
+export const HEADER_EMAIL_BUTTON = 'header_email_button';
+export const HEADER_MESSENGER_BUTTON = 'header_messenger_button'; 
+export const SIGN_UP_PAGE_SIGN_IN_BUTTON = 'sign_up_page_sign_in_button';
+export const SIGN_IN_PAGE_SIGN_UP_BUTTON = 'sign_in_page_sign_up_button'; 
+export const HOME_PAGE_ADD_PROJECT_BUTTON = 'home_page_add_project_button'; 
