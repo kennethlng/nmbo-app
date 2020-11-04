@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 import * as ROUTES from '../constants/routes'; 
 import * as META from '../constants/meta'; 
 import * as METHODS from '../constants/methods';
+import * as TOAST from '../constants/toast'
+import * as EVENTS from '../constants/events'
+import * as PAGE_TITLE from '../constants/pageTitle'
+import * as CONTENT_TYPE from '../constants/contentType'
+import * as CONTENT_ID from '../constants/contentId'
 import { useRouter } from 'next/router';
 import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
 import { toast } from 'react-toastify'
-import * as TOAST from '../constants/toast'
-import * as EVENTS from '../constants/events'
-import * as PAGE_TITLE from '../constants/pageTitle'
 
 export default function SignUp() {
     const router = useRouter();
@@ -21,6 +23,7 @@ export default function SignUp() {
     const [passwordHelp, setPasswordHelp] = useState(''); 
 
     useEffect(() => {
+        // Log event for page view 
         firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
             page_path: router.pathname,
             page_title: PAGE_TITLE.SIGN_UP,
@@ -29,6 +32,12 @@ export default function SignUp() {
     }, [])
 
     const handleSubmit = () => {
+        // Log event for sign up button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.SIGN_UP_PAGE_SIGN_UP_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
         if (loading) return;
 
         if (!EmailValidator.validate(email)) {
@@ -67,6 +76,7 @@ export default function SignUp() {
             var errorMessage = error.message; 
             var errorCode = error.code;
 
+            // Log event for error code and message
             firebase.analytics().logEvent(EVENTS.SIGN_UP_ERROR, {
                 errorCode,
                 errorMessage
@@ -91,6 +101,17 @@ export default function SignUp() {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         setPasswordHelp(''); 
+    }
+
+    const handleSignInClick = () => {
+        // Log event for button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.SIGN_UP_PAGE_SIGN_IN_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
+        // Push route
+        router.push(ROUTES.SIGN_IN)
     }
 
     return (
@@ -135,7 +156,7 @@ export default function SignUp() {
                                         </div>
                                         <div className="field">
                                             <div className="control">
-                                                <a onClick={() => router.push(ROUTES.SIGN_IN)}>Or sign in, if you already have an account</a>
+                                                <a onClick={handleSignInClick}>Or sign in, if you already have an account</a>
                                             </div>
                                         </div>
                                     </fieldset>
