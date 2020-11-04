@@ -6,6 +6,7 @@ export const HEADER_LOGO_BUTTON = 'header_logo_button';
 export const HEADER_TWITTER_BUTTON = 'header_twitter_button'; 
 export const HEADER_EMAIL_BUTTON = 'header_email_button';
 export const HEADER_MESSENGER_BUTTON = 'header_messenger_button'; 
+export const HEADER_FEEDBACK_BUTTON = 'header_feedback_button'; 
 export const FOOTER_EMAIL_BUTTON = 'footer_messenger_button';
 export const FOOTER_MESSENGER_BUTTON = 'footer_messenger_button';
 export const FOOTER_TWITTER_BUTTON = 'footer_twitter_button'; 

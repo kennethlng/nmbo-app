@@ -5,6 +5,7 @@ import EmailButton from './EmailButton'
 import TwitterButton from './TwitterButton'
 import AboutNavBarItemButton from './AboutNavBarItemButton'
 import AuthenticationButtons from './AuthenticationButtons'
+import FeedbackNavBarItemButton from './FeedbackNavBarItemButton'
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = React.useState(false); 
@@ -45,6 +46,7 @@ const Header = () => {
           </div>
 
           <div className="navbar-end">
+            <FeedbackNavBarItemButton/>
             <div className="navbar-item">
               <AuthenticationButtons/>
             </div>
