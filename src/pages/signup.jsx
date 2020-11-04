@@ -63,12 +63,21 @@ export default function SignUp() {
 
             router.push(ROUTES.HOME)
         }).catch(function (error) {
-            console.log("Account linking error", error);
+            // console.log("Account linking error", error);
+            var errorMessage = error.message; 
+            var errorCode = error.code;
 
-            toast('Something went wrong!', {
-                autoClose: TOAST.autoClose,
-                hideProgressBar: true
+            firebase.analytics().logEvent(EVENTS.SIGN_UP_ERROR, {
+                errorCode,
+                errorMessage
             })
+
+            setPasswordHelp(errorMessage); 
+
+            // toast('Something went wrong!', {
+            //     autoClose: TOAST.autoClose,
+            //     hideProgressBar: true
+            // })
 
             setLoading(false); 
         });
