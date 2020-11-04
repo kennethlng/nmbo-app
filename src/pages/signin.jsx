@@ -21,6 +21,7 @@ export default function SignIn() {
     const [passwordHelp, setPasswordHelp] = useState(''); 
 
     useEffect(() => {
+        // Log Google Analytics event for page view 
         firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
             page_path: router.pathname,
             page_title: PAGE_TITLE.SIGN_IN,
@@ -59,14 +60,20 @@ export default function SignIn() {
             router.push(ROUTES.HOME);
         })
         .catch(function(error) {
+            var errorMessage = error.message; 
             var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage); 
 
-            toast('Something went wrong!', {
-                autoClose: TOAST.autoClose,
-                hideProgressBar: true
+            firebase.analytics().logEvent(EVENTS.LOGIN_ERROR, {
+                errorCode,
+                errorMessage
             })
+
+            setPasswordHelp(errorMessage); 
+
+            // toast(error.message, {
+            //     autoClose: TOAST.autoClose,
+            //     hideProgressBar: true
+            // })
 
             setLoading(false); 
         });
