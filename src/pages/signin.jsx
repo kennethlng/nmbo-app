@@ -2,15 +2,17 @@ import App from '../components/App';
 import React, { useEffect, useState } from 'react';
 import * as ROUTES from '../constants/routes'; 
 import * as META from '../constants/meta'; 
+import * as TOAST from '../constants/toast'
+import * as EVENTS from '../constants/events'
+import * as METHODS from '../constants/methods'
+import * as PAGE_TITLE from '../constants/pageTitle'
+import * as CONTENT_TYPE from '../constants/contentType'
+import * as CONTENT_ID from '../constants/contentId'
 import { useRouter } from 'next/router';
 import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
 import { toast } from 'react-toastify'
-import * as TOAST from '../constants/toast'
-import * as EVENTS from '../constants/events'
-import * as METHODS from '../constants/methods'
-import * as PAGE_TITLE from '../constants/pageTitle'
 
 export default function SignIn() {
     const router = useRouter();
@@ -30,6 +32,12 @@ export default function SignIn() {
     }, [])
 
     const handleSubmit = () => {
+        // Log event for sign in button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.SIGN_IN_PAGE_SIGN_IN_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
         if (loading) return;
 
         if (!EmailValidator.validate(email)) {
@@ -46,6 +54,7 @@ export default function SignIn() {
 
         auth.signInWithEmailAndPassword(email, password)
         .then(function() {
+            // Log event for successful login 
             firebase.analytics().logEvent(EVENTS.LOGIN, {
                 method: METHODS.PASSWORD
             })
@@ -63,6 +72,7 @@ export default function SignIn() {
             var errorMessage = error.message; 
             var errorCode = error.code;
 
+            // Log event for sign in error
             firebase.analytics().logEvent(EVENTS.LOGIN_ERROR, {
                 errorCode,
                 errorMessage
@@ -87,6 +97,17 @@ export default function SignIn() {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         setPasswordHelp(''); 
+    }
+
+    const handleSignUpClick = () => {
+        // Log event for sign up button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.SIGN_IN_PAGE_SIGN_UP_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
+        // Push route 
+        router.push(ROUTES.SIGN_UP)
     }
 
     return (    
@@ -131,7 +152,7 @@ export default function SignIn() {
                                         </div>
                                         <div className="field">
                                             <div className="control">
-                                                <a onClick={() => router.push(ROUTES.SIGN_UP)}>Or sign up, if you don't have an account yet</a>
+                                                <a onClick={handleSignUpClick}>Or sign up, if you don't have an account yet</a>
                                             </div>
                                         </div>
                                     </fieldset>
