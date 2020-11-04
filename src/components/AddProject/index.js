@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { db } from '../../lib/firebase'; 
+import { db, firebase } from '../../lib/firebase'; 
 import { AuthUserContext } from '../Session'; 
 import * as DB from '../../constants/db'; 
+import * as CONTENT_TYPE from '../../constants/contentType';
+import * as CONTENT_ID from '../../constants/contentId';
 
 export default function AddProject(props) {
     const { onSuccess, onError } = props; 
@@ -10,6 +12,12 @@ export default function AddProject(props) {
     const [loading, setLoading] = useState(false); 
 
     const createProject = () => {
+        // Log Google Analytics event for button click 
+        firebase.analytics().logEvent('select_content', {
+            content_type: CONTENT_TYPE.BUTTON,
+            content_id: CONTENT_ID.HOME_PAGE_ADD_PROJECT_BUTTON
+        })
+        
         if (newProjectTitle === '' || loading) {
             return 
         }
