@@ -36,7 +36,6 @@ export default function Projects() {
         // Fetch authUser's user_projects
         if (authUser) {
             db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS)
-            .orderBy(DB.TITLE)
             .get()
             .then(function(querySnapshot) {
                 let arr = []; 
@@ -44,7 +43,13 @@ export default function Projects() {
                     let obj = new UserProject(doc);
                     arr.push(obj); 
                 })
-                setUserProjects(arr); 
+
+                // Sort the array alphabetically
+                var sorted = arr.sort(function(a, b) {
+                    return a[DB.TITLE].toLowerCase().localeCompare(b[DB.TITLE].toLowerCase()); 
+                })
+
+                setUserProjects(sorted); 
             })
             .catch(function(error) {
                 console.log("Error retrieving user projects: ", error)
