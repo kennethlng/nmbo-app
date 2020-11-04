@@ -1,4 +1,6 @@
-import * as SOCIAL from '../../constants/social'
+import EmailButton from './EmailButton'
+import MessengerButton from './MessengerButton'
+import TwitterButton from './TwitterButton'
 
 export default function Footer() {
     return (
@@ -11,16 +13,9 @@ export default function Footer() {
                 </div>
                 <div className="level-right">
                     <div className="level-item">
-                        <a href={`mailto:${SOCIAL.EMAIL}`}>
-                            <span className="icon is-medium">
-                                <i className="fas fa-envelope fa-lg"></i>
-                            </span>
-                        </a>
-                        <a href={SOCIAL.MESSENGER} target="_blank">
-                            <span className="icon is-medium">
-                                <i className="fab fa-facebook-messenger fa-lg"></i>
-                            </span>
-                        </a>
+                        <EmailButton/>
+                        <MessengerButton/>
+                        <TwitterButton/>
                     </div>
                 </div>
             </div>
