@@ -2,7 +2,6 @@ import '../styles/styles.sass'
 import { AuthUserContext } from '../components/Session'
 import { useEffect, useState } from 'react'
 import { auth } from '../lib/firebase'
-import '@fortawesome/fontawesome-free/css/all.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import Head from 'next/head'
@@ -14,7 +13,6 @@ import 'nprogress/nprogress.css'
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState(null); 
-  const [pageLoaderIsActive, setPageLoaderIsActive] = useState(false); 
 
   useEffect(() => {
     Router.events.on('routeChangeStart', (url) => NProgress.start())
@@ -60,6 +58,7 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest"/>
+        <script src="https://kit.fontawesome.com/442f26eabd.js" crossorigin="anonymous"></script>
       </Head>
       <Component {...pageProps} />  
     </AuthUserContext.Provider>
