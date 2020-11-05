@@ -110,6 +110,32 @@ export default function SignIn() {
         router.push(ROUTES.SIGN_UP)
     }
 
+    const handleForgotPassword = () => {
+        // Log event for forgot password button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.SIGN_IN_PAGE_FORGOT_PASSWORD_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
+        // If the email is valid
+        if (EmailValidator.validate(email)) {
+            auth.sendPasswordResetEmail(email)
+            .then(function() {
+                toast('An email with instructions on how to reset your password was sent', {
+                    hideProgressBar: true
+                })
+            })
+            .catch(function(error) {
+                console.log(error)
+            })
+        } else {
+            toast('Please enter a valid email', {
+                autoClose: TOAST.autoClose,
+                hideProgressBar: true
+            })
+        }
+    }
+
     return (    
         <App>
             <Head>
@@ -147,12 +173,19 @@ export default function SignIn() {
                                         </div>
                                         <div className="field">
                                             <div className="control">
+                                                <a onClick={handleForgotPassword}>Forgot your password?</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="field">
+                                            <div className="control">
                                                 <button className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} onClick={handleSubmit}>Sign in</button>
                                             </div>
                                         </div>
+                                        <hr/>
                                         <div className="field">
                                             <div className="control">
-                                                <a onClick={handleSignUpClick}>Or sign up, if you don't have an account yet</a>
+                                                Need an account? <a onClick={handleSignUpClick}>Register</a>
                                             </div>
                                         </div>
                                     </fieldset>
