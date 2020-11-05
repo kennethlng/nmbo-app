@@ -4,8 +4,8 @@ import MessengerButton from './MessengerButton'
 import EmailButton from './EmailButton'
 import TwitterButton from './TwitterButton'
 import AboutNavBarItemButton from './AboutNavBarItemButton'
-import AuthenticationButtons from './AuthenticationButtons'
 import FeedbackNavBarItemButton from './FeedbackNavBarItemButton'
+import AuthenticationButtons from './AuthenticationButtons'
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = React.useState(false); 
@@ -26,6 +26,7 @@ const Header = () => {
         <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
           <div className="navbar-start">
             <AboutNavBarItemButton />
+            <FeedbackNavBarItemButton/>
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 More
@@ -46,7 +47,6 @@ const Header = () => {
           </div>
 
           <div className="navbar-end">
-            <FeedbackNavBarItemButton/>
             <div className="navbar-item">
               <AuthenticationButtons/>
             </div>

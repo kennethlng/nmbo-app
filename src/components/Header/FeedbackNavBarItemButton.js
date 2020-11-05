@@ -13,14 +13,15 @@ export default function FeedbackNavBarItemButton() {
 
     return (
         <a 
-            className="navbar-item has-tooltip-arrow has-tooltip-bottom" 
-            data-tooltip="Send feedback!"
-            href={`mailto:${SOCIAL.EMAIL}`}
+            className="navbar-item" 
+            href={SOCIAL.FEEDBACK}
+            target="_blank"
             onClick={handleClick}
         >
-            <span className="icon is-large">
-                <i className="fas fa-exclamation-circle fa-lg"></i>
-            </span>
+            {/* <span className="icon">
+                <i className="fas fa-exclamation-circle"></i>
+            </span> */}
+            <span>Send feedback</span>
         </a>
     )
 }
