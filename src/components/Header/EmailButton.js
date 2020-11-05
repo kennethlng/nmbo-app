@@ -14,7 +14,7 @@ export default function EmailButton() {
     return (
         <a href={`mailto:${SOCIAL.EMAIL}`} onClick={handleClick}>
             <span className="icon is-large">
-                <i className="fas fa-envelope fa-lg"></i>
+                <i aria-hidden className="fas fa-envelope fa-lg"></i>
             </span>
         </a>
     )

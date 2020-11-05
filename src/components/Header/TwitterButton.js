@@ -14,7 +14,7 @@ export default function TwitterButton() {
     return (
         <a href={SOCIAL.TWITTER} target="_blank" onClick={handleClick}>
             <span className="icon is-large">
-                <i className="fab fa-twitter fa-lg"></i>
+                <i aria-hidden className="fab fa-twitter fa-lg"></i>
             </span>
         </a>
     )
