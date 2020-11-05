@@ -114,6 +114,12 @@ export default function SignUp() {
         router.push(ROUTES.SIGN_IN)
     }
 
+    const handleEnterKeyPress = (e) => {
+        if (e.key === "Enter") {
+            handleSubmit();
+        }
+    }
+
     return (
         <App>
             <Head>
@@ -138,14 +144,14 @@ export default function SignUp() {
                                         <div className="field">
                                             <label className="label">Email</label>
                                             <div className="control">
-                                                <input className="input" type="email" onChange={handleEmailChange}/>
+                                                <input className="input" type="email" onChange={handleEmailChange} onKeyPress={handleEnterKeyPress}/>
                                             </div>
                                             <p className="help is-danger">{emailHelp}</p>
                                         </div>
                                         <div className="field">
                                             <label className="label">Password</label>
                                             <div className="control">
-                                                <input className="input" type="password" onChange={handlePasswordChange}/>
+                                                <input className="input" type="password" onChange={handlePasswordChange} onKeyPress={handleEnterKeyPress}/>
                                             </div>
                                             <p className="help is-danger">{passwordHelp}</p>
                                         </div>
