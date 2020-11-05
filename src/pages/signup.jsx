@@ -21,6 +21,7 @@ export default function SignUp() {
     const [loading, setLoading] = useState(false);
     const [emailHelp, setEmailHelp] = useState(''); 
     const [passwordHelp, setPasswordHelp] = useState(''); 
+    const [showEmailVerificationNotification, setShowEmailVerificationNotification] = useState(false); 
 
     useEffect(() => {
         // Log event for page view 
@@ -62,16 +63,26 @@ export default function SignUp() {
             firebase.analytics().logEvent(EVENTS.SIGN_UP, {
                 method: METHODS.PASSWORD
             })
-
+        })
+        .then(function() {
+            return auth.currentUser.sendEmailVerification({
+                url: "https://nmbo.app",
+                handleCodeInApp: false
+            });
+        })
+        .then(function() {
             setLoading(false); 
 
             toast('Account created!', {
-                autoClose: TOAST.autoClose,
                 hideProgressBar: true
             })
 
-            router.push(ROUTES.HOME)
-        }).catch(function (error) {
+            setShowEmailVerificationNotification(true); 
+
+            // Push route
+            router.push(ROUTES.HOME);
+        })
+        .catch(function (error) {
             // console.log("Account linking error", error);
             var errorMessage = error.message; 
             var errorCode = error.code;
@@ -154,7 +165,15 @@ export default function SignUp() {
                                                 <button className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} onClick={handleSubmit}>Create account</button>
                                             </div>
                                         </div>
+
+                                        {showEmailVerificationNotification ? (
+                                            <div className="notification">
+                                                An email was sent to your inbox for verification.
+                                            </div>
+                                        ) : null}
+
                                         <hr/>
+
                                         <div className="field">
                                             <div className="control">
                                                 Already a member? <a onClick={handleSignInClick}>Log in</a>
