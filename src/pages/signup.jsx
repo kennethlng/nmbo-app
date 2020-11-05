@@ -154,9 +154,10 @@ export default function SignUp() {
                                                 <button className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} onClick={handleSubmit}>Create account</button>
                                             </div>
                                         </div>
+                                        <hr/>
                                         <div className="field">
                                             <div className="control">
-                                                <a onClick={handleSignInClick}>Or sign in, if you already have an account</a>
+                                                Already a member? <a onClick={handleSignInClick}>Log in</a>
                                             </div>
                                         </div>
                                     </fieldset>
