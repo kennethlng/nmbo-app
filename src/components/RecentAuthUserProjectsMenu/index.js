@@ -5,6 +5,8 @@ import * as DB from '../../constants/db';
 import * as ROUTES from '../../constants/routes';
 import * as LIST_ID from '../../constants/listId';
 import * as LIST_NAME from '../../constants/listName';
+import * as CONTENT_ID from '../../constants/contentId';
+import * as CONTENT_TYPE from '../../constants/contentType';
 import { db, firebase } from '../../lib/firebase';
 import { useRouter } from 'next/router'
 
@@ -65,6 +67,17 @@ export default function RecentAuthUserProjectsMenu() {
         router.push(ROUTES.PROJECT(userProject[DB.ID]))
     }
 
+    const handleSeeAllChecklistsClick = () => {
+        // Log Google Analytics event for button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.HOME_PAGE_VIEW_PROJECTS_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
+        // Push route to Checklists page
+        router.push(ROUTES.PROJECTS)
+    }
+
     return (
         loading ? <progress className="progress is-small" max="100">15%</progress> : (
             userProjects.length > 0 ? (
@@ -83,26 +96,15 @@ export default function RecentAuthUserProjectsMenu() {
                             </li>
                         ))}
                     </ul>
-                    <div className="menu-list">
-                        <a onClick={() => router.push(ROUTES.PROJECTS)}>
-                            <div className="level is-mobile has-text-link">
-                                <div className="level-left">
-                                    <div className="level-item">
-                                        <p className="is-size-5">
-                                            See all my checklists
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="level-right">
-                                    <div className="level-item">
-                                        <span className="icon">
-                                            <i className="fas fa-arrow-right"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    <hr/>
+                    <a onClick={handleSeeAllChecklistsClick}>
+                        <span className="is-size-5">
+                            See all my checklists
+                        </span>
+                        <span className="icon is-medium">
+                            <i className="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
                 </aside>
             ) : null 
         )

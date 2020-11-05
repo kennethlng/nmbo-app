@@ -16,5 +16,6 @@ export const SIGN_IN_PAGE_SIGN_IN_BUTTON = 'sign_in_page_sign_up_button';
 export const SIGN_IN_PAGE_SIGN_UP_BUTTON = 'sign_in_page_sign_up_button'; 
 export const SIGN_IN_PAGE_FORGOT_PASSWORD_BUTTON = 'sign_in_page_forgot_password_button'; 
 export const HOME_PAGE_ADD_PROJECT_BUTTON = 'home_page_add_project_button'; 
+export const HOME_PAGE_VIEW_PROJECTS_BUTTON = 'home_page_view_projects_button'; 
 export const PROJECTS_PAGE_ADD_PROJECT_BUTTON = 'projects_page_add_project_button'; 
 export const ABOUT_PAGE_ADD_PROJECT_BUTTON = 'about_page_add_project_button'; 
