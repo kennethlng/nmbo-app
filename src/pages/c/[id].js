@@ -72,23 +72,25 @@ export default function Project({ data }) {
                 <meta property="twitter:title" content={data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}/>
             </Head>
             {data ? (
-                <section className="section">
-                    <div className="container">
-                        <div className="columns is-centered">
-                            <div className="column is-three-fifths is-two-thirds-tablet">
-                                <SetProjectTitleInput
-                                    initialValue={data[DB.TITLE]}
-                                />
-                                <div className="block">
-                                    <AddProjectTask />
-                                </div>
-                                <div className="block mb-6">
-                                    <ProjectTasks />
+                authUser ? (
+                    <section className="section">
+                        <div className="container">
+                            <div className="columns is-centered">
+                                <div className="column is-three-fifths is-two-thirds-tablet">
+                                    <SetProjectTitleInput
+                                        initialValue={data[DB.TITLE]}
+                                    />
+                                    <div className="block">
+                                        <AddProjectTask />
+                                    </div>
+                                    <div className="block mb-6">
+                                        <ProjectTasks />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                ) : null
             ) : (
                 <ProjectDoesntExistPlaceholder/>
             )}
