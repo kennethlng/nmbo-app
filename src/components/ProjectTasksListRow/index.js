@@ -143,7 +143,7 @@ export default function ProjectTasksListRow(props) {
             <div className="column is-narrow has-text-right">
                 <a className="has-text-grey-lighter" onClick={handleDeleteClick}>
                     <span className="icon">
-                        <i className="far fa-times fa-lg"></i>
+                        <i className="fas fa-times fa-lg"></i>
                     </span>
                 </a>
             </div>
