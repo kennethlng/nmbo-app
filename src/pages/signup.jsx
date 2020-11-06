@@ -78,8 +78,8 @@ export default function SignUp() {
 
             // Log event for error code and message
             firebase.analytics().logEvent(EVENTS.SIGN_UP_ERROR, {
-                errorCode,
-                errorMessage
+                error_code: errorCode,
+                error_message: errorMessage
             })
 
             setPasswordHelp(errorMessage); 

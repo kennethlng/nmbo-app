@@ -74,8 +74,8 @@ export default function SignIn() {
 
             // Log event for sign in error
             firebase.analytics().logEvent(EVENTS.LOGIN_ERROR, {
-                errorCode,
-                errorMessage
+                error_code: errorCode,
+                error_message: errorMessage
             })
 
             setPasswordHelp(errorMessage); 
