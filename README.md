@@ -1,6 +1,6 @@
 # nmbo-app
 
-NMBO is a simple web app for creating and sharing checklists. 
+NMBO is the fastest way to make a checklist with friends. Create a checklist and share the link, and anyone can start contributing. No account or download needed. 
 
 ![](https://github.com/kennethlng/nmbo-app/blob/master/src/assets/images/Cover@1x.png?raw=true)
 
