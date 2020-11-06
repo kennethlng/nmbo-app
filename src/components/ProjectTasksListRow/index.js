@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import * as DB from '../../constants/db';
+import * as CONTENT_TYPE from '../../constants/contentType';
+import * as CONTENT_ID from '../../constants/contentId'; 
+import * as EVENTS from '../../constants/events';
 import { AuthUserContext } from '../Session';
+import { firebase } from '../../lib/firebase'; 
 
 export default function ProjectTasksListRow(props) {
     const { task } = props; 
@@ -14,25 +18,53 @@ export default function ProjectTasksListRow(props) {
     }, [task.title])
 
     const handleCheckClick = () => {
+        let isCompleted = !task[DB.IS_COMPLETED];
+
+        // Log event for button click
+        firebase.analytics().logEvent('select_content', {
+            content_id: isCompleted ? CONTENT_ID.FINISH_TASK_BUTTON : CONTENT_ID.UNFINISH_TASK_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
         task.ref.update({
-            [DB.IS_COMPLETED]: !task[DB.IS_COMPLETED],
+            [DB.IS_COMPLETED]: isCompleted,
             [DB.MODIFIED_BY]: authUser.uid
         })
         .then(function() {
-            // Document successfully updated
+            // Log event for success
+            firebase.analytics().logEvent(isCompleted ? EVENTS.FINISH_TASK_SUCCESS : EVENTS.UNFINISH_TASK_SUCCESS)
         })
         .catch(function(error) {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
+
+            // Log event for error
+            firebase.analytics().logEvent(isCompleted ? EVENTS.FINISH_TASK_ERROR : EVENTS.UNFINISH_TASK_ERROR, {
+                error_code: error.code,
+                error_message: error.message
+            })
         });
     }
 
     const handleDeleteClick = () => {
+        // Log event for button click
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.DELETE_TASK_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
         task.ref.delete() 
         .then(function() {
-            console.log("Document successfully deleted!");
+            // Log event for success
+            firebase.analytics().logEvent(EVENTS.DELETE_TASK_SUCCESS);
         }).catch(function(error) {
             console.error("Error removing document: ", error);
+
+            // Log event for error
+            firebase.analytics().logEvent(EVENTS.DELETE_TASK_ERROR, {
+                error_code: error.code,
+                error_message: error.message
+            });
         });
     }
 
@@ -45,7 +77,7 @@ export default function ProjectTasksListRow(props) {
             // Document successfully updated
         })
         .catch(function(error) {
-            // The document probably doesn't exist.
+            // Log event for error
             console.error("Error updating document: ", error);
         });
     }
@@ -62,6 +94,12 @@ export default function ProjectTasksListRow(props) {
     }
 
     const updateTaskTitle = () => {
+        // Log event for input focus
+        firebase.analytics().logEvent('select_content', {
+            content_type: CONTENT_TYPE.INPUT,
+            content_id: CONTENT_ID.TASK_TITLE_INPUT
+        })
+
         // If currently performing an update task or the title text hasn't changed, don't do anything
         if (isLoading || title === task[DB.TITLE]) {
             return;
@@ -74,12 +112,20 @@ export default function ProjectTasksListRow(props) {
             [DB.MODIFIED_BY]: authUser.uid
         })
         .then(function() {
-            // Document successfully updated
+            // Log event for success
+            firebase.analytics().logEvent(EVENTS.TASK_TITLE_UPDATE_SUCCESS); 
+
             setIsLoading(false);
         })
         .catch(function(error) {
-            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
+
+            // Log event for error
+            firebase.analytics().logEvent(EVENTS.TASK_TITLE_UPDATE_ERROR, {
+                error_code: error.code,
+                error_message: error.message
+            })
+
             setIsLoading(false);
         });
     }
