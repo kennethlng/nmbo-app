@@ -42,4 +42,4 @@ Considering users share the checklists via their messaging apps, server-side ren
 
 ## Feedback
 
-NMBO is a work-in-progress, and I want to hear your ideas and feedback ([short Google Forms questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSf_GusPzzA4M1xNiKxHHVwEj4Q3iz_fWrX9pJXihlIjcdVmaQ/viewform)) so I can make it more useful for your needs. 
+NMBO is a work-in-progress, and I want to hear your ideas and feedback so I can make it more useful for your needs. Click [here](https://docs.google.com/forms/d/e/1FAIpQLSf_GusPzzA4M1xNiKxHHVwEj4Q3iz_fWrX9pJXihlIjcdVmaQ/viewform) for a brief Google Forms questionnaire. 
