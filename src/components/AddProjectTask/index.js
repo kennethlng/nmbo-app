@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { AuthUserContext } from '../Session'
 import * as DB from '../../constants/db'
+import * as CONTENT_ID from '../../constants/contentId'
+import * as CONTENT_TYPE from '../../constants/contentType'
+import * as EVENTS from '../../constants/events'
 import { useRouter } from 'next/router'
-import { db } from '../../lib/firebase'
+import { db, firebase } from '../../lib/firebase'
 
 export default function AddProjectTask(props) {
     const { onSuccess, onError } = props; 
@@ -12,6 +15,12 @@ export default function AddProjectTask(props) {
     const [loading, setLoading] = useState(false); 
 
     const add = () => {
+        // Log event for button click 
+        firebase.analytics().logEvent('select_content', {
+            content_id: CONTENT_ID.ADD_TASK_BUTTON,
+            content_type: CONTENT_TYPE.BUTTON
+        })
+
         if (title === '' || loading) {
             return; 
         }
@@ -26,14 +35,27 @@ export default function AddProjectTask(props) {
             [DB.IS_COMPLETED]: false 
         })
         .then(function(docRef) {
+            // Log event for success
+            firebase.analytics().logEvent(EVENTS.ADD_TASK_SUCCESS);
+
+            // Reset the input
             setTitle(''); 
+
             setLoading(false); 
+
             if (onSuccess) onSuccess(); 
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
 
+            // Log event for error
+            firebase.analytics().logEvent(EVENTS.ADD_TASK_ERROR, {
+                error_code: error.code,
+                error_message: error.message
+            });
+
             setLoading(false); 
+
             if (onError) onError(); 
         })
     }
