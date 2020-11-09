@@ -42,7 +42,7 @@ export default function Home() {
               <div className="container">
                 <div className="columns is-centered">
                   <div className="column is-half">
-                    <div className="block my-6">
+                    <div className="block">
                       {/* <h1 className="title is-1 has-text-weight-bold">
                         Make a checklist
                       </h1> */}
