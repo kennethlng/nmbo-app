@@ -2,7 +2,7 @@
 
 ![](https://github.com/kennethlng/nmbo-app/blob/master/src/assets/images/Cover@1x.png?raw=true)
 
-[NMBO](https://nmbo.app) is the fastest way to make a checklist with friends. Create a checklist and share the link, and anyone can start contributing. No account or download needed. 
+[NMBO](https://nmbo.app) is the fastest way to make a checklist with friends. Create a checklist and share the link, and anyone can start contributing. No account or download needed.  
 
 To use NMBO: 
 
