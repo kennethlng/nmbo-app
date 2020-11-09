@@ -9,6 +9,7 @@ import * as CONTENT_ID from '../../constants/contentId';
 import * as CONTENT_TYPE from '../../constants/contentType';
 import { db, firebase } from '../../lib/firebase';
 import { useRouter } from 'next/router'
+import PlaceholderNotification from './PlaceholderNotification'
 
 export default function RecentAuthUserProjectsMenu() {
     const authUser = useContext(AuthUserContext); 
@@ -80,11 +81,11 @@ export default function RecentAuthUserProjectsMenu() {
 
     return (
         loading ? <progress className="progress is-small" max="100">15%</progress> : (
-            userProjects.length > 0 ? (
-                <aside className="menu">
-                    <p className="menu-label">
-                        Recent
-                    </p>
+            <aside className="menu">
+                <p className="menu-label">
+                    Recent Checklists
+                </p>
+                {userProjects.length > 0 ? (
                     <ul className="menu-list">
                         {userProjects.map(userProject => (
                             <li key={userProject[DB.ID]}>
@@ -95,18 +96,20 @@ export default function RecentAuthUserProjectsMenu() {
                                 </a>
                             </li>
                         ))}
+                        <hr />
+                        <li>
+                            <a onClick={handleSeeAllChecklistsClick}>
+                                <span className="is-size-5">
+                                    See all my checklists
+                                </span>
+                                <span className="icon is-medium">
+                                    <i className="fas fa-arrow-right"></i>
+                                </span>
+                            </a>
+                        </li>
                     </ul>
-                    <hr/>
-                    <a onClick={handleSeeAllChecklistsClick}>
-                        <span className="is-size-5">
-                            See all my checklists
-                        </span>
-                        <span className="icon is-medium">
-                            <i className="fas fa-arrow-right"></i>
-                        </span>
-                    </a>
-                </aside>
-            ) : null 
+                ) : <PlaceholderNotification/>}
+            </aside>
         )
     )
 }
