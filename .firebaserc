@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "chop-chop-97e18"
+    "dev": "nmbo-dev",
+    "staging": "nmbo-dev",
+    "prod": "chop-chop-97e18"
   }
 }
