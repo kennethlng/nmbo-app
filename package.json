@@ -4,14 +4,15 @@
   "description": "Host Next.js SSR app on Firebase Cloud Functions with Firebase Hosting redirects.",
   "main": "firebaseFunctions.js",
   "scripts": {
-    "use-dev": "firebase use dev",
-    "use-prod": "firebase use prod",
-    "dev": "next src/",
+    "use:dev": "firebase use dev",
+    "use:prod": "firebase use prod",
+    "dev": "npm run use:dev && ENV=development next src/",
     "build": "next build src/",
     "start": "next start src/",
     "serve": "npm run build && firebase emulators:start --only functions,hosting",
     "shell": "npm run build && firebase functions:shell",
-    "deploy": "firebase deploy --only functions:nextjsFunc,hosting",
+    "deploy:dev": "npm run use:dev && ENV=development firebase deploy --only functions,hosting",
+    "deploy:prod": "npm run use:prod && ENV=production firebase deploy --only functions, hosting",
     "logs": "firebase functions:log"
   },
   "dependencies": {
@@ -19,20 +20,21 @@
     "@creativebulma/bulma-tooltip": "^1.2.0",
     "bulma": "^0.9.1",
     "bulma-pageloader": "^0.3.0",
+    "dotenv": "^8.2.0",
     "email-validator": "^2.0.4",
     "firebase": "^7.24.0",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0",
-    "next": "^9.3.4",
+    "next": "^9.5.5",
     "nprogress": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-toastify": "^6.0.9",
-    "sass": "^1.27.0"
+    "react-toastify": "^6.1.0",
+    "sass": "^1.29.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.1.6",
-    "firebase-tools": "^8.6.0"
+    "firebase-tools": "^8.15.1"
   },
   "license": "MIT"
 }

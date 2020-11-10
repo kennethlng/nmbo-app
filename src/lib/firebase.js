@@ -1,11 +1,8 @@
 import firebase from 'firebase/app';
-import { prodConfig, devConfig } from '../config/firebase'; 
+import { config } from '../config/firebase'; 
 import 'firebase/auth';
 import 'firebase/firestore'; 
 import 'firebase/analytics'; 
-
-const isDev = true; 
-const config = isDev ? devConfig : prodConfig
 
 try {
     firebase.initializeApp(config)

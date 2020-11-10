@@ -13,6 +13,14 @@ const nextjsServer = next({
 })
 const nextjsHandle = nextjsServer.getRequestHandler()
 
+// Next.js
 exports.nextjsFunc = https.onRequest((req, res) => {
   return nextjsServer.prepare().then(() => nextjsHandle(req, res))
 })
+
+// Firestore triggers
+exports.onCreateProject = require('./functions/lib/db/onCreateProject').onCreateProject; 
+exports.onDeleteProject = require('./functions/lib/db/onDeleteProject').onDeleteProject;
+exports.onUpdateProjectTitle = require('./functions/lib/db/onUpdateProjectTitle').onUpdateProjectTitle;
+exports.onWriteProjectTask = require('./functions/lib/db/onWriteProjectTask').onWriteProjectTask;
+exports.onIncrementUserProjectVisitCounter = require('./functions/lib/db/onIncrementUserProjectVisitCounter').onIncrementUserProjectVisitCounter;
