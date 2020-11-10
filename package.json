@@ -7,12 +7,12 @@
     "use:dev": "firebase use dev",
     "use:prod": "firebase use prod",
     "dev": "npm run use:dev && ENV=development next src/",
-    "build": "next build src/",
-    "start": "next start src/",
+    "build": "npm run use:dev && ENV=development next build src/",
+    "start": "npm run use:dev && ENV=development next start src/",
     "serve": "npm run build && firebase emulators:start --only functions,hosting",
     "shell": "npm run build && firebase functions:shell",
     "deploy:dev": "npm run use:dev && ENV=development firebase deploy --only functions,hosting",
-    "deploy:prod": "npm run use:prod && ENV=production firebase deploy --only functions, hosting",
+    "deploy:prod": "npm run use:prod && ENV=production firebase deploy --only functions,hosting",
     "logs": "firebase functions:log"
   },
   "dependencies": {
