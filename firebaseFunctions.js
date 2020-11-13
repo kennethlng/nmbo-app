@@ -22,5 +22,4 @@ exports.nextjsFunc = https.onRequest((req, res) => {
 exports.onCreateProject = require('./functions/lib/db/onCreateProject').onCreateProject; 
 exports.onDeleteProject = require('./functions/lib/db/onDeleteProject').onDeleteProject;
 exports.onUpdateProjectTitle = require('./functions/lib/db/onUpdateProjectTitle').onUpdateProjectTitle;
-exports.onWriteProjectTask = require('./functions/lib/db/onWriteProjectTask').onWriteProjectTask;
 exports.onIncrementUserProjectVisitCounter = require('./functions/lib/db/onIncrementUserProjectVisitCounter').onIncrementUserProjectVisitCounter;
