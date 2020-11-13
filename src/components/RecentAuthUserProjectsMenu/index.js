@@ -98,17 +98,21 @@ export default function RecentAuthUserProjectsMenu() {
                                 </a>
                             </li>
                         ))}
-                        <hr />
-                        <li>
-                            <a onClick={handleSeeAllChecklistsClick}>
-                                <span className="is-size-5">
-                                    See all my checklists
-                                </span>
-                                <span className="icon is-medium">
-                                    <i className="fas fa-arrow-right"></i>
-                                </span>
-                            </a>
-                        </li>
+                        {userProjects.length >= 10 ? (
+                            <div>
+                                <hr />
+                                <li>
+                                    <a onClick={handleSeeAllChecklistsClick}>
+                                        <span className="is-size-5">
+                                            See all my checklists
+                                        </span>
+                                        <span className="icon is-medium">
+                                            <i className="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </div>
+                        ) : null}
                     </ul>
                 ) : <PlaceholderNotification/>}
             </aside>
