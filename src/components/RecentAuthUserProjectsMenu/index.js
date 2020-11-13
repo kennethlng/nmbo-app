@@ -18,15 +18,17 @@ export default function RecentAuthUserProjectsMenu() {
     const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
-        // Fetch data
-        list(); 
+        if (authUser) {
+            // Fetch data
+            list(); 
 
-        // Log Google Analytics event for viewing item list
-        firebase.analytics().logEvent('view_item_list', {
-            item_list_id: LIST_ID.RECENT_USER_PROJECTS,
-            item_list_name: LIST_NAME.RECENT_USER_PROJECTS
-        })
-    }, [])
+            // Log Google Analytics event for viewing item list
+            firebase.analytics().logEvent('view_item_list', {
+                item_list_id: LIST_ID.RECENT_USER_PROJECTS,
+                item_list_name: LIST_NAME.RECENT_USER_PROJECTS
+            })
+        }
+    }, [authUser])
 
     const list = () => {
         setLoading(true); 

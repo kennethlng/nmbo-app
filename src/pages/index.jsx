@@ -35,37 +35,30 @@ export default function Home() {
         <meta property="twitter:url" content={META.URL}/>
         <meta property="twitter:title" content={META.TITLE}/>
       </Head>
-      {authUser ? (
-        <div>
-          <section className="hero">
-            <div className="hero-body">
-              <div className="container">
-                <div className="columns is-centered">
-                  <div className="column is-half">
-                    <div className="block">
-                      {/* <h1 className="title is-1 has-text-weight-bold">
-                        Make a checklist
-                      </h1> */}
-                      <AddProject
-                        onSuccess={handleSuccess}
-                      />
-                    </div>
-                  </div>
+      <section className="hero">
+        <div className="hero-body">
+          <div className="container">
+            <div className="columns is-centered">
+              <div className="column is-half">
+                <div className="block">
+                  <AddProject
+                    onSuccess={handleSuccess}
+                  />
                 </div>
               </div>
             </div>
-          </section>
-          <section className="section">
-            <div className="container">
-              <div className="columns is-centered">
-                <div className="column is-half">
-                  <RecentAuthUserProjectsMenu/>
-                </div>
-              </div>
-            </div>
-          </section>
+          </div>
         </div>
-      ) : null}
+      </section>
+      <section className="section">
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column is-half">
+              <RecentAuthUserProjectsMenu/>
+            </div>
+          </div>
+        </div>
+      </section>
     </App>
   )
 }

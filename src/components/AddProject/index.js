@@ -18,7 +18,7 @@ export default function AddProject(props) {
             content_id: CONTENT_ID.HOME_PAGE_ADD_PROJECT_BUTTON
         })
         
-        if (newProjectTitle === '' || loading) {
+        if (newProjectTitle === '' || loading || !authUser) {
             return 
         }
 
