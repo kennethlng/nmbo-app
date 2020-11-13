@@ -99,7 +99,7 @@ export default function Project({ data }) {
 }
 
 export async function getServerSideProps(context) {
-    const ref = db.collection("projects").doc(context.params.id);
+    const ref = db.collection(DB.PROJECTS).doc(context.params.id);
     const doc = await ref.get(); 
 
     return {
