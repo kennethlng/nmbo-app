@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 import Footer from '../components/Footer'
 import { faqs } from '../constants/faqs'
 import AddProject from '../components/AddProject'
+import SectionTitle from '../components/SectionTitle'
+import SectionSubtitle from '../components/SectionSubtitle'
 
 const FeatureTile = (props) => {
   const { title, subtitle } = props; 
@@ -47,18 +49,14 @@ export default function About() {
         <meta property="twitter:url" content={META.URL + ROUTES.ABOUT} />
         <meta property="twitter:title" content={META.ABOUT_TITLE} />
       </Head>
-      <section className="hero is-medium is-primary">
+      <section className="hero is-medium is-bold">
         <div className="hero-body">
-          <div className="container">
-            <div className="columns">
-              <div className="column is-two-thirds">
+          <div className="container has-text-centered">
+            <div className="columns is-centered">
+              <div className="column is-three-fifths">
                 <h1 className="title is-1 has-text-weight-bold">
-                  The fastest way to make a checklist with friends
+                  NMBO is the fastest way to make a checklist with friends.
                 </h1>
-                <h2 className="subtitle is-3">
-                  Just copy the link and share it. 
-                  <p>It's free to use. No account or download needed.</p>
-                </h2>
               </div>
             </div>
           </div>
@@ -66,43 +64,68 @@ export default function About() {
       </section>
       <section className="section is-medium">
         <div className="container">
-          <div className="tile is-ancestor">
-            <div className="tile is-parent">
-              <FeatureTile
-                title="✅"
-                subtitle={<div>Create a <strong className="has-text-primary has-text-weight-bold">checklist</strong> for whatever you need. Party supplies, groceries, weekend trip, etc.</div>}
-              />
+          <div className="columns">
+            <div className="column">
+              
             </div>
-            <div className="tile is-parent">
-              <FeatureTile
-                title="🤳"
-                subtitle={<div><strong className="has-text-primary has-text-weight-bold">Copy the URL and share it</strong> with your friends using your favorite messaging apps.</div>}
+            <div className="column">
+              <SectionTitle
+                content={<div>Share a link.<p>Share a checklist.</p></div>}
               />
-            </div>
-            <div className="tile is-parent">
-              <FeatureTile
-                title="🥳"
-                subtitle={<div>Cross items off the list. <strong className="has-text-primary has-text-weight-bold">Get stuff done together.</strong></div>}
+              <SectionSubtitle
+                content={<div>Creating and sharing a checklist is as easy as sending a link. Start a checklist and share the link on any of your favorite messaging apps.</div>}
               />
             </div>
           </div>
         </div>
       </section>
-      {/* <section className="section is-medium">
+      <section className="section is-medium">
+        <div className="container has-text-centered">
+          <SectionTitle
+            content={<div>No account needed to join. </div>}
+          />
+          <SectionSubtitle
+            content={<div>Join a checklist with a link, even if you don’t have an account.</div>}
+          />
+        </div>
+      </section>
+      <section className="section is-medium">
         <div className="container">
-          <div className="columns is-centered">
-            <div className="column is is-half">
-              <AddProject/>
+          <div className="columns">
+            <div className="column">
+              <SectionTitle
+                content={<div>Jump in <p>anytime.</p></div>}
+              />
+              <SectionSubtitle
+                content={<div>NMBO lives on the web, so you can join a checklist from any web browser and from any device.</div>}
+              />
+            </div>
+            <div className="column">
+              
             </div>
           </div>
         </div>
-      </section> */}
-      {/* <section className="section">
+      </section>
+      <section className="section is-medium">
+        <div className="container has-text-centered">
+          <SectionTitle
+            content={<div>Get stuff done together.</div>}
+          />
+          <SectionSubtitle
+            content={<div>Invite as many people as you want to your checklist. Projects are more fun with other people.</div>}
+          />
+        </div>
+      </section>
+      <section className="section is-medium">
         <div className="container">
-          <h3 className="title has-text-weight-bold">
-            FAQS
-          </h3>
-          <div className="block">
+          <div className="columns is-centered">
+            <div className="column has-text-centered">
+              <SectionTitle
+                content={<div>Frequently asked questions</div>}
+              />
+            </div>
+          </div>
+          <div className="block mt-6">
             <div className="columns is-multiline">
               {faqs.map((faq, index) => (
                 <div className="column is-one-third block" key={index}>
@@ -115,7 +138,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
       <Footer/>
     </App>
   )
