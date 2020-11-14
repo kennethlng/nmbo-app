@@ -35,8 +35,7 @@ const Header = () => {
               <a className="navbar-link">
                 More
               </a>
-              <div className="navbar-dropdown is-boxed">
-                {/* <hr className="navbar-divider" /> */}
+              <div className="navbar-dropdown is-right is-boxed">
                 <div className="navbar-item" onClick={() => setMenuIsActive(false)}>
                   <div className="field is-grouped">
                     <p className="control">
