@@ -25,8 +25,12 @@ const Header = () => {
 
         <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
           <div className="navbar-start">
+            
+          </div>
+
+          <div className="navbar-end">
             <AboutNavBarItemButton />
-            <FeedbackNavBarItemButton/>
+            <FeedbackNavBarItemButton />
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 More
@@ -44,9 +48,6 @@ const Header = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="navbar-end">
             <div className="navbar-item">
               <AuthenticationButtons/>
             </div>
