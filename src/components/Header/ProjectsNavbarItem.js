@@ -21,7 +21,7 @@ export default function ProjectsNavbarItem() {
     return (
         <a className="navbar-item" onClick={handleClick}>
             <span className="icon">
-                <i className="fas fa-tasks"></i>
+                <i className="fas fa-tasks" aria-hidden></i>
             </span>
             <span>
                 My checklists

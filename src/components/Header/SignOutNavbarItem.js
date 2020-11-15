@@ -38,7 +38,7 @@ export default function SignOutNavbarItem() {
     return (
         <a className="navbar-item" onClick={handleSignOutClick}>
             <span className="icon">
-                <i className="fas fa-sign-out-alt"></i>
+                <i className="fas fa-sign-out-alt" aria-hidden></i>
             </span>
             <span>Sign out</span>
         </a>

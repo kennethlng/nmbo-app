@@ -72,7 +72,7 @@ export default function AddProject(props) {
                         onKeyPress={handleKeyPress}
                     />
                     <span className="icon is-size-1 is-size-2-tablet is-size-3-mobile is-left">
-                        <i className="fas fa-tasks"></i>
+                        <i className="fas fa-tasks" aria-hidden></i>
                     </span>
                 </div>
             </div>

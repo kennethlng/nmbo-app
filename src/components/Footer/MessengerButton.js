@@ -14,7 +14,7 @@ export default function MessengerButton() {
     return (
         <a href={SOCIAL.MESSENGER} target="_blank" onClick={handleClick}>
             <span className="icon is-medium">
-                <i className="fab fa-facebook-messenger fa-lg"></i>
+                <i className="fab fa-facebook-messenger fa-lg" aria-hidden></i>
             </span>
         </a>
     )
