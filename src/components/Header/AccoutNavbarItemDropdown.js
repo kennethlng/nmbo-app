@@ -1,4 +1,5 @@
 import SignOutNavbarItem from './SignOutNavbarItem'
+import ProjectsNavbarItem from './ProjectsNavbarItem'
 
 export default function AccountNavbarItemDropdown() {
     return (
@@ -9,6 +10,8 @@ export default function AccountNavbarItemDropdown() {
                 </span>
             </a>
             <div className="navbar-dropdown is-right is-boxed">
+                <ProjectsNavbarItem/>
+                <hr className="navbar-divider"></hr>
                 <SignOutNavbarItem/>
             </div>
         </div>
