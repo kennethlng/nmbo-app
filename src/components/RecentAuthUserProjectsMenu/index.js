@@ -5,8 +5,6 @@ import * as DB from '../../constants/db';
 import * as ROUTES from '../../constants/routes';
 import * as LIST_ID from '../../constants/listId';
 import * as LIST_NAME from '../../constants/listName';
-import * as CONTENT_ID from '../../constants/contentId';
-import * as CONTENT_TYPE from '../../constants/contentType';
 import { db, firebase } from '../../lib/firebase';
 import { useRouter } from 'next/router'
 import PlaceholderNotification from './PlaceholderNotification'
@@ -39,7 +37,7 @@ export default function RecentAuthUserProjectsMenu() {
 
         // Fetch all user_projects that were opened within the last week
         db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS)
-        .where(DB.OPENED_ON, '>', startDateObj)
+        .where(DB.OPENED_ON, '>=', startDateObj)
         .orderBy(DB.OPENED_ON, "desc")
         .limit(10)
         .get()
@@ -76,22 +74,11 @@ export default function RecentAuthUserProjectsMenu() {
         router.push(ROUTES.PROJECT(userProject[DB.ID]))
     }
 
-    const handleSeeAllChecklistsClick = () => {
-        // Log Google Analytics event for button click 
-        firebase.analytics().logEvent('select_content', {
-            content_id: CONTENT_ID.HOME_PAGE_VIEW_PROJECTS_BUTTON,
-            content_type: CONTENT_TYPE.BUTTON
-        })
-
-        // Push route to Checklists page
-        router.push(ROUTES.PROJECTS)
-    }
-
     return (
         loading ? <progress className="progress is-small" max="100">15%</progress> : (
             <aside className="menu">
                 <p className="menu-label">
-                    Recent Checklists
+                    Recent
                 </p>
                 {userProjects.length > 0 ? (
                     <ul className="menu-list">
@@ -104,21 +91,6 @@ export default function RecentAuthUserProjectsMenu() {
                                 </a>
                             </li>
                         ))}
-                        {userProjects.length >= 10 ? (
-                            <div>
-                                <hr />
-                                <li>
-                                    <a onClick={handleSeeAllChecklistsClick}>
-                                        <span className="is-size-5">
-                                            See all my checklists
-                                        </span>
-                                        <span className="icon is-medium">
-                                            <i className="fas fa-arrow-right"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            </div>
-                        ) : null}
                     </ul>
                 ) : <PlaceholderNotification/>}
             </aside>
