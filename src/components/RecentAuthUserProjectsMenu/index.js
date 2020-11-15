@@ -33,7 +33,13 @@ export default function RecentAuthUserProjectsMenu() {
     const list = () => {
         setLoading(true); 
 
+        // Set last week date as start date
+        var startDate = Date.now() - 604800000;
+        var startDateObj = new Date(startDate);
+
+        // Fetch all user_projects that were opened within the last week
         db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS)
+        .where(DB.OPENED_ON, '>', startDateObj)
         .orderBy(DB.OPENED_ON, "desc")
         .limit(10)
         .get()
