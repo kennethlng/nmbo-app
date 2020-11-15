@@ -29,7 +29,8 @@ export default function SignOutNavbarItem() {
 
                 // Log Google Analytics event for sign out error 
                 firebase.analytics().logEvent(EVENTS.SIGN_OUT_ERROR, {
-                    error
+                    error_code: error.code,
+                    error_message: error.message
                 })
             });
     }
