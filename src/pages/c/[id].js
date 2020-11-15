@@ -52,6 +52,7 @@ export default function Project({ data }) {
 
             let projectUserRef = db.collection(DB.PROJECTS).doc(projectId).collection(DB.PROJECT_USERS).doc(authUser.uid); 
             batch.set(projectUserRef, {
+                [DB.ID]: authUser.uid,
                 [DB.PHOTO_URL]: authUser.photoURL,
                 [DB.DISPLAY_NAME]: authUser.displayName
             }, { merge: true })
