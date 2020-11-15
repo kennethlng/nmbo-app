@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="level">
                 <div className="level-left">
                     <div className="level-item">
-                        © Copyright NMBO. All Rights Reserved
+                        © NMBO 2020. All Rights Reserved
                     </div>
                 </div>
                 <div className="level-right">
