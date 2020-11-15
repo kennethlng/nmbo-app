@@ -48,7 +48,7 @@ export default function AddProject(props) {
     return (
         <div>
             <div className="field">
-                <div className="control">
+                <div className="control has-icons-left">
                     <input 
                         className="input is-size-1 is-size-2-tablet is-size-3-mobile has-text-weight-bold" 
                         type="text" 
@@ -57,11 +57,14 @@ export default function AddProject(props) {
                         onChange={e => setNewProjectTitle(e.target.value)}
                         onKeyPress={handleKeyPress}
                     />
+                    <span className="icon is-size-1 is-size-2-tablet is-size-3-mobile is-left">
+                        <i className="fas fa-tasks"></i>
+                    </span>
                 </div>
             </div>
             <div className="field">
                 <div className="control">
-                    <button className={`button is-medium is-primary has-text-weight-bold ${loading ? "is-loading" : ''}`} disabled={loading} onClick={createProject}>
+                    <button className={`button is-fullwidth is-medium is-primary has-text-weight-bold ${loading ? "is-loading" : ''}`} disabled={loading} onClick={createProject}>
                         <span>Create checklist</span>
                     </button>
                 </div>
