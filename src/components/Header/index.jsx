@@ -1,13 +1,17 @@
 import * as React from 'react'
 import LogoNavBarItemButton from './LogoNavBarItemButton'
-import MessengerButton from './MessengerButton'
-import EmailButton from './EmailButton'
-import TwitterButton from './TwitterButton'
 import AboutNavBarItemButton from './AboutNavBarItemButton'
 import FeedbackNavBarItemButton from './FeedbackNavBarItemButton'
-import AuthenticationButtons from './AuthenticationButtons'
+import SignInButton from './SignInButton'
+import SignUpButton from './SignUpButton'
+import { AuthUserContext } from '../Session'
+import { useRouter } from 'next/router'
+import * as ROUTES from '../../constants/routes'
+import AccountNavbarItemDropdown from './AccoutNavbarItemDropdown'
 
 const Header = () => {
+  const authUser = React.useContext(AuthUserContext); 
+  const router = useRouter(); 
   const [menuIsActive, setMenuIsActive] = React.useState(false); 
 
   return (
@@ -31,25 +35,16 @@ const Header = () => {
           <div className="navbar-end">
             <AboutNavBarItemButton />
             <FeedbackNavBarItemButton />
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">
-                More
-              </a>
-              <div className="navbar-dropdown is-right is-boxed">
-                <div className="navbar-item" onClick={() => setMenuIsActive(false)}>
-                  <div className="field is-grouped">
-                    <p className="control">
-                      <EmailButton />
-                      <MessengerButton />
-                      <TwitterButton />
-                    </p>
+            {router.pathname === ROUTES.SIGN_IN || router.pathname === ROUTES.SIGN_UP ? null
+              : authUser && authUser.isAnonymous ? (
+                <div className="navbar-item">
+                  <div className="buttons">
+                    <SignUpButton />
+                    <SignInButton />
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="navbar-item">
-              <AuthenticationButtons/>
-            </div>
+              ) : <AccountNavbarItemDropdown/>
+            }
           </div>
         </div>
       </nav>
