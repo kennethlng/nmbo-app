@@ -4,6 +4,7 @@ import { AuthUserContext } from '../Session';
 import * as DB from '../../constants/db'; 
 import * as CONTENT_TYPE from '../../constants/contentType';
 import * as CONTENT_ID from '../../constants/contentId';
+import * as EVENTS from '../../constants/events'; 
 
 export default function AddProject(props) {
     const { onSuccess, onError } = props; 
@@ -29,12 +30,25 @@ export default function AddProject(props) {
             [DB.CREATED_BY]: authUser.uid
         })
         .then(function(docRef) {
+            // Log success event
+            firebase.analytics().logEvent(EVENTS.ADD_PROJECT_SUCCESS);
+
             setLoading(false); 
+
+            // Broadcast props method
             if (onSuccess) onSuccess(docRef.id);
         })
         .catch(function(error) {
+            // Log error event
+            firebase.analytics().logEvent(EVENTS.ADD_PROJECT_ERROR, {
+                error_code: error.code,
+                error_message: error.message
+            });
+
             setLoading(false);
+
             if (onError) onError(); 
+
             console.error("Error adding document: ", error);
         });
     }
