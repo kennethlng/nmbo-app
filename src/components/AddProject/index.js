@@ -25,18 +25,31 @@ export default function AddProject(props) {
 
         setLoading(true); 
 
-        db.collection(DB.PROJECTS).add({
+        let batch = db.batch(); 
+
+        let newProjectRef = db.collection(DB.PROJECTS).doc(); 
+        batch.set(newProjectRef, {
             [DB.TITLE]: newProjectTitle,
             [DB.CREATED_BY]: authUser.uid
         })
-        .then(function(docRef) {
+
+        let userProjectRef = db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(newProjectRef.id);
+        batch.set(userProjectRef, {
+            [DB.CREATED_BY]: authUser.uid,
+            [DB.TITLE]: newProjectTitle,
+            [DB.ID]: newProjectRef.id,
+            [DB.VISIT_COUNTER]: 0
+        })
+
+        batch.commit()
+        .then(function() {
             // Log success event
             firebase.analytics().logEvent(EVENTS.ADD_PROJECT_SUCCESS);
 
             setLoading(false); 
 
             // Broadcast props method
-            if (onSuccess) onSuccess(docRef.id);
+            if (onSuccess) onSuccess(newProjectRef.id);
         })
         .catch(function(error) {
             // Log error event
