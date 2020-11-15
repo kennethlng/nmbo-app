@@ -6,7 +6,7 @@ export default function AccountNavbarItemDropdown() {
         <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link has-background-white-ter">
                 <span className="icon">
-                    <i className="fas fa-user"></i>
+                    <i className="fas fa-user" aria-hidden></i>
                 </span>
             </a>
             <div className="navbar-dropdown is-right is-boxed">
