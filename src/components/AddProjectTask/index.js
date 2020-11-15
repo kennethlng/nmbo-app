@@ -72,14 +72,14 @@ export default function AddProjectTask(props) {
                 <input 
                     className="input" 
                     type="text" 
-                    placeholder="New item or task" 
+                    placeholder="New task" 
                     value={title} 
                     disabled={loading}
                     onChange={e => setTitle(e.target.value)}
                     onKeyPress={handleKeyPress}
                 />
                 <span className="icon is-left">
-                    <i className="fas fa-plus"></i>
+                    <i className="far fa-check"></i>
                 </span>
             </div>
             <div className="control">
