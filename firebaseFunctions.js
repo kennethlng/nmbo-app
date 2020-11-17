@@ -21,4 +21,5 @@ exports.nextjsFunc = https.onRequest((req, res) => {
 // Firestore triggers
 exports.onDeleteProject = require('./functions/lib/db/onDeleteProject').onDeleteProject;
 exports.onUpdateProjectTitle = require('./functions/lib/db/onUpdateProjectTitle').onUpdateProjectTitle;
-exports.onIncrementUserProjectVisitCounter = require('./functions/lib/db/onIncrementUserProjectVisitCounter').onIncrementUserProjectVisitCounter;
+exports.onWriteUserProject = require('./functions/lib/db/onWriteUserProject').onWriteUserProject;
+exports.onWriteProjectTask = require('./functions/lib/db/onWriteProjectTask').onWriteProjectTask;
