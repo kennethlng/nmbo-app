@@ -8,6 +8,7 @@ export const CREATED_BY = "created_by";
 export const MODIFIED_ON = "modified_on";
 export const MODIFIED_BY = "modified_by";
 export const OPENED_ON = "opened_on";
+export const UPDATED_ON = "updated_on";
 export const TITLE = "title";
 export const ID = "id";
 export const VISIT_COUNTER = "visit_counter";
