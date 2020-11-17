@@ -10,7 +10,6 @@ import { useContext, useEffect } from 'react'
 import AddProject from '../components/AddProject'
 import { useRouter } from 'next/router'
 import { firebase } from '../lib/firebase'
-import Footer from '../components/Footer'
 
 export default function Home() {
   const authUser = useContext(AuthUserContext);
@@ -60,7 +59,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Footer/>
     </App>
   )
 }
