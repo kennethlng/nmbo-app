@@ -8,6 +8,7 @@ module.exports = {
     MODIFIED_ON: "modified_on",
     MODIFIED_BY: "modified_by",
     OPENED_ON: "opened_on",
+    UPDATED_ON: "updated_on",
     TITLE: "title",
     ID: "id",
     VISIT_COUNTER: "visit_counter",
