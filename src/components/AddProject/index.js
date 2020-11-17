@@ -35,8 +35,8 @@ export default function AddProject(props) {
 
         let userProjectRef = db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(newProjectRef.id);
         batch.set(userProjectRef, {
-            [DB.CREATED_BY]: authUser.uid,
             [DB.TITLE]: newProjectTitle,
+            [DB.CREATED_BY]: authUser.uid,
             [DB.ID]: newProjectRef.id,
             [DB.VISIT_COUNTER]: 0
         })
