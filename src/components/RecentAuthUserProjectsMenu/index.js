@@ -84,10 +84,8 @@ export default function RecentAuthUserProjectsMenu() {
                     <ul className="menu-list">
                         {userProjects.map(userProject => (
                             <li key={userProject[DB.ID]}>
-                                <a onClick={() => handleRowClick(userProject)}>
-                                    <p className="is-size-5">
-                                        {userProject[DB.TITLE]}
-                                    </p>
+                                <a className="is-size-5" onClick={() => handleRowClick(userProject)}>
+                                    {userProject[DB.TITLE]}
                                 </a>
                             </li>
                         ))}
