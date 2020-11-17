@@ -27,7 +27,7 @@ const Header = () => {
           </a>
         </div>
 
-        <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`}>
+        <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`} onClick={() => setMenuIsActive(false)}>
           <div className="navbar-start">
             
           </div>
