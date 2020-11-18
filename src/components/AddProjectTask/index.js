@@ -21,9 +21,6 @@ export default function AddProjectTask(props) {
     const [loading, setLoading] = useState(false); 
 
     const add = () => {
-        console.log(projectId)
-        return;
-
         // Log event for button click 
         firebase.analytics().logEvent('select_content', {
             content_id: CONTENT_ID.ADD_TASK_BUTTON,
