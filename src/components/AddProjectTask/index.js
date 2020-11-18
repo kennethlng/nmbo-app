@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
-import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
 export default function AddProjectTask(props) {
     const { projectId, onSuccess, onError } = props; 
@@ -89,7 +89,7 @@ export default function AddProjectTask(props) {
                             edge="end"
                             color="primary"
                         >
-                            <AddCircleOutlineRoundedIcon/>
+                            <SendRoundedIcon/>
                         </IconButton>
                     </InputAdornment>
                 }
