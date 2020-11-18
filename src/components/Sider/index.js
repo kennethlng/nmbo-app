@@ -8,7 +8,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 import { useContext } from 'react'; 
+import HomeIcon from '@material-ui/icons/Home';
+import { useRouter } from 'next/router'
+import * as ROUTES from '../../constants/routes';
+import RecentAuthUserProjectsSubList from '../RecentAuthUserProjectsSubList'
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
@@ -28,23 +33,23 @@ const useStyles = makeStyles((theme) => ({
 export default function Sider() {
     const classes = useStyles(); 
     const theme = useTheme(); 
+    const router = useRouter(); 
     const appState = useContext(AppStateContext);
 
     const list = (
-        <div className={classes.drawerContainer}>
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts', ].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+        <div className={classes.drawerContainer} onClick={() => appState.setDrawerOpen(false)}>
+            <List subheader={<li/>}>
+                <ListItem button onClick={() => router.push(ROUTES.HOME)}>
+                    <ListItemIcon><HomeIcon/></ListItemIcon>
+                    <ListItemText primary="Home"/>
+                </ListItem>
+                <Divider/>
+                <RecentAuthUserProjectsSubList/>
             </List>
         </div>
     )
 
-    const handleDrawerToggle = () => {
-        appState.setDrawerOpen(!appState.drawerOpen); 
-    };
+    const handleDrawerToggle = () => appState.setDrawerOpen(!appState.drawerOpen);
 
     return (
         <nav className={classes.drawer}>
