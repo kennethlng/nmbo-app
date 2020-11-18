@@ -3,31 +3,36 @@ import Hidden from '@material-ui/core/Hidden';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { AppStateContext } from '../AppState'
 import * as STYLES from '../../constants/styles'
+import * as ROUTES from '../../constants/routes';
+import * as SOCIAL from '../../constants/social'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import CreateIcon from '@material-ui/icons/Create';
 import { useContext } from 'react'; 
-import HomeIcon from '@material-ui/icons/Home';
 import { useRouter } from 'next/router'
-import * as ROUTES from '../../constants/routes';
 import RecentAuthUserProjectsSubList from '../RecentAuthUserProjectsSubList'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
         [theme.breakpoints.up('sm')]: {
             width: STYLES.DRAWER_WIDTH,
             flexShrink: 0,
-        },
+        }
     },
     drawerPaper: {
         width: STYLES.DRAWER_WIDTH,
+        paddingTop: theme.spacing(3)
     },
     drawerContainer: {
-        overflow: 'auto',
+        overflow: 'auto'
     },
+    margin: {
+        margin: theme.spacing(2)
+    }
 }))
 
 export default function Sider() {
@@ -36,15 +41,28 @@ export default function Sider() {
     const router = useRouter(); 
     const appState = useContext(AppStateContext);
 
-    const list = (
+    const drawer = (
         <div className={classes.drawerContainer} onClick={() => appState.setDrawerOpen(false)}>
+            <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={() => router.push(ROUTES.HOME)}
+                disableElevation
+                disableRipple
+                className={classes.margin}
+                startIcon={<CreateIcon/>}
+            >
+                New Checklist
+            </Button>
             <List subheader={<li/>}>
-                <ListItem button onClick={() => router.push(ROUTES.HOME)}>
-                    <ListItemIcon><HomeIcon/></ListItemIcon>
-                    <ListItemText primary="Home"/>
-                </ListItem>
-                <Divider/>
                 <RecentAuthUserProjectsSubList/>
+                <Divider/>
+                <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
+                    <ListItemText primary="About"/>
+                </ListItem>
+                <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
+                    <ListItemText primary="Send Feedback"/>
+                </ListItem>
             </List>
         </div>
     )
@@ -66,7 +84,7 @@ export default function Sider() {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                 >
-                    {list}
+                    {drawer}
                 </Drawer>
             </Hidden>
             <Hidden xsDown implementation="js">
@@ -78,7 +96,7 @@ export default function Sider() {
                     open
                 >
                     <Toolbar/>
-                    {list}
+                    {drawer}
                 </Drawer>
             </Hidden>
         </nav>
