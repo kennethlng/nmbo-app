@@ -40,7 +40,7 @@ export default function Project({ data }) {
 
     useEffect(() => {
         // Map user_project doc for authUser
-        if (authUser) {
+        if (data && authUser) {
             let projectId = router.query.id;
             let batch = db.batch(); 
 
