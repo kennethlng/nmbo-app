@@ -1,8 +1,8 @@
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
+import SettingsIcon from '@material-ui/icons/Settings';
 import Menu from '@material-ui/core/Menu';
 import { useState } from 'react';
+import SignOutMenuItem from './SignOutMenuItem'
 
 export default function AccountButton() {
     const [anchorEl, setAnchorEl] = useState(null); 
@@ -22,7 +22,7 @@ export default function AccountButton() {
                 onClick={handleClick}
                 color="inherit"
             >
-                <AccountCircle/>
+                <SettingsIcon/>
             </IconButton>
             <Menu
                 anchorEl={anchorEl}
@@ -37,9 +37,9 @@ export default function AccountButton() {
                 }}
                 open={open}
                 onClose={handleClose}
+                onClick={handleClose}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <SignOutMenuItem/>
             </Menu>
         </div>
     )
