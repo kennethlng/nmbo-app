@@ -77,6 +77,7 @@ export default function AddProject(props) {
                 variant="contained"
                 disabled={loading}
                 disableElevation
+                disableRipple
                 size="large"
             >
                 Create Checklist
