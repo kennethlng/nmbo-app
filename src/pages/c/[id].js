@@ -78,7 +78,7 @@ export default function Project({ data }) {
                 authUser ? (
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <Typography variant="h4" component="h1">
+                            <Typography variant="h3" component="h1">
                                 {data[DB.TITLE]}
                             </Typography>
                         </Grid>
