@@ -8,6 +8,9 @@ import * as LIST_NAME from '../../constants/listName';
 import { db, firebase } from '../../lib/firebase';
 import { useRouter } from 'next/router'
 import PlaceholderNotification from './PlaceholderNotification'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default function RecentAuthUserProjectsMenu() {
     const authUser = useContext(AuthUserContext); 
@@ -37,8 +40,8 @@ export default function RecentAuthUserProjectsMenu() {
 
         // Fetch all user_projects that were updated within the last week
         db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS)
-        .where(DB.UPDATED_ON, '>=', startDateObj)
-        .orderBy(DB.UPDATED_ON, "desc")
+        .where(DB.OPENED_ON, '>=', startDateObj)
+        .orderBy(DB.OPENED_ON, "desc")
         .limit(10)
         .get()
         .then(function(querySnapshot) {
@@ -75,23 +78,31 @@ export default function RecentAuthUserProjectsMenu() {
     }
 
     return (
-        loading ? <progress className="progress is-small" max="100">15%</progress> : (
-            <aside className="menu">
-                <p className="menu-label">
-                    Recent
-                </p>
-                {userProjects.length > 0 ? (
-                    <ul className="menu-list">
-                        {userProjects.map(userProject => (
-                            <li key={userProject[DB.ID]}>
-                                <a className="is-size-5" onClick={() => handleRowClick(userProject)}>
-                                    {userProject[DB.TITLE]}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                ) : <PlaceholderNotification/>}
-            </aside>
-        )
+        <List>
+            {userProjects.map(userProject => (
+                <ListItem button key={userProject[DB.ID]} onClick={() => handleRowClick(userProject)}>
+                    <ListItemText primary={userProject[DB.TITLE]} />
+                </ListItem>
+            ))}
+        </List>
+
+        // loading ? <progress className="progress is-small" max="100">15%</progress> : (
+        //     <aside className="menu">
+        //         <p className="menu-label">
+        //             Recent
+        //         </p>
+        //         {userProjects.length > 0 ? (
+        //             <ul className="menu-list">
+        //                 {userProjects.map(userProject => (
+        //                     <li key={userProject[DB.ID]}>
+        //                         <a className="is-size-5" onClick={() => handleRowClick(userProject)}>
+        //                             {userProject[DB.TITLE]}
+        //                         </a>
+        //                     </li>
+        //                 ))}
+        //             </ul>
+        //         ) : <PlaceholderNotification/>}
+        //     </aside>
+        // )
     )
 }
