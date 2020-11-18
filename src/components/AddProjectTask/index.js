@@ -6,10 +6,24 @@ import * as CONTENT_TYPE from '../../constants/contentType'
 import * as EVENTS from '../../constants/events'
 import { useRouter } from 'next/router'
 import { db, firebase } from '../../lib/firebase'
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+    input: {
+        marginTop: theme.spacing(3)
+    }
+}))
 
 export default function AddProjectTask(props) {
     const { onSuccess, onError } = props; 
     const router = useRouter(); 
+    const classes = useStyles(); 
     const authUser = useContext(AuthUserContext); 
     const [title, setTitle] = useState(''); 
     const [loading, setLoading] = useState(false); 
@@ -67,30 +81,29 @@ export default function AddProjectTask(props) {
     }
 
     return (
-        <div className="field has-addons">
-            <div className="control has-icons-left is-expanded">
-                <input 
-                    className="input" 
-                    type="text" 
-                    placeholder="New task" 
-                    value={title} 
-                    disabled={loading}
-                    onChange={e => setTitle(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                />
-                <span className="icon is-left">
-                    <i className="far fa-check"></i>
-                </span>
-            </div>
-            <div className="control">
-                <button 
-                    className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} 
-                    disabled={loading} 
-                    onClick={add}
-                >
-                    Add
-                </button>
-            </div>
-        </div>
+        <FormControl variant="outlined" fullWidth className={classes.input}>
+            <InputLabel htmlFor="outlined-adornment-password">New task</InputLabel>
+            <OutlinedInput
+                id="outlined-adornment-password"
+                type='text'
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                onKeyPress={handleKeyPress}
+                endAdornment={
+                    <InputAdornment position="end">
+                        <IconButton
+                            aria-label="add task"
+                            onClick={add}
+                            edge="end"
+                            color="primary"
+                        >
+                            <AddCircleOutlineRoundedIcon/>
+                        </IconButton>
+                    </InputAdornment>
+                }
+                labelWidth={70}
+                disabled={loading}
+            />
+        </FormControl>
     )
 }
