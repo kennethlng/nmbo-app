@@ -14,6 +14,10 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppStateContext } from '../AppState'
+import SignInButton from './SignInButton'
+import SignUpButton from './SignUpButton'
+import AccountButton from './AccountButton'
+import { AuthUserContext } from '../Session'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
+  },
+  spacer: {
+    flexGrow: 1
+  },
+  buttons: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   }
 }))
 
@@ -34,6 +46,7 @@ const Header = () => {
   const classes = useStyles(); 
   const router = useRouter();
   const appState = React.useContext(AppStateContext); 
+  const authUser = React.useContext(AuthUserContext); 
 
   const handleDrawerToggle = () => {
     appState.setDrawerOpen(!appState.drawerOpen);
@@ -52,8 +65,15 @@ const Header = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          Responsive drawer
+          NMBO
         </Typography>
+        <div className={classes.spacer}/>
+        {authUser && authUser.isAnonymous ? (
+          <div className={classes.buttons}>
+            <SignUpButton/>
+            <SignInButton/>
+          </div>
+        ) : <AccountButton/>}
       </Toolbar>
     </AppBar>
 

@@ -3,6 +3,7 @@ import * as ROUTES from '../../constants/routes'
 import * as CONTENT_TYPE from '../../constants/contentType'
 import * as CONTENT_ID from '../../constants/contentId'
 import { firebase } from '../../lib/firebase'
+import Button from '@material-ui/core/Button'
 
 export default function SignInButton() {
     const router = useRouter();
@@ -19,8 +20,13 @@ export default function SignInButton() {
     }
 
     return (
-        <a className="button is-light" onClick={handleClick}>
+        <Button 
+            variant="contained" 
+            onClick={handleClick}
+            disableElevation
+            disableRipple
+        >
             Log in
-        </a>
+        </Button>
     )
 }
