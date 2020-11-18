@@ -7,7 +7,7 @@ import { AuthUserContext } from '../Session';
 import { firebase } from '../../lib/firebase'; 
 import CloseIcon from '@material-ui/icons/Close';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -131,8 +131,8 @@ export default function ProjectTasksListRow(props) {
     return (
         <ListItem>
             <ListItemIcon>
-                <IconButton edge="start" onClick={handleCheckClick}>
-                    {task[DB.IS_COMPLETED] ? <CheckCircleIcon/> : <RadioButtonUncheckedIcon/>}
+                <IconButton edge="start" onClick={handleCheckClick} color="primary">
+                    {task[DB.IS_COMPLETED] ? <CheckCircleRoundedIcon/> : <RadioButtonUncheckedIcon/>}
                 </IconButton>
             </ListItemIcon>
             <ListItemText primary={title} />
