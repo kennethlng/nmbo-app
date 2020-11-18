@@ -3,6 +3,7 @@ import Header from '../Header'
 import Sider from '../Sider'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
+import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    paddingTop: theme.spacing(6)
   },
 }))
 
@@ -23,7 +24,9 @@ const App = ({ children }) => {
       <Sider/>
       <div className={classes.content}>
         <Toolbar/>
-        {children}
+        <Container maxWidth="sm">
+          {children}
+        </Container>
       </div>
     </main>
   )
