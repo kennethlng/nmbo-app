@@ -4,7 +4,6 @@ import * as META from '../constants/meta'
 import * as ROUTES from '../constants/routes'
 import * as EVENTS from '../constants/events'
 import * as PAGE_TITLE from '../constants/pageTitle'
-import RecentAuthUserProjectsMenu from '../components/RecentAuthUserProjectsMenu'
 import { AuthUserContext } from '../components/Session'
 import { useContext, useEffect } from 'react'
 import AddProject from '../components/AddProject'
@@ -35,30 +34,9 @@ export default function Home() {
         <meta property="twitter:url" content={META.URL}/>
         <meta property="twitter:title" content={META.TITLE}/>
       </Head>
-      <section className="hero">
-        <div className="hero-body">
-          <div className="container">
-            <div className="columns is-centered">
-              <div className="column is-half">
-                <div className="block">
-                  <AddProject
-                    onSuccess={handleSuccess}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="section mb-6">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-half">
-              <RecentAuthUserProjectsMenu/>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AddProject
+        onSuccess={handleSuccess}
+      />
     </App>
   )
 }
