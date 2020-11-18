@@ -40,7 +40,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" className={classes.appBar} >
+    <AppBar position="fixed" className={classes.appBar} color="inherit" elevation={0}>
       <Toolbar>
         <IconButton
           color="inherit"
