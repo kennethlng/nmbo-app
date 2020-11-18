@@ -9,7 +9,8 @@ import { useRouter } from 'next/router'
 import NoTasksPlaceholder from './NoTasksPlaceholder'; 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default function ProjectTasks() {
+export default function ProjectTasks(props) {
+    const { projectId } = props; 
     const router = useRouter();
     const [tasks, setTasks] = useState([]); 
     const [loading, setLoading] = useState(false); 
@@ -35,7 +36,7 @@ export default function ProjectTasks() {
         })
 
         return () => unsubscribe();
-    }, [])
+    }, [projectId])
 
     const completedTasks = () => {
         let arr = tasks.filter(task => task[DB.IS_COMPLETED]);
