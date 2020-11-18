@@ -5,6 +5,8 @@ import * as DB from '../../constants/db';
 import * as CONTENT_TYPE from '../../constants/contentType';
 import * as CONTENT_ID from '../../constants/contentId';
 import * as EVENTS from '../../constants/events'; 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 export default function AddProject(props) {
     const { onSuccess, onError } = props; 
@@ -12,7 +14,9 @@ export default function AddProject(props) {
     const [newProjectTitle, setNewProjectTitle] = useState(''); 
     const [loading, setLoading] = useState(false); 
 
-    const createProject = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault(); 
+        
         // Log Google Analytics event for button click 
         firebase.analytics().logEvent('select_content', {
             content_type: CONTENT_TYPE.BUTTON,
@@ -53,36 +57,30 @@ export default function AddProject(props) {
         });
     }
 
-    const handleKeyPress = (e) => {
-        if (e.key === "Enter") {
-            createProject(); 
-        }
-    }
-
     return (
-        <div>
-            <div className="field">
-                <div className="control has-icons-left">
-                    <input 
-                        className="input is-size-1 is-size-2-tablet is-size-3-mobile has-text-weight-bold" 
-                        type="text" 
-                        placeholder="Checklist name" 
-                        value={newProjectTitle}
-                        onChange={e => setNewProjectTitle(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                    />
-                    <span className="icon is-size-1 is-size-2-tablet is-size-3-mobile is-left">
-                        <i className="fas fa-tasks" aria-hidden></i>
-                    </span>
-                </div>
-            </div>
-            <div className="field">
-                <div className="control">
-                    <button className={`button is-fullwidth is-medium is-primary has-text-weight-bold ${loading ? "is-loading" : ''}`} disabled={loading} onClick={createProject}>
-                        <span>Create checklist</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <form noValidate onSubmit={handleSubmit}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                autoFocus
+                label="Checklist Name"
+                name="name"
+                type="text"
+                disabled={loading}
+                onChange={e => setNewProjectTitle(e.target.value)}
+            />
+            <Button
+                type="submit"
+                fullWidth
+                color="primary"
+                variant="contained"
+                disabled={loading}
+                disableElevation
+                size="large"
+            >
+                Create Checklist
+            </Button>
+        </form>
     )
 }
