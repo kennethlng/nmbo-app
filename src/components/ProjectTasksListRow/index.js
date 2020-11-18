@@ -76,20 +76,6 @@ export default function ProjectTasksListRow(props) {
         });
     }
 
-    const handleHeartClick = () => {
-        task.ref.update({
-            [DB.IS_HEARTED]: !task[DB.IS_HEARTED],
-            [DB.MODIFIED_BY]: authUser.uid
-        })
-        .then(function() {
-            // Document successfully updated
-        })
-        .catch(function(error) {
-            // Log event for error
-            console.error("Error updating document: ", error);
-        });
-    }
-
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
             e.target.blur(); 
