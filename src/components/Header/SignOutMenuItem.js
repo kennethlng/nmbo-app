@@ -5,8 +5,9 @@ import * as CONTENT_TYPE from '../../constants/contentType'
 import * as CONTENT_ID from '../../constants/contentId'
 import * as EVENTS from '../../constants/events'
 import { auth } from '../../lib/firebase'
+import MenuItem from '@material-ui/core/MenuItem';
 
-export default function SignOutNavbarItem() {
+export default function SignOutMenuItem() {
     const router = useRouter();
 
     const handleSignOutClick = () => {
@@ -36,8 +37,8 @@ export default function SignOutNavbarItem() {
     }
 
     return (
-        <a className="navbar-item" onClick={handleSignOutClick}>
+        <MenuItem onClick={handleSignOutClick}>
             👋 Sign out
-        </a>
+        </MenuItem>
     )
 }
