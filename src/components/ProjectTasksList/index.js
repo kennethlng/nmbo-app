@@ -1,17 +1,18 @@
 import React from 'react'; 
 import ProjectTasksListRow from '../ProjectTasksListRow'; 
+import List from '@material-ui/core/List';
 
 export default function ProjectTasksList(props) {
     const { tasks } = props; 
 
     return (
-        <div>
+        <List>
             {tasks.map(task => (
                 <ProjectTasksListRow
                     key={task.id}
                     task={task}
                 />
             ))}
-        </div>
+        </List>
     )
 }
