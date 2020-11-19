@@ -9,6 +9,8 @@ import { useContext, useEffect } from 'react'
 import AddProject from '../components/AddProject'
 import { useRouter } from 'next/router'
 import { firebase } from '../lib/firebase'
+import RecentAuthUserProjectsList from '../components/RecentAuthUserProjectsList'
+import Grid from '@material-ui/core/Grid'
 
 export default function Home() {
   const authUser = useContext(AuthUserContext);
@@ -34,9 +36,16 @@ export default function Home() {
         <meta property="twitter:url" content={META.URL}/>
         <meta property="twitter:title" content={META.TITLE}/>
       </Head>
-      <AddProject
-        onSuccess={handleSuccess}
-      />
+      <Grid container spacing={6}>
+        <Grid item xs={12}>
+          <AddProject
+            onSuccess={handleSuccess}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <RecentAuthUserProjectsList/>
+        </Grid>
+      </Grid>
     </App>
   )
 }
