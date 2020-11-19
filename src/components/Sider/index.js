@@ -49,7 +49,7 @@ export default function Sider() {
                 New Checklist
             </Button>
             <List subheader={<li/>}>
-                <RecentAuthUserProjectsSubList/>
+                {/* <RecentAuthUserProjectsSubList/> */}
                 <Divider/>
                 <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
                     <ListItemText primary="About"/>
