@@ -11,8 +11,9 @@ import PlaceholderNotification from './PlaceholderNotification'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
-export default function RecentAuthUserProjectsMenu() {
+export default function RecentAuthUserProjectsList() {
     const authUser = useContext(AuthUserContext); 
     const router = useRouter();
     const [userProjects, setUserProjects] = useState([]); 
@@ -78,7 +79,9 @@ export default function RecentAuthUserProjectsMenu() {
     }
 
     return (
-        <List>
+        <List
+            subheader={<ListSubheader component="div">Latest updates from your checklists</ListSubheader>}
+        >
             {userProjects.map(userProject => (
                 <ListItem button key={userProject[DB.ID]} onClick={() => handleRowClick(userProject)}>
                     <ListItemText primary={userProject[DB.TITLE]} />
