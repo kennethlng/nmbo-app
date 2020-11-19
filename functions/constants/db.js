@@ -9,6 +9,8 @@ module.exports = {
     MODIFIED_BY: "modified_by",
     OPENED_ON: "opened_on",
     UPDATED_ON: "updated_on",
+    UPDATED_BY: "updated_by",
+    SNIPPET: "snippet",
     TITLE: "title",
     ID: "id",
     VISIT_COUNTER: "visit_counter",
