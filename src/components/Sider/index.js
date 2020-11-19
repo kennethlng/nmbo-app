@@ -17,12 +17,6 @@ import RecentAuthUserProjectsSubList from '../RecentAuthUserProjectsSubList'
 import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
-    drawer: {
-        [theme.breakpoints.up('sm')]: {
-            width: STYLES.DRAWER_WIDTH,
-            flexShrink: 0,
-        }
-    },
     drawerPaper: {
         width: STYLES.DRAWER_WIDTH,
         paddingTop: theme.spacing(3)
@@ -70,35 +64,15 @@ export default function Sider() {
     const handleDrawerToggle = () => appState.setDrawerOpen(!appState.drawerOpen);
 
     return (
-        <nav className={classes.drawer}>
-            <Hidden smUp implementation="js">
-                <Drawer
-                    variant="temporary"
-                    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                    open={appState.drawerOpen}
-                    onClose={handleDrawerToggle}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                >
-                    {drawer}
-                </Drawer>
-            </Hidden>
-            <Hidden xsDown implementation="js">
-                <Drawer
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    variant="permanent"
-                    open
-                >
-                    <Toolbar/>
-                    {drawer}
-                </Drawer>
-            </Hidden>
-        </nav>
+        <Drawer
+            anchor='left'
+            open={appState.drawerOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+                paper: classes.drawerPaper,
+            }}
+        >
+            {drawer}
+        </Drawer>
     )
 }

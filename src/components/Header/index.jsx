@@ -28,9 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
   },
   spacer: {
     flexGrow: 1
@@ -48,10 +45,6 @@ const Header = () => {
   const appState = React.useContext(AppStateContext); 
   const authUser = React.useContext(AuthUserContext); 
 
-  const handleDrawerToggle = () => {
-    appState.setDrawerOpen(!appState.drawerOpen);
-  };
-
   return (
     <AppBar position="fixed" className={classes.appBar} color="inherit" elevation={0}>
       <Toolbar>
@@ -59,7 +52,7 @@ const Header = () => {
           color="inherit"
           aria-label="open drawer"
           edge="start"
-          onClick={handleDrawerToggle}
+          onClick={() => appState.setDrawerOpen(!appState.drawerOpen)}
           className={classes.menuButton}
         >
           <MenuIcon />
