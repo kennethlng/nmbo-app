@@ -50,7 +50,6 @@ export default function RecentAuthUserProjectsList() {
             querySnapshot.forEach(function(doc) {
                 let item = new UserProject(doc); 
                 items.push(item); 
-                console.log(item[DB.SNIPPET])
             })
             setUserProjects(items); 
 
