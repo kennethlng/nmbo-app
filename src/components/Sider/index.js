@@ -1,21 +1,16 @@
 import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { AppStateContext } from '../AppState'
 import * as STYLES from '../../constants/styles'
 import * as ROUTES from '../../constants/routes';
 import * as SOCIAL from '../../constants/social'
-import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import CreateIcon from '@material-ui/icons/Create';
 import { useContext } from 'react'; 
 import { useRouter } from 'next/router'
 import Logo from '../Logo'
-import RecentAuthUserProjectsSubList from '../RecentAuthUserProjectsSubList'
-import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -50,6 +45,9 @@ export default function Sider() {
             <List subheader={<li/>}>
                 {/* <RecentAuthUserProjectsSubList/> */}
                 <Divider/>
+                <ListItem button onClick={() => router.push(ROUTES.HOME)}>
+                    <ListItemText primary="Home"/>
+                </ListItem>
                 <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
                     <ListItemText primary="About"/>
                 </ListItem>
