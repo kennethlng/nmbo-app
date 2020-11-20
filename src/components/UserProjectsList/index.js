@@ -1,5 +1,6 @@
 import List from '@material-ui/core/List';
 import UserProjectsListRow from '../UserProjectsListRow';
+import * as DB from '../../constants/db'; 
 
 export default function UserProjectsList(props) {
     const { userProjects } = props; 
@@ -7,7 +8,10 @@ export default function UserProjectsList(props) {
     return (
         <List>
             {userProjects.map(userProject => (
-                <UserProjectsListRow userProject={userProject}/>    
+                <UserProjectsListRow 
+                    key={userProject[DB.ID]}
+                    userProject={userProject}
+                />    
             ))}
         </List>
     )
