@@ -9,7 +9,7 @@ import { useContext, useEffect } from 'react'
 import AddProject from '../components/AddProject'
 import { useRouter } from 'next/router'
 import { firebase } from '../lib/firebase'
-import RecentAuthUserProjectsList from '../components/RecentAuthUserProjectsList'
+import RecentAuthUserProjects from '../components/RecentAuthUserProjects'
 import Grid from '@material-ui/core/Grid'
 
 export default function Home() {
@@ -43,7 +43,7 @@ export default function Home() {
           />
         </Grid>
         <Grid item xs={12}>
-          <RecentAuthUserProjectsList/>
+          <RecentAuthUserProjects/>
         </Grid>
       </Grid>
     </App>
