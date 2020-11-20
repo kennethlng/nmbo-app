@@ -9,32 +9,34 @@ exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJEC
     let timestamp = admin.firestore.FieldValue.serverTimestamp();
     let batch = db.batch(); 
     let userProjects = db.collectionGroup(CONSTANTS.DB.USER_PROJECTS).where(CONSTANTS.DB.ID, '==', context.params.projectId);
-    let obj = {}; 
 
     // Task created or updated
     if (data) {
         let title = data[CONSTANTS.DB.TITLE];
+        let snippet = '';
 
         // Task updated (previous document exists)
         if (prevData) {
-            // Only add updated_on field if user completed a task. Otherwise, don't do anything
+            // Only add snippet and modified_on field if user completed a task. Otherwise, don't do anything
             let isCompleted = data[CONSTANTS.DB.IS_COMPLETED] && !prevData[CONSTANTS.DB.IS_COMPLETED]
             if (!isCompleted) return null;
 
-            obj[CONSTANTS.DB.SNIPPET] = `Checked off: ${title}`
+            snippet = `Checked off: ${title}`;
         }
         // Task created (previous document doesn't exist)
         else {
-            obj[CONSTANTS.DB.SNIPPET] = `New: ${title}`
+            snippet = `New: ${title}`;
         }
-
-        obj[CONSTANTS.DB.UPDATED_ON] = timestamp; 
 
         // Update all user projects
         return userProjects.get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                    batch.update(doc.ref, obj)
+                    batch.update(doc.ref, {
+                        [CONSTANTS.DB.SNIPPET]: snippet,
+                        [CONSTANTS.DB.MODIFIED_ON]: timestamp,
+                        [CONSTANTS.DB.RELEVANT_ON]: timestamp
+                    })
                 });
 
                 return batch.commit();

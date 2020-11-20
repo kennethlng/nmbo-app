@@ -1,43 +1,74 @@
 import * as React from 'react'
-import LogoNavBarItemButton from './LogoNavBarItemButton'
-import AboutNavBarItemButton from './AboutNavBarItemButton'
-import FeedbackNavBarItemButton from './FeedbackNavBarItemButton'
-import AccountNavbarItemDropdown from './AccoutNavbarItemDropdown'
 import { useRouter } from 'next/router'
 import * as ROUTES from '../../constants/routes'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import { makeStyles } from '@material-ui/core/styles'
+import { AppStateContext } from '../AppState'
+import SignInButton from './SignInButton'
+import SignUpButton from './SignUpButton'
+import AccountButton from './AccountButton'
+import { AuthUserContext } from '../Session'
+import Logo from '../Logo'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  },
+  logo: {
+    height: 35,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  spacer: {
+    flexGrow: 1
+  },
+  buttons: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  }
+}))
 
 const Header = () => {
-  const router = useRouter();
-  const [menuIsActive, setMenuIsActive] = React.useState(false); 
+  const classes = useStyles(); 
+  const router = useRouter(); 
+  const appState = React.useContext(AppStateContext); 
+  const authUser = React.useContext(AuthUserContext); 
 
   return (
-    <header>
-      <nav className="navbar is-transparent is-spaced" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <LogoNavBarItemButton/>
-
-          <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => setMenuIsActive(!menuIsActive)}>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div id="navbarBasicExample" className={`navbar-menu ${menuIsActive ? 'is-active' : ''}`} onClick={() => setMenuIsActive(false)}>
-          <div className="navbar-start">
-            
+    <AppBar position="fixed" className={classes.appBar} color="inherit" elevation={0}>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={() => appState.setDrawerOpen(!appState.drawerOpen)}
+          className={classes.menuButton}
+        >
+          <MenuIcon />
+        </IconButton>
+        <a href="" className={classes.logo}>
+          <Logo/>
+        </a>
+        <div className={classes.spacer}/>
+        {authUser && authUser.isAnonymous ? (
+          <div className={classes.buttons}>
+            <SignUpButton/>
+            <SignInButton/>
           </div>
-
-          {router.pathname !== ROUTES.SIGN_IN && router.pathname !== ROUTES.SIGN_UP ? (
-            <div className="navbar-end">
-              <AboutNavBarItemButton />
-              <FeedbackNavBarItemButton />
-              <AccountNavbarItemDropdown />
-            </div>
-          ) : null}
-        </div>
-      </nav>
-    </header>
+        ) : <AccountButton/>}
+      </Toolbar>
+    </AppBar>
   )
 }
 

@@ -7,8 +7,10 @@ import * as LIST_NAME from '../../constants/listName';
 import { db, firebase } from '../../lib/firebase';
 import { useRouter } from 'next/router'
 import NoTasksPlaceholder from './NoTasksPlaceholder'; 
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default function ProjectTasks() {
+export default function ProjectTasks(props) {
+    const { projectId } = props; 
     const router = useRouter();
     const [tasks, setTasks] = useState([]); 
     const [loading, setLoading] = useState(false); 
@@ -34,7 +36,7 @@ export default function ProjectTasks() {
         })
 
         return () => unsubscribe();
-    }, [])
+    }, [projectId])
 
     const completedTasks = () => {
         let arr = tasks.filter(task => task[DB.IS_COMPLETED]);
@@ -42,22 +44,12 @@ export default function ProjectTasks() {
     }
 
     return (
-        loading ? <progress className="progress is-small" max="100">15%</progress> : (
+        loading ? <CircularProgress/> : (
             tasks.length > 0 ? (
-                <div className="mb-6 pb-6">
-                    <ProjectTasksList
-                        tasks={tasks.filter(task => !task[DB.IS_COMPLETED])}
-                    />
-                    {completedTasks().length > 0 ? (
-                        <div>
-                            <div className="divider">🥳</div>
-                            <ProjectTasksList
-                                tasks={completedTasks()}
-                            />
-                        </div>
-                    ) : null }
-                </div>
-            ) : <NoTasksPlaceholder/>
+                <ProjectTasksList
+                    tasks={tasks}
+                />
+            ) : null
         )
     )
 }

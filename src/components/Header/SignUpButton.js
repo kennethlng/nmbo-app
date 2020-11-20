@@ -3,6 +3,7 @@ import * as ROUTES from '../../constants/routes'
 import * as CONTENT_TYPE from '../../constants/contentType'
 import * as CONTENT_ID from '../../constants/contentId'
 import { firebase } from '../../lib/firebase'
+import Button from '@material-ui/core/Button'
 
 export default function SignUpButton() {
     const router = useRouter();
@@ -19,8 +20,13 @@ export default function SignUpButton() {
     }
 
     return (
-        <a className="button is-primary is-outlined has-text-weight-bold" onClick={handleClick}>
+        <Button 
+            variant="outlined" 
+            color="primary" 
+            onClick={handleClick}
+            disableRipple
+        >
             Create account
-        </a>
+        </Button>
     )
 }

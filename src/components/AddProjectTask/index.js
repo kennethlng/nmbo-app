@@ -6,9 +6,15 @@ import * as CONTENT_TYPE from '../../constants/contentType'
 import * as EVENTS from '../../constants/events'
 import { useRouter } from 'next/router'
 import { db, firebase } from '../../lib/firebase'
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import IconButton from '@material-ui/core/IconButton';
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
 export default function AddProjectTask(props) {
-    const { onSuccess, onError } = props; 
+    const { projectId, onSuccess, onError } = props; 
     const router = useRouter(); 
     const authUser = useContext(AuthUserContext); 
     const [title, setTitle] = useState(''); 
@@ -27,11 +33,10 @@ export default function AddProjectTask(props) {
 
         setLoading(true);
 
-        db.collection(DB.PROJECTS).doc(router.query.id).collection(DB.PROJECT_TASKS).add({
+        db.collection(DB.PROJECTS).doc(projectId).collection(DB.PROJECT_TASKS).add({
             [DB.TITLE]: title,
             [DB.CREATED_BY]: authUser.uid,
             [DB.MODIFIED_BY]: authUser.uid,
-            [DB.IS_HEARTED]: false,
             [DB.IS_COMPLETED]: false 
         })
         .then(function(docRef) {
@@ -67,30 +72,29 @@ export default function AddProjectTask(props) {
     }
 
     return (
-        <div className="field has-addons">
-            <div className="control has-icons-left is-expanded">
-                <input 
-                    className="input" 
-                    type="text" 
-                    placeholder="New task" 
-                    value={title} 
-                    disabled={loading}
-                    onChange={e => setTitle(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                />
-                <span className="icon is-left">
-                    <i className="far fa-check"></i>
-                </span>
-            </div>
-            <div className="control">
-                <button 
-                    className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} 
-                    disabled={loading} 
-                    onClick={add}
-                >
-                    Add
-                </button>
-            </div>
-        </div>
+        <FormControl variant="outlined" fullWidth>
+            <InputLabel htmlFor="outlined-adornment-password">New task</InputLabel>
+            <OutlinedInput
+                id="outlined-adornment-password"
+                type='text'
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                onKeyPress={handleKeyPress}
+                endAdornment={
+                    <InputAdornment position="end">
+                        <IconButton
+                            aria-label="add task"
+                            onClick={add}
+                            edge="end"
+                            color="primary"
+                        >
+                            <SendRoundedIcon/>
+                        </IconButton>
+                    </InputAdornment>
+                }
+                labelWidth={70}
+                disabled={loading}
+            />
+        </FormControl>
     )
 }

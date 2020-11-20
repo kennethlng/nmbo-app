@@ -24,22 +24,6 @@ export default function NoTasksPlaceholder() {
                     Add something to the checklist!
                 </h4>
             </div>
-            {/* <div className="block">
-                <div className="field">
-                    <div className="control">
-                        <input 
-                            className="input has-text-grey" 
-                            type="text" 
-                            defaultValue={window.location.href} 
-                            readOnly
-                            onFocus={handleFocus}
-                        />
-                    </div>
-                    <p className="help">
-                        Copy the URL to share it with others 
-                    </p>
-                </div>
-            </div> */}
         </div>
     )
 }

@@ -9,6 +9,5 @@ export class Task {
         this.ref = doc.ref; 
         this.title = data.title; 
         this[DB.IS_COMPLETED] = data[DB.IS_COMPLETED]; 
-        this[DB.IS_HEARTED] = data[DB.IS_HEARTED]; 
     }
 }

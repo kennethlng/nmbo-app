@@ -1,5 +1,4 @@
 import ProjectsNavbarItem from './ProjectsNavbarItem'
-import SignOutNavbarItem from './SignOutNavbarItem'
 import SignUpNavbarItem from './SignUpNavbarItem'
 import SignInNavbarItem from './SignInNavbarItem'
 import { AuthUserContext } from '../Session'
@@ -22,7 +21,7 @@ export default function AccountNavbarItemDropdown() {
                         <SignUpNavbarItem/>
                         <SignInNavbarItem/>
                     </div>
-                ) : <SignOutNavbarItem/>}
+                ) : null}
             </div>
         </div>
     )
