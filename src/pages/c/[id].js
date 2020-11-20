@@ -9,10 +9,9 @@ import * as ROUTES from '../../constants/routes'
 import * as EVENTS from '../../constants/events'
 import ProjectTasks from '../../components/ProjectTasks'
 import ProjectDoesntExistPlaceholder from '../../components/ProjectDoesntExistPlaceholder'
-import SetProjectTitleInput from '../../components/SetProjectTitleInput'
+import ProjectTitleInput from '../../components/ProjectTitleInput'
 import AddProjectTask from '../../components/AddProjectTask'
 import { AuthUserContext } from '../../components/Session'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
 export default function Project({ data }) {
@@ -78,9 +77,9 @@ export default function Project({ data }) {
                 authUser ? (
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <Typography variant="h3" component="h1">
-                                {data[DB.TITLE]}
-                            </Typography>
+                            <ProjectTitleInput
+                                initialValue={data[DB.TITLE]}
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <AddProjectTask
