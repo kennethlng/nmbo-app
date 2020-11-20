@@ -3,6 +3,6 @@ import * as META from '../../constants/meta'
 
 export default function Logo() {
     return (
-        <img src={META.LOGO} width="100%"></img>
+        <img src={META.LOGO} height="100%"></img>
     )
 }
