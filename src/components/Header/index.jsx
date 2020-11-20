@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { useRouter } from 'next/router'
-import * as ROUTES from '../../constants/routes'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -11,17 +9,10 @@ import SignInButton from './SignInButton'
 import SignUpButton from './SignUpButton'
 import AccountButton from './AccountButton'
 import { AuthUserContext } from '../Session'
-import Logo from '../Logo'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
-  },
-  logo: {
-    height: 35,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -41,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles(); 
-  const router = useRouter(); 
   const appState = React.useContext(AppStateContext); 
   const authUser = React.useContext(AuthUserContext); 
 
@@ -57,9 +47,6 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <a href="" className={classes.logo}>
-          <Logo/>
-        </a>
         <div className={classes.spacer}/>
         {authUser && authUser.isAnonymous ? (
           <div className={classes.buttons}>

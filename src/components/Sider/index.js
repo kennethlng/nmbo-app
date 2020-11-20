@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import CreateIcon from '@material-ui/icons/Create';
 import { useContext } from 'react'; 
 import { useRouter } from 'next/router'
+import Logo from '../Logo'
 import RecentAuthUserProjectsSubList from '../RecentAuthUserProjectsSubList'
 import Button from '@material-ui/core/Button'
 
@@ -26,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
     },
     margin: {
         margin: theme.spacing(2)
+    },
+    logo: {
+        width: '75%',
+        margin: 'auto',
+        marginBottom: theme.spacing(2),
+        padding: theme.spacing(2)
     }
 }))
 
@@ -37,17 +44,9 @@ export default function Sider() {
 
     const drawer = (
         <div className={classes.drawerContainer} onClick={() => appState.setDrawerOpen(false)}>
-            <Button 
-                variant="contained" 
-                color="primary" 
-                onClick={() => router.push(ROUTES.HOME)}
-                disableElevation
-                disableRipple
-                className={classes.margin}
-                startIcon={<CreateIcon/>}
-            >
-                New Checklist
-            </Button>
+            <div className={classes.logo}>
+                <Logo/>
+            </div>
             <List subheader={<li/>}>
                 {/* <RecentAuthUserProjectsSubList/> */}
                 <Divider/>
