@@ -8,6 +8,7 @@ import { AppStateContext } from '../AppState'
 import SignInButton from './SignInButton'
 import SignUpButton from './SignUpButton'
 import AccountButton from './AccountButton'
+import AddProjectButton from './AddProjectButton'
 import { AuthUserContext } from '../Session'
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +49,7 @@ const Header = () => {
           <MenuIcon />
         </IconButton>
         <div className={classes.spacer}/>
+        <AddProjectButton/>
         {authUser && authUser.isAnonymous ? (
           <div className={classes.buttons}>
             <SignUpButton/>
