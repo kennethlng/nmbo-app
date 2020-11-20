@@ -47,7 +47,7 @@ export default function Project({ data }) {
             let userProjectRef = db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(projectId);
             batch.set(userProjectRef, {
                 [DB.ID]: router.query.id,
-                [DB.TITLE]: data[DB.TITLE],
+                [DB.TITLE]: data[DB.TITLE] ? data[DB.TITLE] : "🧐",
                 [DB.CREATED_BY]: data[DB.CREATED_BY],
                 [DB.VISIT_COUNTER]: firebase.firestore.FieldValue.increment(1)
             }, { merge: true })
