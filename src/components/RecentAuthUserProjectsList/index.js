@@ -50,6 +50,7 @@ export default function RecentAuthUserProjectsList() {
             querySnapshot.forEach(function(doc) {
                 let item = new UserProject(doc); 
                 items.push(item); 
+                console.log(item[DB.SNIPPET])
             })
             setUserProjects(items); 
 
@@ -80,11 +81,14 @@ export default function RecentAuthUserProjectsList() {
 
     return (
         <List
-            subheader={<ListSubheader component="div">Latest updates from your checklists</ListSubheader>}
+            subheader={<ListSubheader component="div">Recent checklists</ListSubheader>}
         >
             {userProjects.map(userProject => (
                 <ListItem button key={userProject[DB.ID]} onClick={() => handleRowClick(userProject)}>
-                    <ListItemText primary={userProject[DB.TITLE]} />
+                    <ListItemText 
+                        primary={userProject[DB.TITLE]} 
+                        secondary={userProject[DB.SNIPPET] ? userProject[DB.SNIPPET] : ''}
+                    />
                 </ListItem>
             ))}
         </List>

@@ -7,5 +7,6 @@ export class UserProject {
         this[DB.ID] = doc[DB.ID]; 
         this.ref = doc.ref; 
         this[DB.TITLE] = data[DB.TITLE]; 
+        this[DB.SNIPPET] = data[DB.SNIPPET]; 
     }
 }
