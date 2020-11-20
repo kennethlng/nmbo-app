@@ -24,10 +24,14 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2)
     },
     logo: {
+        [theme.breakpoints.up('sm')]: {
+            display: 'none'
+        },
+        height: 35,
         width: '75%',
         margin: 'auto',
-        marginBottom: theme.spacing(2),
-        padding: theme.spacing(2)
+        marginBottom: theme.spacing(3),
+        paddingLeft: theme.spacing(3)
     }
 }))
 
@@ -43,8 +47,6 @@ export default function Sider() {
                 <Logo/>
             </div>
             <List subheader={<li/>}>
-                {/* <RecentAuthUserProjectsSubList/> */}
-                <Divider/>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
                     <ListItemText primary="Home"/>
                 </ListItem>

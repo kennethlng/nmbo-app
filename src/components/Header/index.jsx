@@ -5,11 +5,9 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppStateContext } from '../AppState'
-import SignInButton from './SignInButton'
-import SignUpButton from './SignUpButton'
 import AccountButton from './AccountButton'
 import AddProjectButton from './AddProjectButton'
-import { AuthUserContext } from '../Session'
+import Logo from '../Logo';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,17 +22,23 @@ const useStyles = makeStyles((theme) => ({
   spacer: {
     flexGrow: 1
   },
-  buttons: {
-    '& > *': {
-      margin: theme.spacing(1),
+  logo: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
     },
+    height: 35,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  endButton: {
+    marginLeft: theme.spacing(1)
   }
 }))
 
 const Header = () => {
   const classes = useStyles(); 
   const appState = React.useContext(AppStateContext); 
-  const authUser = React.useContext(AuthUserContext); 
 
   return (
     <AppBar position="fixed" className={classes.appBar} color="inherit" elevation={0}>
@@ -48,14 +52,14 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
+        <div className={classes.logo}>
+          <Logo/>
+        </div>
         <div className={classes.spacer}/>
-        <AddProjectButton/>
-        {authUser && authUser.isAnonymous ? (
-          <div className={classes.buttons}>
-            <SignUpButton/>
-            <SignInButton/>
-          </div>
-        ) : <AccountButton/>}
+        <AddProjectButton/>    
+        <div className={classes.endButton}>
+          <AccountButton/>
+        </div>
       </Toolbar>
     </AppBar>
   )
