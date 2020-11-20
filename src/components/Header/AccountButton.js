@@ -1,10 +1,13 @@
-import IconButton from '@material-ui/core/IconButton';
-import SettingsIcon from '@material-ui/icons/Settings';
+import Button from '@material-ui/core/Button'; 
 import Menu from '@material-ui/core/Menu';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthUserContext } from '../Session'
 import SignOutMenuItem from './SignOutMenuItem'
+import SignInMenuItem from './SignInMenuItem'
+import SignUpMenuItem from './SignUpMenuItem'
 
 export default function AccountButton() {
+    const authUser = useContext(AuthUserContext); 
     const [anchorEl, setAnchorEl] = useState(null); 
     const open = Boolean(anchorEl);
 
@@ -18,12 +21,14 @@ export default function AccountButton() {
 
     return (
         <div>
-            <IconButton
+            <Button
                 onClick={handleClick}
-                color="inherit"
+                disableElevation
+                disableRipple
+                variant="contained"
             >
-                <SettingsIcon/>
-            </IconButton>
+                Sus 🦁
+            </Button>
             <Menu
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -39,7 +44,12 @@ export default function AccountButton() {
                 onClose={handleClose}
                 onClick={handleClose}
             >
-                <SignOutMenuItem/>
+                {authUser && authUser.isAnonymous ? (
+                    <div>
+                        <SignUpMenuItem/>
+                        <SignInMenuItem/>
+                    </div>
+                ) : <SignOutMenuItem/>}
             </Menu>
         </div>
     )
