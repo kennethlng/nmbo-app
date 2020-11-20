@@ -1,5 +1,4 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import { red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
     palette: {
@@ -10,12 +9,9 @@ const theme = createMuiTheme({
         secondary: {
             main: '#19857b',
         },
-        error: {
-            main: red.A400,
-        },
         background: {
             default: '#fff',
-        },
+        }
     },
     typography: {
         h1: {
@@ -26,12 +22,20 @@ const theme = createMuiTheme({
             color: '#4a4a4a'
         },
         fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
             'Assistant',
-            'sans-serif'
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"'
         ].join(','),
         button: {
             textTransform: 'capitalize',
-            fontWeight: 700
+            fontWeight: 900
         }
     },
     shape: {
