@@ -7,9 +7,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { AppStateContext } from '../AppState'
 import AccountButton from './AccountButton'
 import AddProjectButton from './AddProjectButton'
-import Logo from '../Logo';
 import * as ROUTES from '../../constants/routes'
 import { useRouter } from 'next/router'
+import LogoButton from './LogoButton'; 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,14 +24,10 @@ const useStyles = makeStyles((theme) => ({
   spacer: {
     flexGrow: 1
   },
-  logo: {
+  logoContainer: {
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     },
-    height: 35,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
   },
   endButton: {
     marginLeft: theme.spacing(1)
@@ -55,8 +51,8 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <div className={classes.logo}>
-          <Logo/>
+        <div className={classes.logoContainer}>
+          <LogoButton/>
         </div>
         <div className={classes.spacer}/>   
         <AddProjectButton/> 
