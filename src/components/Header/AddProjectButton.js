@@ -8,9 +8,19 @@ import * as CONTENT_ID from '../../constants/contentId'
 import { db, firebase } from '../../lib/firebase'
 import { AuthUserContext } from '../Session'
 import { useContext, useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+    checklist: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'none'
+        }
+    }
+}))
 
 export default function AddProjectButton() {
     const router = useRouter(); 
+    const classes = useStyles(); 
     const authUser = useContext(AuthUserContext); 
     const [loading, setLoading] = useState(false); 
 
@@ -48,7 +58,7 @@ export default function AddProjectButton() {
             disableElevation
             startIcon={<PlaylistAddRoundedIcon/>}
         >
-            New Checklist
+            <span>New <span className={classes.checklist}>Checklist</span></span>
         </Button>
     )
 }
