@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+import { grey } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
     palette: {
@@ -11,15 +12,20 @@ const theme = createMuiTheme({
         },
         background: {
             default: '#fff',
+        },
+        text: {
+            primary: grey['800']  
         }
     },
     typography: {
         h1: {
-            fontWeight: 700
+            fontWeight: 900
+        },
+        h2: {
+            fontWeight: 900
         },
         h3: {
-            fontWeight: 700,
-            color: '#4a4a4a'
+            fontWeight: 900
         },
         fontFamily: [
             '-apple-system',
