@@ -40,7 +40,7 @@ export default function AddProjectButton() {
 
     return (
         <Button
-            variant="contained"
+            variant="outlined"
             color="primary"
             onClick={handleClick}
             disabled={loading}
