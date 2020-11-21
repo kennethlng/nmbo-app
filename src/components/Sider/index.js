@@ -1,5 +1,5 @@
 import Drawer from '@material-ui/core/Drawer';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { AppStateContext } from '../AppState'
 import * as STYLES from '../../constants/styles'
 import * as ROUTES from '../../constants/routes';
@@ -7,10 +7,9 @@ import * as SOCIAL from '../../constants/social'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import { useContext } from 'react'; 
 import { useRouter } from 'next/router'
-import Logo from '../Logo'
+import LogoButton from './LogoButton'
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -27,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'none'
         },
-        height: 35,
         width: '75%',
         margin: 'auto',
         marginBottom: theme.spacing(3),
@@ -37,14 +35,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sider() {
     const classes = useStyles(); 
-    const theme = useTheme(); 
     const router = useRouter(); 
     const appState = useContext(AppStateContext);
 
     const drawer = (
         <div className={classes.drawerContainer} onClick={() => appState.setDrawerOpen(false)}>
             <div className={classes.logo}>
-                <Logo/>
+                <LogoButton/>
             </div>
             <List subheader={<li/>}>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
