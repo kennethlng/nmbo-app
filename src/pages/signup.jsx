@@ -13,9 +13,26 @@ import { auth, firebase } from '../lib/firebase'
 import Head from 'next/head'
 import * as EmailValidator from 'email-validator'
 import { toast } from 'react-toastify'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'; 
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+
+const useStyles = makeStyles(theme => ({
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(2, 0, 2)
+    }
+}))
 
 export default function SignUp() {
     const router = useRouter();
+    const classes = useStyles(); 
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
     const [loading, setLoading] = useState(false);
@@ -31,7 +48,9 @@ export default function SignUp() {
         })
     }, [])
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault(); 
+
         // Log event for sign up button click 
         firebase.analytics().logEvent('select_content', {
             content_id: CONTENT_ID.SIGN_UP_PAGE_SIGN_UP_BUTTON,
@@ -40,18 +59,15 @@ export default function SignUp() {
 
         if (loading) return;
 
+        // Validate email
         if (!EmailValidator.validate(email)) {
             setEmailHelp('Please enter a valid email');
             return 
         }
 
-        if (password === '') {
-            setPasswordHelp('Please enter a password');
-            return 
-        }
-
         setLoading(true); 
 
+        // Link email and password
         var credential = firebase.auth.EmailAuthProvider.credential(email, password);
         auth.currentUser.linkWithCredential(credential)
         .then(function(usercred) {
@@ -70,6 +86,7 @@ export default function SignUp() {
                 hideProgressBar: true
             })
 
+            // Push route
             router.push(ROUTES.HOME)
         }).catch(function (error) {
             // console.log("Account linking error", error);
@@ -130,49 +147,57 @@ export default function SignUp() {
                 <meta property="twitter:url" content={META.URL + ROUTES.SIGN_UP} />
                 <meta property="twitter:title" content={META.SIGN_UP_TITLE} />
             </Head>
-            <section className="hero">
-                <div className="hero-body">
-                    <div className="container">
-                        <div className="columns is-centered">
-                            <div className="column is-half">
-                                <h1 className="title is-1 has-text-weight-bold">Create an account</h1>
-                                <h2 className="subtitle is-4 has-text-grey">
-                                    Save your checklists and access them anywhere you go.
-                                </h2>
-                                <div className="block">
-                                    <fieldset disabled={loading}>
-                                        <div className="field">
-                                            <label className="label">Email</label>
-                                            <div className="control">
-                                                <input className="input" type="email" onChange={handleEmailChange} onKeyPress={handleEnterKeyPress}/>
-                                            </div>
-                                            <p className="help is-danger">{emailHelp}</p>
-                                        </div>
-                                        <div className="field">
-                                            <label className="label">Password</label>
-                                            <div className="control">
-                                                <input className="input" type="password" onChange={handlePasswordChange} onKeyPress={handleEnterKeyPress}/>
-                                            </div>
-                                            <p className="help is-danger">{passwordHelp}</p>
-                                        </div>
-                                        <div className="field">
-                                            <div className="control">
-                                                <button className={`button is-primary has-text-weight-bold ${loading ? "is-loading" : ""}`} onClick={handleSubmit}>Create account</button>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div className="field">
-                                            <div className="control">
-                                                Already a member? <a onClick={handleSignInClick}>Log in</a>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Typography component="h1" variant="h3">
+                Create account
+            </Typography>
+            <Typography component="h3" variant="h6">
+                Access your checklists anywhere you go
+            </Typography>
+            <form className={classes.form} onSubmit={handleSubmit}>
+                <TextField
+                    variant="outlined"
+                    required
+                    margin="normal"
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    autoComplete="email"
+                    disabled={loading}
+                    helperText={emailHelp}
+                    onChange={handleEmailChange}
+                />
+                <TextField
+                    variant="outlined"
+                    required
+                    margin="normal"
+                    fullWidth
+                    label="Password"
+                    name="password"
+                    autoComplete="password"
+                    disabled={loading}
+                    helperText={passwordHelp}
+                    onChange={handlePasswordChange}
+                />
+                <Button
+                    className={classes.submit}
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    disableElevation
+                    disableRipple
+                    disabled={loading}
+                >
+                    Create Account
+                </Button>
+                <Grid container>
+                    <Grid item xs>
+                        <Link variant="body2" onClick={handleSignInClick}>
+                            Already have an account? Sign in
+                        </Link>
+                    </Grid>
+                </Grid>
+            </form>
         </App>
     )
 }
