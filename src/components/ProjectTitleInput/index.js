@@ -77,7 +77,6 @@ export default function ProjectTitleInput(props) {
                     title === currentTitle ? null : (
                         <InputAdornment position="end">
                             <Button
-                                // variant="contained"
                                 color="primary"
                                 disableElevation
                                 disableRipple

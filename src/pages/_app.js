@@ -13,17 +13,21 @@ import NProgress from 'nprogress'
 import Router from 'next/router'
 import 'nprogress/nprogress.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { generateRandomDisplayName } from '../lib/generateRandomDisplayName'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false); 
+  const [displayName, setDisplayName] = useState(''); 
 
   useEffect(() => {
+    // Next.js router change listeners
     Router.events.on('routeChangeStart', (url) => NProgress.start())
     Router.events.on('routeChangeComplete', () => NProgress.done())
     Router.events.on('routeChangeError', () => NProgress.done())
 
+    // Necessary for server-side rendering with Material UI and Next.js
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -32,18 +36,27 @@ export default function MyApp({ Component, pageProps }) {
     // AuthStateChanged listener
     const unsubscribe = auth.onAuthStateChanged(function (authUser) {
       if (authUser) {
-        setAuthUser(authUser)
+        setAuthUser(authUser); 
+
+        // If the authUser doesn't currently have a displayName, create one
+        if (!authUser.displayName) {
+          let displayName = generateRandomDisplayName(); 
+
+          setDisplayName(displayName); 
+
+          authUser.updateProfile({ displayName })
+          .catch(function(error) {
+            console.log("Error updating displayname: ", error);
+          })
+        }
       } else {
         setAuthUser(null);
 
+        // Sign in anonymously
         auth.signInAnonymously()
-          .catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-            console.log(errorMessage);
-          });
+        .catch(function (error) {
+          console.log("Error updating displayname: ", error);
+        });
       }
     })
 
@@ -53,7 +66,8 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <AppStateContext.Provider value={{
       drawerOpen,
-      setDrawerOpen: (open) => setDrawerOpen(open)
+      setDrawerOpen: (open) => setDrawerOpen(open),
+      displayName
     }}>
       <AuthUserContext.Provider value={authUser}>
         <ToastContainer
@@ -72,7 +86,6 @@ export default function MyApp({ Component, pageProps }) {
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="manifest" href="/site.webmanifest" />
-          <script src="https://kit.fontawesome.com/442f26eabd.js" crossOrigin="anonymous"></script>
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline/>

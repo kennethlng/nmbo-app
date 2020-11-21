@@ -1,0 +1,1 @@
+export const adjectives = ['Sus', 'Greedy', 'Moody', 'Happy', 'Super'];
