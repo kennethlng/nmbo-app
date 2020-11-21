@@ -8,6 +8,8 @@ import { AppStateContext } from '../AppState'
 import AccountButton from './AccountButton'
 import AddProjectButton from './AddProjectButton'
 import Logo from '../Logo';
+import * as ROUTES from '../../constants/routes'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles(); 
+  const router = useRouter(); 
   const appState = React.useContext(AppStateContext); 
 
   return (
@@ -55,11 +58,13 @@ const Header = () => {
         <div className={classes.logo}>
           <Logo/>
         </div>
-        <div className={classes.spacer}/>
-        <AddProjectButton/>    
-        <div className={classes.endButton}>
-          <AccountButton/>
-        </div>
+        <div className={classes.spacer}/>   
+        <AddProjectButton/> 
+        {router.pathname !== ROUTES.SIGN_UP && router.pathname !== ROUTES.SIGN_IN ? (
+          <div className={classes.endButton}>
+            <AccountButton/>
+          </div>
+        ) : null}
       </Toolbar>
     </AppBar>
   )
