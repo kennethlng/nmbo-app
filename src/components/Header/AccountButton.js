@@ -6,7 +6,6 @@ import SignOutMenuItem from './SignOutMenuItem'
 import SignInMenuItem from './SignInMenuItem'
 import SignUpMenuItem from './SignUpMenuItem'
 import { AppStateContext } from '../AppState'
-import Badge from '@material-ui/core/Badge';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'; 
@@ -40,16 +39,15 @@ export default function AccountButton() {
     return (
         displayName ? (
             <div>
-                <Badge color="secondary" variant="dot" invisible={authUser && !authUser.isAnonymous}>
-                    <Button
-                        onClick={handleClick}
-                        disableElevation
-                        disableRipple
-                        variant="contained"
-                    >
-                        {displayName}
-                    </Button>
-                </Badge>
+                <Button
+                    onClick={handleClick}
+                    disableElevation
+                    disableRipple
+                    variant="contained"
+                    color={authUser && authUser.isAnonymous ? "secondary" : "default"}
+                >
+                    {displayName}
+                </Button>
                 <Menu
                     anchorEl={anchorEl}
                     anchorOrigin={{
