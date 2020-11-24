@@ -1,4 +1,3 @@
-import { delBasePath } from 'next/dist/next-server/lib/router/router';
 import * as DB from '../constants/db';
 
 export class Task {
@@ -7,7 +6,7 @@ export class Task {
 
         this.id = doc.id; 
         this.ref = doc.ref; 
-        this.title = data.title; 
+        this[DB.TITLE] = data[DB.TITLE]; 
         this[DB.IS_COMPLETED] = data[DB.IS_COMPLETED]; 
     }
 }
