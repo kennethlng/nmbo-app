@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'; 
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container'
 import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
@@ -147,58 +148,60 @@ export default function SignUp() {
                 <meta property="twitter:url" content={META.URL + ROUTES.SIGN_UP} />
                 <meta property="twitter:title" content={META.SIGN_UP_TITLE} />
             </Head>
-            <Typography component="h1" variant="h3">
-                Create an account
-            </Typography>
-            <Typography component="h3" variant="h6">
-                Save the checklists you've created and opened and access them anywhere you go.
-            </Typography>
-            <form className={classes.form} onSubmit={handleSubmit}>
-                <TextField
-                    variant="outlined"
-                    required
-                    margin="normal"
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    autoComplete="email"
-                    disabled={loading}
-                    helperText={emailHelp}
-                    onChange={handleEmailChange}
-                />
-                <TextField
-                    variant="outlined"
-                    required
-                    margin="normal"
-                    fullWidth
-                    type="password"
-                    label="Password"
-                    name="password"
-                    autoComplete="password"
-                    disabled={loading}
-                    helperText={passwordHelp}
-                    onChange={handlePasswordChange}
-                />
-                <Button
-                    className={classes.submit}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    disableElevation
-                    disableRipple
-                    disabled={loading}
-                >
-                    Create Account
-                </Button>
-                <Grid container>
-                    <Grid item xs>
-                        <Link variant="body2" onClick={handleSignInClick}>
-                            Already have an account? Sign in
-                        </Link>
+            <Container maxWidth="sm">
+                <Typography component="h1" variant="h3">
+                    Create an account
+                </Typography>
+                <Typography component="h3" variant="h6">
+                    Save the checklists you've created and opened and access them anywhere you go.
+                </Typography>
+                <form className={classes.form} onSubmit={handleSubmit}>
+                    <TextField
+                        variant="outlined"
+                        required
+                        margin="normal"
+                        fullWidth
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
+                        disabled={loading}
+                        helperText={emailHelp}
+                        onChange={handleEmailChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        required
+                        margin="normal"
+                        fullWidth
+                        type="password"
+                        label="Password"
+                        name="password"
+                        autoComplete="password"
+                        disabled={loading}
+                        helperText={passwordHelp}
+                        onChange={handlePasswordChange}
+                    />
+                    <Button
+                        className={classes.submit}
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        disableElevation
+                        disableRipple
+                        disabled={loading}
+                    >
+                        Create Account
+                    </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link variant="body2" onClick={handleSignInClick}>
+                                Already have an account? Sign in
+                            </Link>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </form>
+                </form>
+            </Container>
         </App>
     )
 }
