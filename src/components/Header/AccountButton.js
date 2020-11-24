@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { auth } from '../../lib/firebase'
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import ArchiveMenuItem from './ArchiveMenuItem';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 
 const useStyles = makeStyles(theme => ({
     text: {
@@ -48,18 +50,18 @@ export default function AccountButton() {
                 <IconButton
                     disableRipple
                     onClick={handleClick}
-                    color={authUser && authUser.isAnonymous ? "secondary" : "default"}
+                    // color={authUser && authUser.isAnonymous ? "secondary" : "default"}
                 >
-                    <AccountCircleRoundedIcon/>
+                    {authUser && authUser.isAnonymous ? <ExpandMoreRoundedIcon/> : <AccountCircleRoundedIcon/>}
                 </IconButton>
                 {/* <Button
                     onClick={handleClick}
                     disableElevation
                     disableRipple
                     variant="contained"
-                    color={authUser && authUser.isAnonymous ? "secondary" : "default"}
+                    // color={authUser && authUser.isAnonymous ? "secondary" : "default"}
+                    endIcon={authUser && authUser.isAnonymous ? <SettingsRoundedIcon/> : <AccountCircleRoundedIcon/>}
                 >
-                    {displayName}
                 </Button> */}
                 <Menu
                     anchorEl={anchorEl}
@@ -78,14 +80,21 @@ export default function AccountButton() {
                 >
                     {authUser && authUser.isAnonymous ? (
                         <div>
-                            <Typography className={classes.text} variant="body2" display="block">
+                            {/* <Typography className={classes.text} variant="body2" display="block">
                                 You are currently signed in as an <strong className={classes.anonymous}>anonymous user</strong>. Create an account or log in to sync your checklists and access them anywhere you go.
-                            </Typography>
-                            <Divider/>
+                            </Typography> */}
+                            {/* <ArchiveMenuItem/>
+                            <Divider/> */}
                             <SignUpMenuItem/>
                             <SignInMenuItem/>
                         </div>
-                    ) : <SignOutMenuItem/>}
+                    ) : (
+                        <div>
+                            {/* <ArchiveMenuItem/>
+                            <Divider/> */}
+                            <SignOutMenuItem/>
+                        </div>
+                    )}
                 </Menu>
             </div>
         // ) : null
