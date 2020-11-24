@@ -12,6 +12,7 @@ export const HEADER_ADD_PROJECT_BUTTON = 'header_add_project_button';
 export const FOOTER_EMAIL_BUTTON = 'footer_messenger_button';
 export const FOOTER_MESSENGER_BUTTON = 'footer_messenger_button';
 export const FOOTER_TWITTER_BUTTON = 'footer_twitter_button'; 
+export const FOOTER_GITHUB_BUTTON = 'footer_github_button'; 
 export const SIGN_UP_PAGE_SIGN_UP_BUTTON = 'sign_up_page_sign_up_button';
 export const SIGN_UP_PAGE_SIGN_IN_BUTTON = 'sign_up_page_sign_in_button';
 export const SIGN_IN_PAGE_SIGN_IN_BUTTON = 'sign_in_page_sign_in_button'; 

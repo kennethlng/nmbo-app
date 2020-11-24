@@ -16,6 +16,7 @@ import LogoButton from './LogoButton'
 import Typography from '@material-ui/core/Typography'
 import EmailButton from '../EmailButton'
 import TwitterButton from '../TwitterButton'
+import GithubButton from '../GithubButton'
 import RecentAuthUserProjects from '../RecentAuthUserProjects'
 import Divider from '@material-ui/core/Divider'
 
@@ -84,6 +85,7 @@ export default function Sider() {
                 <div className={classes.social}>
                     <EmailButton/>
                     <TwitterButton/>
+                    <GithubButton/>
                 </div>
                 <Typography variant="caption">
                     © Copyright NMBO 2020
