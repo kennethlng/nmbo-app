@@ -16,6 +16,8 @@ import LogoButton from './LogoButton'
 import Typography from '@material-ui/core/Typography'
 import EmailButton from '../EmailButton'
 import TwitterButton from '../TwitterButton'
+import RecentAuthUserProjects from '../RecentAuthUserProjects'
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -39,10 +41,13 @@ const useStyles = makeStyles((theme) => ({
     },
     footer: {
         padding: theme.spacing(2),
-        marginTop: theme.spacing(6)
+        // marginTop: theme.spacing(6)
     },
     social: {
-        marginTop: theme.spacing(3)
+        // marginTop: theme.spacing(3)
+    },
+    divider: {
+        margin: theme.spacing(2)
     }
 }))
 
@@ -58,21 +63,23 @@ export default function Sider() {
             </div>
             <List subheader={<li/>}>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
-                    {/* <ListItemIcon>
+                    <ListItemIcon>
                         <HomeRoundedIcon/>
-                    </ListItemIcon> */}
+                    </ListItemIcon>
                     <ListItemText primary="Home"/>
                 </ListItem>
                 {/* <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
                     <ListItemText primary="About"/>
                 </ListItem> */}
                 <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
-                    {/* <ListItemIcon>
+                    <ListItemIcon>
                         <FeedbackRoundedIcon/>
-                    </ListItemIcon> */}
+                    </ListItemIcon>
                     <ListItemText primary="Send Feedback"/>
                 </ListItem>
             </List>
+            <Divider className={classes.divider}/>
+            <RecentAuthUserProjects/>
             <div className={classes.footer}>
                 <div className={classes.social}>
                     <EmailButton/>
