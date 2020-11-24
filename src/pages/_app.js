@@ -20,6 +20,7 @@ export default function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false); 
   const [displayName, setDisplayName] = useState(''); 
+  const [routeLoading, setRouteLoading] = useState(false); 
 
   useEffect(() => {
     // Necessary for server-side rendering with Material UI and Next.js
@@ -29,9 +30,18 @@ export default function MyApp({ Component, pageProps }) {
     }
     
     // Next.js router change listeners
-    Router.events.on('routeChangeStart', (url) => NProgress.start())
-    Router.events.on('routeChangeComplete', () => NProgress.done())
-    Router.events.on('routeChangeError', () => NProgress.done())
+    Router.events.on('routeChangeStart', (url) => {
+      // NProgress.start()
+      setRouteLoading(true); 
+    })
+    Router.events.on('routeChangeComplete', () => {
+      // NProgress.done()
+      setRouteLoading(false); 
+    })
+    Router.events.on('routeChangeError', () => {
+      // NProgress.done()
+      setRouteLoading(false); 
+    })
 
     // AuthStateChanged listener
     const unsubscribe = auth.onAuthStateChanged(function (authUser) {
@@ -67,7 +77,8 @@ export default function MyApp({ Component, pageProps }) {
     <AppStateContext.Provider value={{
       drawerOpen,
       setDrawerOpen: (open) => setDrawerOpen(open),
-      displayName
+      displayName,
+      routeLoading
     }}>
       <AuthUserContext.Provider value={authUser}>
         <ToastContainer
