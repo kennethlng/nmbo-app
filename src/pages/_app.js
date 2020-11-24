@@ -22,16 +22,16 @@ export default function MyApp({ Component, pageProps }) {
   const [displayName, setDisplayName] = useState(''); 
 
   useEffect(() => {
-    // Next.js router change listeners
-    Router.events.on('routeChangeStart', (url) => NProgress.start())
-    Router.events.on('routeChangeComplete', () => NProgress.done())
-    Router.events.on('routeChangeError', () => NProgress.done())
-
     // Necessary for server-side rendering with Material UI and Next.js
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+    
+    // Next.js router change listeners
+    Router.events.on('routeChangeStart', (url) => NProgress.start())
+    Router.events.on('routeChangeComplete', () => NProgress.done())
+    Router.events.on('routeChangeError', () => NProgress.done())
 
     // AuthStateChanged listener
     const unsubscribe = auth.onAuthStateChanged(function (authUser) {
