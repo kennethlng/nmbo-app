@@ -9,10 +9,16 @@ import { AppStateContext } from '../AppState'
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'; 
+import { auth } from '../../lib/firebase'
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 
 const useStyles = makeStyles(theme => ({
     text: {
         padding: theme.spacing(2)
+    },
+    anonymous: {
+        color: theme.palette.secondary.main
     }
 }))
 
@@ -20,13 +26,13 @@ export default function AccountButton() {
     const authUser = useContext(AuthUserContext); 
     const appState = useContext(AppStateContext); 
     const classes = useStyles(); 
-    const [displayName, setDisplayName] = useState(null);
+    const [displayName, setDisplayName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null); 
     const open = Boolean(anchorEl);
 
-    useEffect(() => {
-        setDisplayName(authUser && authUser.displayName ? authUser.displayName : appState.displayName);
-    }, [authUser, appState.displayName])
+    // useEffect(() => {
+    //     setDisplayName(authUser && authUser.displayName ? authUser.displayName : appState.displayName);
+    // }, [authUser, appState.displayName])
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
@@ -37,9 +43,16 @@ export default function AccountButton() {
     };
 
     return (
-        displayName ? (
+        // displayName ? (
             <div>
-                <Button
+                <IconButton
+                    disableRipple
+                    onClick={handleClick}
+                    color={authUser && authUser.isAnonymous ? "secondary" : "default"}
+                >
+                    <AccountCircleRoundedIcon/>
+                </IconButton>
+                {/* <Button
                     onClick={handleClick}
                     disableElevation
                     disableRipple
@@ -47,7 +60,7 @@ export default function AccountButton() {
                     color={authUser && authUser.isAnonymous ? "secondary" : "default"}
                 >
                     {displayName}
-                </Button>
+                </Button> */}
                 <Menu
                     anchorEl={anchorEl}
                     anchorOrigin={{
@@ -66,7 +79,7 @@ export default function AccountButton() {
                     {authUser && authUser.isAnonymous ? (
                         <div>
                             <Typography className={classes.text} variant="body2" display="block">
-                                You are currently signed in as anonymous user <strong>{displayName}</strong>. Create an account or log in to save your checklists.
+                                You are currently signed in as an <strong className={classes.anonymous}>anonymous user</strong>. Create an account or log in to access your checklists anywhere you go.
                             </Typography>
                             <Divider/>
                             <SignUpMenuItem/>
@@ -75,6 +88,6 @@ export default function AccountButton() {
                     ) : <SignOutMenuItem/>}
                 </Menu>
             </div>
-        ) : null
+        // ) : null
     )
 }
