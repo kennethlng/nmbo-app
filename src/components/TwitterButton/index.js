@@ -11,6 +11,9 @@ export default function TwitterButton() {
             content_id: CONTENT_ID.FOOTER_TWITTER_BUTTON,
             content_type: CONTENT_TYPE.BUTTON
         })
+
+        // Open link
+        window.open(SOCIAL.TWITTER, '_blank');
     }
 
     return (
