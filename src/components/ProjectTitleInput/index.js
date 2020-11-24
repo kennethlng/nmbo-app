@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../lib/firebase'
 import * as DB from '../../constants/db'
-import { useRouter } from 'next/router'
 import InputBase from '@material-ui/core/InputBase';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
@@ -19,24 +18,23 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function ProjectTitleInput(props) {
-    const { initialValue } = props;
-    const router = useRouter(); 
+    const { projectId, initialValue } = props;
     const classes = useStyles(); 
     const [title, setTitle] = useState(''); 
     const [currentTitle, setCurrentTitle] = useState('');
     const [isLoading, setIsLoading] = useState(false); 
 
     useEffect(() => {
-        setCurrentTitle(initialValue);
-        setTitle(initialValue);
-    }, [initialValue])
+        setCurrentTitle(initialValue ? initialValue : '');
+        setTitle(initialValue ? initialValue : '');
+    }, [projectId, initialValue])
 
     const updateProject = () => {
         if (isLoading || title === currentTitle) return;
 
         setIsLoading(true); 
 
-        db.collection(DB.PROJECTS).doc(router.query.id).set({
+        db.collection(DB.PROJECTS).doc(projectId).set({
             title
         }, { merge: true })
         .then(function() {
