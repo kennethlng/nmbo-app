@@ -6,10 +6,26 @@ import * as LIST_ID from '../../constants/listId';
 import * as LIST_NAME from '../../constants/listName';
 import { useRouter } from 'next/router';
 import { firebase } from '../../lib/firebase';
+import Typography from '@material-ui/core/Typography';
+import { useEffect, useState } from 'react';
+import { getDayName } from '../../lib/getDayName';
 
 export default function UserProjectsListRow(props) {
     const { userProject } = props;
     const router = useRouter();
+    const [secondaryText, setSecondaryText] = useState(''); 
+
+    useEffect(() => {
+        let string = ''; 
+        const relevantOn = userProject[DB.RELEVANT_ON];
+        const snippet = userProject[DB.SNIPPET];
+
+        if (snippet) string += snippet; 
+        if (snippet && relevantOn) string += " ・ ";
+        if (relevantOn) string += getDayName(relevantOn.toDate().getDay());
+
+        setSecondaryText(string);
+    }, [userProject])
 
     const handleRowClick = () => {
         // Log Google Analytics event for selecting item
@@ -31,8 +47,16 @@ export default function UserProjectsListRow(props) {
     return (
         <ListItem button key={userProject[DB.ID]} onClick={handleRowClick}>
             <ListItemText
-                primary={userProject[DB.TITLE]}
-                secondary={userProject[DB.SNIPPET] ? userProject[DB.SNIPPET] : ''}
+                primary={(
+                    <Typography variant="h6">
+                        {userProject[DB.TITLE]}
+                    </Typography>
+                )}
+                secondary={(
+                    <Typography variant="caption">
+                        {secondaryText}
+                    </Typography>
+                )}
             />
         </ListItem>
     )
