@@ -19,11 +19,12 @@ export default function Project({ data }) {
     const authUser = useContext(AuthUserContext); 
 
     useEffect(() => {
+        // If the checklist exists
         if (data) {
             // Log event for page_view
             firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
                 page_path: router.pathname,
-                page_title: data[DB.TITLE],
+                page_title: data[DB.TITLE] ? data[DB.TITLE] : "Untitled",
                 page_location: window.location.href
             })
 
@@ -31,37 +32,35 @@ export default function Project({ data }) {
             firebase.analytics().logEvent(EVENTS.VIEW_ITEM, {
                 items: [{ 
                     item_id: router.query.id, 
-                    item_name: data[DB.TITLE]
+                    item_name: data[DB.TITLE] ? data[DB.TITLE] : "Untitled",
                 }]
             })
+
+            // Map user_project doc for authUser
+            if (authUser) {
+                let projectId = router.query.id;
+                let batch = db.batch(); 
+    
+                let userProjectRef = db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(projectId);
+                batch.set(userProjectRef, {
+                    [DB.ID]: router.query.id,
+                    [DB.TITLE]: data[DB.TITLE] ? data[DB.TITLE] : "🧐 Untitled",
+                    [DB.CREATED_BY]: data[DB.CREATED_BY],
+                    [DB.VISIT_COUNTER]: firebase.firestore.FieldValue.increment(1)
+                }, { merge: true })
+    
+                let projectUserRef = db.collection(DB.PROJECTS).doc(projectId).collection(DB.PROJECT_USERS).doc(authUser.uid); 
+                batch.set(projectUserRef, {
+                    [DB.ID]: authUser.uid,
+                    [DB.PHOTO_URL]: authUser.photoURL,
+                    [DB.DISPLAY_NAME]: authUser.displayName
+                }, { merge: true })
+    
+                batch.commit()
+                .catch(error => console.log(error))
+            }
         }
-    }, [])
-
-    useEffect(() => {
-        // Map user_project doc for authUser
-        if (data && authUser) {
-            let projectId = router.query.id;
-            let batch = db.batch(); 
-
-            let userProjectRef = db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS).doc(projectId);
-            batch.set(userProjectRef, {
-                [DB.ID]: router.query.id,
-                [DB.TITLE]: data[DB.TITLE] ? data[DB.TITLE] : "🧐",
-                [DB.CREATED_BY]: data[DB.CREATED_BY],
-                [DB.VISIT_COUNTER]: firebase.firestore.FieldValue.increment(1)
-            }, { merge: true })
-
-            let projectUserRef = db.collection(DB.PROJECTS).doc(projectId).collection(DB.PROJECT_USERS).doc(authUser.uid); 
-            batch.set(projectUserRef, {
-                [DB.ID]: authUser.uid,
-                [DB.PHOTO_URL]: authUser.photoURL,
-                [DB.DISPLAY_NAME]: authUser.displayName
-            }, { merge: true })
-
-            batch.commit()
-            .catch(error => console.log(error))
-        }
-    }, [authUser])
+    }, [data, authUser])
 
     return (
         <App>
@@ -78,6 +77,7 @@ export default function Project({ data }) {
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <ProjectTitleInput
+                                projectId={router.query.id}
                                 initialValue={data[DB.TITLE]}
                             />
                         </Grid>
