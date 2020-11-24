@@ -49,7 +49,7 @@ export default function ProjectTasks(props) {
                 <ProjectTasksList
                     tasks={tasks}
                 />
-            ) : null
+            ) : <NoTasksPlaceholder/>
         )
     )
 }
