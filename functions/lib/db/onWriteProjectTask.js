@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const { db } = require('../admin'); 
+const { db, auth } = require('../admin'); 
 const admin = require('firebase-admin');
 const CONSTANTS = require('../../constants'); 
 
@@ -14,6 +14,7 @@ exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJEC
     if (data) {
         let title = data[CONSTANTS.DB.TITLE];
         let snippet = '';
+        let modifiedBy = data[CONSTANTS.DB.MODIFIED_BY]; 
 
         // Task updated (previous document exists)
         if (prevData) {
@@ -27,6 +28,14 @@ exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJEC
         else {
             snippet = `New: ${title}`;
         }
+
+        // return auth.getUser(modifiedBy)
+        // .then(function(user) {
+            
+        // })
+        // .catch(function(error) {
+        //     console.log('Error fetching user data:', error);
+        // });
 
         // Update all user projects
         return userProjects.get()
