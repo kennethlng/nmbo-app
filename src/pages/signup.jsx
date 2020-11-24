@@ -171,6 +171,7 @@ export default function SignUp() {
                     required
                     margin="normal"
                     fullWidth
+                    type="password"
                     label="Password"
                     name="password"
                     autoComplete="password"

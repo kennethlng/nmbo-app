@@ -191,6 +191,7 @@ export default function SignIn() {
                 <TextField
                     variant="outlined"
                     required
+                    type="password"
                     margin="normal"
                     fullWidth
                     label="Password"
