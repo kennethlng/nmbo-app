@@ -9,9 +9,22 @@ import PlaceholderNotification from './PlaceholderNotification'
 import UserProjectsList from '../UserProjectsList';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+
+const useStyles = makeStyles(theme => ({
+    subheader: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2)
+    },
+    divider: {
+        margin: theme.spacing(2)
+    }
+}))
 
 export default function RecentAuthUserProjects() {
     const authUser = useContext(AuthUserContext); 
+    const classes = useStyles(); 
     const [userProjects, setUserProjects] = useState([]); 
     const [loading, setLoading] = useState(false); 
 
@@ -61,12 +74,13 @@ export default function RecentAuthUserProjects() {
         loading ? <LinearProgress/> : (
             userProjects.length > 0 ? (
                 <div>
-                    <Typography variant="overline" display="block" gutterBottom>
-                        Recent Checklists
+                    <Typography className={classes.subheader} variant="overline" >
+                        Recent checklists
                     </Typography>
                     <UserProjectsList
                         userProjects={userProjects}
                     />
+                    <Divider className={classes.divider}/>
                 </div>
             ) : null
         )
