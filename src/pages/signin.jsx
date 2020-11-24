@@ -174,9 +174,9 @@ export default function SignIn() {
                 <Typography component="h1" variant="h3">
                     Sign in
                 </Typography>
-                <Typography component="h3" variant="h6">
+                {/* <Typography component="h3" variant="h6">
                     Access your checklists anywhere you go.
-                </Typography>
+                </Typography> */}
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
@@ -188,6 +188,7 @@ export default function SignIn() {
                         autoComplete="email"
                         disabled={loading}
                         helperText={emailHelp}
+                        error={emailHelp === '' ? false : true}
                         onChange={handleEmailChange}
                     />
                     <TextField
@@ -201,6 +202,7 @@ export default function SignIn() {
                         autoComplete="password"
                         disabled={loading}
                         helperText={passwordHelp}
+                        error={passwordHelp === '' ? false : true}
                         onChange={handlePasswordChange}
                     />
                     <Button

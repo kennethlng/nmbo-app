@@ -152,9 +152,9 @@ export default function SignUp() {
                 <Typography component="h1" variant="h3">
                     Create an account
                 </Typography>
-                <Typography component="h3" variant="h6">
-                    Save the checklists you've created and opened and access them anywhere you go.
-                </Typography>
+                {/* <Typography component="h3" variant="h6">
+                    Sync your checklists anywhere you go.
+                </Typography> */}
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
@@ -166,6 +166,7 @@ export default function SignUp() {
                         autoComplete="email"
                         disabled={loading}
                         helperText={emailHelp}
+                        error={emailHelp === '' ? false : true}
                         onChange={handleEmailChange}
                     />
                     <TextField
@@ -179,6 +180,7 @@ export default function SignUp() {
                         autoComplete="password"
                         disabled={loading}
                         helperText={passwordHelp}
+                        error={passwordHelp === '' ? false : true}
                         onChange={handlePasswordChange}
                     />
                     <Button
