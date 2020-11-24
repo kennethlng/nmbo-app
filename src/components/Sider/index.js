@@ -7,9 +7,15 @@ import * as SOCIAL from '../../constants/social'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
 import { useContext } from 'react'; 
 import { useRouter } from 'next/router'
 import LogoButton from './LogoButton'
+import Typography from '@material-ui/core/Typography'
+import EmailButton from '../EmailButton'
+import TwitterButton from '../TwitterButton'
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -30,6 +36,13 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         marginBottom: theme.spacing(3),
         paddingLeft: theme.spacing(3)
+    },
+    footer: {
+        padding: theme.spacing(2),
+        marginTop: theme.spacing(6)
+    },
+    social: {
+        marginTop: theme.spacing(3)
     }
 }))
 
@@ -45,15 +58,30 @@ export default function Sider() {
             </div>
             <List subheader={<li/>}>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
+                    {/* <ListItemIcon>
+                        <HomeRoundedIcon/>
+                    </ListItemIcon> */}
                     <ListItemText primary="Home"/>
                 </ListItem>
-                <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
+                {/* <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
                     <ListItemText primary="About"/>
-                </ListItem>
+                </ListItem> */}
                 <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
+                    {/* <ListItemIcon>
+                        <FeedbackRoundedIcon/>
+                    </ListItemIcon> */}
                     <ListItemText primary="Send Feedback"/>
                 </ListItem>
             </List>
+            <div className={classes.footer}>
+                <div className={classes.social}>
+                    <EmailButton/>
+                    <TwitterButton/>
+                </div>
+                <Typography variant="caption">
+                    © Copyright NMBO 2020
+                </Typography>
+            </div>
         </div>
     )
 
