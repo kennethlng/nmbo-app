@@ -18,6 +18,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'; 
 import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -169,63 +170,65 @@ export default function SignIn() {
                 <meta property="twitter:url" content={META.URL + ROUTES.SIGN_IN} />
                 <meta property="twitter:title" content={META.SIGN_IN_TITLE} />
             </Head>
-            <Typography component="h1" variant="h3">
-                Sign in
-            </Typography>
-            <Typography component="h3" variant="h6">
-                Access your checklists anywhere you go.
-            </Typography>
-            <form className={classes.form} onSubmit={handleSubmit}>
-                <TextField
-                    variant="outlined"
-                    required
-                    margin="normal"
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    autoComplete="email"
-                    disabled={loading}
-                    helperText={emailHelp}
-                    onChange={handleEmailChange}
-                />
-                <TextField
-                    variant="outlined"
-                    required
-                    type="password"
-                    margin="normal"
-                    fullWidth
-                    label="Password"
-                    name="password"
-                    autoComplete="password"
-                    disabled={loading}
-                    helperText={passwordHelp}
-                    onChange={handlePasswordChange}
-                />
-                <Button
-                    className={classes.submit}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disableElevation
-                    disableRipple
-                    disabled={loading}
-                    size="large"
-                >
-                    Sign In
-                </Button>
-                <Grid container>
-                    <Grid item xs>
-                        <Link variant="body2" onClick={handleSignUpClick}>
-                            Need an account? Register
-                        </Link>
+            <Container maxWidth="sm">
+                <Typography component="h1" variant="h3">
+                    Sign in
+                </Typography>
+                <Typography component="h3" variant="h6">
+                    Access your checklists anywhere you go.
+                </Typography>
+                <form className={classes.form} onSubmit={handleSubmit}>
+                    <TextField
+                        variant="outlined"
+                        required
+                        margin="normal"
+                        fullWidth
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
+                        disabled={loading}
+                        helperText={emailHelp}
+                        onChange={handleEmailChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        required
+                        type="password"
+                        margin="normal"
+                        fullWidth
+                        label="Password"
+                        name="password"
+                        autoComplete="password"
+                        disabled={loading}
+                        helperText={passwordHelp}
+                        onChange={handlePasswordChange}
+                    />
+                    <Button
+                        className={classes.submit}
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        disableElevation
+                        disableRipple
+                        disabled={loading}
+                        size="large"
+                    >
+                        Sign In
+                    </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link variant="body2" onClick={handleSignUpClick}>
+                                Need an account? Register
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            {/* <Link href="#" variant="body2">
+                                Forgot password?
+                            </Link> */}
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        {/* <Link href="#" variant="body2">
-                            Forgot password?
-                        </Link> */}
-                    </Grid>
-                </Grid>
-            </form>
+                </form>
+            </Container>
         </App>
     )
 }
