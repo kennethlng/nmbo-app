@@ -8,6 +8,7 @@ import { db, firebase } from '../../lib/firebase';
 import PlaceholderNotification from './PlaceholderNotification'
 import UserProjectsList from '../UserProjectsList';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 
 export default function RecentAuthUserProjects() {
     const authUser = useContext(AuthUserContext); 
@@ -58,9 +59,16 @@ export default function RecentAuthUserProjects() {
 
     return (
         loading ? <CircularProgress/> : (
-            <UserProjectsList
-                userProjects={userProjects}
-            />
+            userProjects.length > 0 ? (
+                <div>
+                    <Typography variant="overline" display="block" gutterBottom>
+                        Recent Checklists
+                    </Typography>
+                    <UserProjectsList
+                        userProjects={userProjects}
+                    />
+                </div>
+            ) : null
         )
     )
 }
