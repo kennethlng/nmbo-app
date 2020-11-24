@@ -50,8 +50,8 @@ export default function RecentAuthUserProjects() {
 
         // Fetch all user_projects that were relevant within the last week
         db.collection(DB.USERS).doc(authUser.uid).collection(DB.USER_PROJECTS)
-        .where(DB.RELEVANT_ON, '>=', startDateObj)
-        .orderBy(DB.RELEVANT_ON, "desc")
+        .where(DB.OPENED_ON, '>=', startDateObj)
+        .orderBy(DB.OPENED_ON, "desc")
         .limit(10)
         .get()
         .then(function(querySnapshot) {
