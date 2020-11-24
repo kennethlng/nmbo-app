@@ -7,8 +7,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { AppStateContext } from '../AppState'
 import AccountButton from './AccountButton'
 import AddProjectButton from './AddProjectButton'
-import * as ROUTES from '../../constants/routes'
-import { useRouter } from 'next/router'
 import LogoButton from './LogoButton'; 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles(); 
-  const router = useRouter(); 
   const appState = React.useContext(AppStateContext); 
 
   return (
@@ -56,11 +53,9 @@ const Header = () => {
         </div>
         <div className={classes.spacer}/>   
         <AddProjectButton/> 
-        {router.pathname !== ROUTES.SIGN_UP && router.pathname !== ROUTES.SIGN_IN ? (
-          <div className={classes.endButton}>
-            <AccountButton/>
-          </div>
-        ) : null}
+        <div className={classes.endButton}>
+          <AccountButton />
+        </div>
       </Toolbar>
     </AppBar>
   )
