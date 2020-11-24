@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme => ({
     input: {
         fontWeight: 900,
-        fontSize: 35,
+        fontSize: 42,
         color: grey['800']
     }
 }))
@@ -47,7 +47,7 @@ export default function ProjectTitleInput(props) {
         .catch(function(error) {
             setIsLoading(false); 
 
-            console.error("Error adding document: ", error)
+            console.error("Error updating project title: ", error)
         });
     }
 
@@ -62,7 +62,7 @@ export default function ProjectTitleInput(props) {
     } 
 
     return (
-        <FormControl>
+        <FormControl fullWidth>
             <InputBase
                 className={classes.input}
                 placeholder="Checklist name"
@@ -80,6 +80,8 @@ export default function ProjectTitleInput(props) {
                                 color="primary"
                                 disableElevation
                                 disableRipple
+                                disabled={isLoading}
+                                onClick={updateProject}
                             >
                                 Save
                             </Button>
@@ -87,7 +89,7 @@ export default function ProjectTitleInput(props) {
                     )
                 }
             />
-            <FormHelperText>Tap checklist name to edit</FormHelperText>
+            {/* <FormHelperText>Tap to edit</FormHelperText> */}
         </FormControl>
     )
 }
