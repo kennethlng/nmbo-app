@@ -23,7 +23,7 @@ export default function SignInMenuItem() {
         <MenuItem 
             onClick={handleClick}
         >
-            Log in
+            👍 Log in
         </MenuItem>
     )
 }

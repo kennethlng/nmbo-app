@@ -32,7 +32,7 @@ export default function SignUpMenuItem() {
             className={classes.text}
             onClick={handleClick}
         >
-            Create account
+            📋 Create account
         </MenuItem>
     )
 }
