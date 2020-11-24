@@ -99,24 +99,5 @@ export default function RecentAuthUserProjectsSubList() {
                 ))}
             </ul>
         </li>
-
-        // loading ? <progress className="progress is-small" max="100">15%</progress> : (
-        //     <aside className="menu">
-        //         <p className="menu-label">
-        //             Recent
-        //         </p>
-        //         {userProjects.length > 0 ? (
-        //             <ul className="menu-list">
-        //                 {userProjects.map(userProject => (
-        //                     <li key={userProject[DB.ID]}>
-        //                         <a className="is-size-5" onClick={() => handleRowClick(userProject)}>
-        //                             {userProject[DB.TITLE]}
-        //                         </a>
-        //                     </li>
-        //                 ))}
-        //             </ul>
-        //         ) : <PlaceholderNotification/>}
-        //     </aside>
-        // )
     )
 }
