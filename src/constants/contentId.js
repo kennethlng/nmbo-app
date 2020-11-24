@@ -9,6 +9,7 @@ export const HEADER_MESSENGER_BUTTON = 'header_messenger_button';
 export const HEADER_FEEDBACK_BUTTON = 'header_feedback_button'; 
 export const HEADER_PROJECTS_BUTTON = 'header_projects_button';
 export const HEADER_ADD_PROJECT_BUTTON = 'header_add_project_button';
+export const HEADER_ARCHIVE_BUTTON = 'header_archive_button'; 
 export const FOOTER_EMAIL_BUTTON = 'footer_messenger_button';
 export const FOOTER_MESSENGER_BUTTON = 'footer_messenger_button';
 export const FOOTER_TWITTER_BUTTON = 'footer_twitter_button'; 
