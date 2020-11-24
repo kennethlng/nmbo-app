@@ -4,7 +4,6 @@ import * as DB from '../../constants/db'
 import * as CONTENT_ID from '../../constants/contentId'
 import * as CONTENT_TYPE from '../../constants/contentType'
 import * as EVENTS from '../../constants/events'
-import { useRouter } from 'next/router'
 import { db, firebase } from '../../lib/firebase'
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,7 +14,6 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
 export default function AddProjectTask(props) {
     const { projectId, onSuccess, onError } = props; 
-    const router = useRouter(); 
     const authUser = useContext(AuthUserContext); 
     const [title, setTitle] = useState(''); 
     const [loading, setLoading] = useState(false); 
