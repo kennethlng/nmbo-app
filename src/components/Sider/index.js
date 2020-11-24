@@ -63,18 +63,18 @@ export default function Sider() {
             </div>
             <List subheader={<li/>}>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                         <HomeRoundedIcon/>
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary="Home"/>
                 </ListItem>
                 {/* <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
                     <ListItemText primary="About"/>
                 </ListItem> */}
                 <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                         <FeedbackRoundedIcon/>
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary="Send Feedback"/>
                 </ListItem>
             </List>
