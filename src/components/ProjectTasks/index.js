@@ -7,7 +7,7 @@ import * as LIST_NAME from '../../constants/listName';
 import { db, firebase } from '../../lib/firebase';
 import { useRouter } from 'next/router'
 import NoTasksPlaceholder from './NoTasksPlaceholder'; 
-import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default function ProjectTasks(props) {
     const { projectId } = props; 
@@ -44,7 +44,7 @@ export default function ProjectTasks(props) {
     }
 
     return (
-        loading ? <CircularProgress/> : (
+        loading ? <LinearProgress/> : (
             tasks.length > 0 ? (
                 <ProjectTasksList
                     tasks={tasks}

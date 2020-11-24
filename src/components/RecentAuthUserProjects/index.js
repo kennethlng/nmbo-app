@@ -7,7 +7,7 @@ import * as LIST_NAME from '../../constants/listName';
 import { db, firebase } from '../../lib/firebase';
 import PlaceholderNotification from './PlaceholderNotification'
 import UserProjectsList from '../UserProjectsList';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 
 export default function RecentAuthUserProjects() {
@@ -58,7 +58,7 @@ export default function RecentAuthUserProjects() {
     }
 
     return (
-        loading ? <CircularProgress/> : (
+        loading ? <LinearProgress/> : (
             userProjects.length > 0 ? (
                 <div>
                     <Typography variant="overline" display="block" gutterBottom>
