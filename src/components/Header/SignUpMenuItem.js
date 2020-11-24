@@ -4,9 +4,17 @@ import * as CONTENT_TYPE from '../../constants/contentType'
 import * as CONTENT_ID from '../../constants/contentId'
 import { firebase } from '../../lib/firebase'
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    text: {
+        color: theme.palette.primary.main
+    }
+}))
 
 export default function SignUpMenuItem() {
     const router = useRouter();
+    const classes = useStyles(); 
 
     const handleClick = () => {
         // Log Google Analytics event for button click 
@@ -21,6 +29,7 @@ export default function SignUpMenuItem() {
 
     return (
         <MenuItem
+            className={classes.text}
             onClick={handleClick}
         >
             Create account
