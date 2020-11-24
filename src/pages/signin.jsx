@@ -173,7 +173,7 @@ export default function SignIn() {
                 Sign in
             </Typography>
             <Typography component="h3" variant="h6">
-                Access your checklists anywhere you go
+                Access your checklists anywhere you go.
             </Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
