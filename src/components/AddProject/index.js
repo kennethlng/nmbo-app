@@ -61,7 +61,7 @@ export default function AddProject(props) {
     return (
         <form noValidate onSubmit={handleSubmit}>
             <Grid container direction="column" spacing={1}>
-                <Grid item xs={6}>
+                <Grid item md={6} sm={8}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -74,7 +74,7 @@ export default function AddProject(props) {
                         onChange={e => setNewProjectTitle(e.target.value)}
                     />
                 </Grid>
-                <Grid item>
+                <Grid item sm={4}>
                     <Button
                         type="submit"
                         color="primary"
@@ -82,9 +82,10 @@ export default function AddProject(props) {
                         disabled={loading}
                         disableElevation
                         disableRipple
+                        fullWidth
                         size="large"
                     >
-                        Create New Checklist
+                        Create Checklist
                     </Button>
                 </Grid>
             </Grid>
