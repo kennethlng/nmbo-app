@@ -27,6 +27,9 @@ const theme = createMuiTheme({
         h3: {
             fontWeight: 900
         },
+        h6: {
+            fontWeight: 700
+        },
         fontFamily: [
             '-apple-system',
             'BlinkMacSystemFont',

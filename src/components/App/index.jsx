@@ -3,7 +3,6 @@ import Header from '../Header'
 import Sider from '../Sider'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
-import Container from '@material-ui/core/Container'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { AppStateContext } from '../AppState'
@@ -35,9 +34,7 @@ const App = ({ children }) => {
       </Backdrop>
       <div className={classes.content}>
         <Toolbar/>
-        <Container maxWidth="sm">
-          {children}
-        </Container>
+        {children}
       </div>
     </main>
   )

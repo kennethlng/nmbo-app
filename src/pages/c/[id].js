@@ -13,6 +13,7 @@ import ProjectTitleInput from '../../components/ProjectTitleInput'
 import AddProjectTask from '../../components/AddProjectTask'
 import { AuthUserContext } from '../../components/Session'
 import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
 
 export default function Project({ data }) {
     const router = useRouter(); 
@@ -72,30 +73,32 @@ export default function Project({ data }) {
                 <meta property="twitter:url" content={data ? META.URL + ROUTES.PROJECT(router.query.id) : META.URL}/>
                 <meta property="twitter:title" content={data ? META.PROJECT_TITLE(data.title) : META.CHECKLIST_DOESNT_EXIST}/>
             </Head>
-            {data ? (
-                authUser ? (
-                    <Grid container spacing={1}>
-                        <Grid item xs={12}>
-                            <ProjectTitleInput
-                                projectId={router.query.id}
-                                initialValue={data[DB.TITLE]}
-                            />
+            <Container maxWidth="sm">
+                {data ? (
+                    authUser ? (
+                        <Grid container spacing={1}>
+                            <Grid item xs={12}>
+                                <ProjectTitleInput
+                                    projectId={router.query.id}
+                                    initialValue={data[DB.TITLE]}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <AddProjectTask
+                                    projectId={router.query.id}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <ProjectTasks 
+                                    projectId={router.query.id}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <AddProjectTask
-                                projectId={router.query.id}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ProjectTasks 
-                                projectId={router.query.id}
-                            />
-                        </Grid>
-                    </Grid>
-                ) : null
-            ) : (
-                <ProjectDoesntExistPlaceholder/>
-            )}
+                    ) : null
+                ) : (
+                    <ProjectDoesntExistPlaceholder/>
+                )}
+            </Container>
         </App>
     )
 }
