@@ -79,7 +79,7 @@ export default function AccountButton() {
                     {authUser && authUser.isAnonymous ? (
                         <div>
                             <Typography className={classes.text} variant="body2" display="block">
-                                You are currently signed in as an <strong className={classes.anonymous}>anonymous user</strong>. Create an account or log in to access your checklists anywhere you go.
+                                You are currently signed in as an <strong className={classes.anonymous}>anonymous user</strong>. Create an account or log in to sync your checklists and access them anywhere you go.
                             </Typography>
                             <Divider/>
                             <SignUpMenuItem/>
