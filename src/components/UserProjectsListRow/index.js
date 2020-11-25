@@ -48,15 +48,11 @@ export default function UserProjectsListRow(props) {
         <ListItem button key={userProject[DB.ID]} onClick={handleRowClick}>
             <ListItemText
                 primary={(
-                    <Typography variant="h6">
-                        {userProject[DB.TITLE]}
+                    <Typography variant="body1">
+                        <strong>{userProject[DB.TITLE]}</strong>
                     </Typography>
                 )}
-                secondary={(
-                    <Typography variant="caption">
-                        {secondaryText}
-                    </Typography>
-                )}
+                secondary={secondaryText}
             />
         </ListItem>
     )
