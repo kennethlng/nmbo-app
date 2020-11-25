@@ -7,7 +7,6 @@ import * as CONTENT_ID from '../../constants/contentId';
 import * as EVENTS from '../../constants/events'; 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid'
 
 export default function AddProject(props) {
     const { onSuccess, onError } = props; 
@@ -60,35 +59,29 @@ export default function AddProject(props) {
 
     return (
         <form noValidate onSubmit={handleSubmit}>
-            <Grid container direction="column" spacing={1}>
-                <Grid item md={6} sm={8}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        autoFocus
-                        label="Checklist Name"
-                        fullWidth
-                        name="name"
-                        type="text"
-                        disabled={loading}
-                        onChange={e => setNewProjectTitle(e.target.value)}
-                    />
-                </Grid>
-                <Grid item sm={4}>
-                    <Button
-                        type="submit"
-                        color="primary"
-                        variant="contained"
-                        disabled={loading}
-                        disableElevation
-                        disableRipple
-                        fullWidth
-                        size="large"
-                    >
-                        Create Checklist
-                    </Button>
-                </Grid>
-            </Grid>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                autoFocus
+                label="Checklist Name"
+                fullWidth
+                name="name"
+                type="text"
+                disabled={loading}
+                onChange={e => setNewProjectTitle(e.target.value)}
+            />
+            <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                disabled={loading}
+                disableElevation
+                disableRipple
+                size="large"
+                fullWidth
+            >
+                Create Checklist
+            </Button>
         </form>
     )
 }
