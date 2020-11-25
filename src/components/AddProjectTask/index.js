@@ -11,6 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 export default function AddProjectTask(props) {
     const { projectId, onSuccess, onError } = props; 
@@ -93,6 +94,7 @@ export default function AddProjectTask(props) {
                 labelWidth={70}
                 disabled={loading}
             />
+            {title !== '' ? <FormHelperText>Press ENTER to add</FormHelperText> : null}
         </FormControl>
     )
 }
