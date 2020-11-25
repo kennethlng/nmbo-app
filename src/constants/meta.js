@@ -1,6 +1,6 @@
 export const SLOGAN = "The fastest way to make a checklist with friends";
 export const TITLE = `NMBO - ${SLOGAN}`
-export const DESCRIPTION = "Create a checklist and share the link, and anyone can start contributing. No account or download needed. Free to use.";
+export const DESCRIPTION = "Create a checklist and share the link, and anyone can start contributing. It's free to use. No account or download needed. ";
 export const SIGN_IN_TITLE = "Log in | NMBO";
 export const SIGN_UP_TITLE = "Sign up | NMBO";
 export const ABOUT_TITLE = "About | NMBO";
