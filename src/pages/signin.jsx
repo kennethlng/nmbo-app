@@ -171,10 +171,10 @@ export default function SignIn() {
                 <meta property="twitter:title" content={META.SIGN_IN_TITLE} />
             </Head>
             <Container maxWidth="sm">
-                <Typography component="h1" variant="h3">
+                <Typography component="h1" variant="h3" paragraph>
                     Sign in
                 </Typography>
-                {/* <Typography component="h3" variant="h6">
+                {/* <Typography component="h3" variant="h5">
                     Access your checklists anywhere you go.
                 </Typography> */}
                 <form className={classes.form} onSubmit={handleSubmit}>

@@ -149,12 +149,12 @@ export default function SignUp() {
                 <meta property="twitter:title" content={META.SIGN_UP_TITLE} />
             </Head>
             <Container maxWidth="sm">
-                <Typography component="h1" variant="h3">
+                <Typography component="h1" variant="h3" paragraph>
                     Create an account
                 </Typography>
-                {/* <Typography component="h3" variant="h6">
+                <Typography component="h3" variant="h5">
                     Sync your checklists anywhere you go.
-                </Typography> */}
+                </Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
