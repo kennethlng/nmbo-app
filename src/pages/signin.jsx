@@ -205,20 +205,23 @@ export default function SignIn() {
                         error={passwordHelp === '' ? false : true}
                         onChange={handlePasswordChange}
                     />
-                    <Button
-                        className={classes.submit}
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        disableElevation
-                        disableRipple
-                        disabled={loading}
-                        size="large"
-                    >
-                        Sign In
-                    </Button>
                     <Grid container>
-                        <Grid item xs>
+                        <Grid item xs={12} sm={3}>
+                            <Button
+                                className={classes.submit}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                disableElevation
+                                disableRipple
+                                fullWidth
+                                disabled={loading}
+                                size="large"
+                            >
+                                Sign In
+                            </Button>
+                        </Grid>
+                        <Grid item xs={12}>
                             <Link variant="body2" onClick={handleSignUpClick}>
                                 Need an account? Register
                             </Link>

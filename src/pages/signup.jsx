@@ -183,20 +183,23 @@ export default function SignUp() {
                         error={passwordHelp === '' ? false : true}
                         onChange={handlePasswordChange}
                     />
-                    <Button
-                        className={classes.submit}
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        disableElevation
-                        disableRipple
-                        disabled={loading}
-                    >
-                        Create Account
-                    </Button>
                     <Grid container>
-                        <Grid item xs>
+                        <Grid item xs={12} sm={4}>
+                            <Button
+                                className={classes.submit}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                fullWidth
+                                disableElevation
+                                disableRipple
+                                disabled={loading}
+                            >
+                                Create Account
+                            </Button>
+                        </Grid>
+                        <Grid item xs={12}>
                             <Link variant="body2" onClick={handleSignInClick}>
                                 Already have an account? Sign in
                             </Link>
