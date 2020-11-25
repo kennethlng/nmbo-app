@@ -31,14 +31,14 @@ const features = [
     description: "Creating and sharing a checklist is as easy as sending a link. Start a checklist and share the link with your friends on any of your favorite messaging apps."
   },
   {
-    emoji: "🥳🏖",
-    title: "Jump in anytime, anywhere.",
-    description: "Since NMBO lives on the web, you can open a checklist from any browser on any device."
-  },
-  {
     emoji: "🥸",
     title: "No account needed. And it's free.",
     description: "NMBO is completely free to use. Join a checklist or create one, even if you don't have an account."
+  },
+  {
+    emoji: "🥳🏖",
+    title: "Jump in anytime, anywhere.",
+    description: "Since NMBO lives on the web, you can open a checklist from any browser on any device."
   },
   {
     emoji: "👷‍♀️👨‍🌾🧑‍🚀",
@@ -96,8 +96,11 @@ export default function Home() {
               <Typography variant="h3" component="h1">
                 NMBO is the fastest way to make a checklist with friends.
               </Typography>
+              <Typography variant="subtitle1" component="h3">
+                Create a checklist and share the link, and anyone can start contributing.
+              </Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={12} sm={8} md={4}>
               <AddProject
                 onSuccess={handleSuccess}
               />
