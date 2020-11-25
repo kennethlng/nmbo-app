@@ -19,7 +19,6 @@ import EmailListItem from '../EmailListItem'
 import TwitterButton from '../TwitterButton'
 import GithubButton from '../GithubButton'
 import RecentAuthUserProjects from '../RecentAuthUserProjects'
-import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -43,9 +42,6 @@ const useStyles = makeStyles((theme) => ({
     footer: {
         padding: theme.spacing(2),
         // marginTop: theme.spacing(6)
-    },
-    divider: {
-        margin: theme.spacing(2)
     }
 }))
 
@@ -66,7 +62,6 @@ export default function Sider() {
                     </ListItemIcon>
                     <ListItemText primary="Home"/>
                 </ListItem>
-                <Divider className={classes.divider}/>
                 <RecentAuthUserProjects/>
                 <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
                     <ListItemIcon>
