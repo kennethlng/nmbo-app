@@ -9,7 +9,7 @@ export default function NoTasksPlaceholder() {
             <Grid container justify="center" alignItems="center">
                 <Grid item>
                     <Typography variant="body1">
-                        ☝️ Add your first task!
+                        ☝️ Add your first item!
                     </Typography>
                 </Grid>
             </Grid>

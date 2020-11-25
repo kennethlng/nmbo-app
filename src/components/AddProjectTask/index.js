@@ -72,7 +72,7 @@ export default function AddProjectTask(props) {
 
     return (
         <FormControl variant="outlined" fullWidth>
-            <InputLabel htmlFor="outlined-adornment-password">New task</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-password">New item</InputLabel>
             <OutlinedInput
                 id="outlined-adornment-password"
                 type='text'
