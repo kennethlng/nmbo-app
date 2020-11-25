@@ -27,8 +27,18 @@ const theme = createMuiTheme({
         h3: {
             fontWeight: 900
         },
+        h4: {
+            // fontWeight: 800
+        },
+        h5: {
+            fontWeight: 700
+        },
         h6: {
             fontWeight: 700
+        },
+        subtitle1: {
+            fontSize: 25,
+            color: grey['500']
         },
         fontFamily: [
             '-apple-system',
