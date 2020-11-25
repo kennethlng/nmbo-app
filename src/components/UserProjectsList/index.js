@@ -6,13 +6,13 @@ export default function UserProjectsList(props) {
     const { userProjects } = props; 
 
     return (
-        <List>
+        <List disablePadding>
             {userProjects.map(userProject => (
                 <UserProjectsListRow 
                     key={userProject[DB.ID]}
                     userProject={userProject}
                 />    
             ))}
-        </List>
+        </List> 
     )
 }

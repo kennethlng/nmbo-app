@@ -74,6 +74,7 @@ export default function RecentAuthUserProjects() {
         loading ? <LinearProgress/> : (
             userProjects.length > 0 ? (
                 <div>
+                    <Divider className={classes.divider}/>
                     <Typography className={classes.subheader} variant="overline" >
                         Recent checklists
                     </Typography>

@@ -2,17 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthUserContext } from '../Session'; 
 import { UserProject } from '../../models/UserProject'; 
 import * as DB from '../../constants/db'; 
-import * as ROUTES from '../../constants/routes';
 import * as LIST_ID from '../../constants/listId';
 import * as LIST_NAME from '../../constants/listName';
 import { db, firebase } from '../../lib/firebase';
-import { useRouter } from 'next/router'
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import { makeStyles } from '@material-ui/core/styles'
+import UserProjectsListRow from '../UserProjectsListRow'
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
+    subheader: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2)
+    },
     listSection: {
         backgroundColor: 'inherit',
     },
@@ -24,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecentAuthUserProjectsSubList() {
     const authUser = useContext(AuthUserContext); 
-    const router = useRouter();
     const classes = useStyles(); 
     const [userProjects, setUserProjects] = useState([]); 
     const [loading, setLoading] = useState(false); 
@@ -70,34 +71,24 @@ export default function RecentAuthUserProjectsSubList() {
             setLoading(false); 
         })
     }
-    
-    const handleRowClick = (userProject) => {
-        // Log Google Analytics event for selecting item
-        firebase.analytics().logEvent('select_item', {
-            items: [{
-                item_id: userProject[DB.ID],
-                item_name: userProject[DB.TITLE],
-                item_list_name: LIST_NAME.RECENT_USER_PROJECTS,
-                item_list_id: LIST_ID.RECENT_USER_PROJECTS
-            }],
-            item_list_name: LIST_NAME.RECENT_USER_PROJECTS,
-            item_list_id: LIST_ID.RECENT_USER_PROJECTS
-        })
-
-        // Route to project page
-        router.push(ROUTES.PROJECT(userProject[DB.ID]))
-    }
 
     return (
-        <li className={classes.listSection}>
-            <ul className={classes.ul}>
-                <ListSubheader>Recent</ListSubheader>
-                {userProjects.map(userProject => (
-                    <ListItem button key={userProject[DB.ID]} onClick={() => handleRowClick(userProject)}>
-                        <ListItemText primary={userProject[DB.TITLE]} />
-                    </ListItem>
-                ))}
-            </ul>
-        </li>
+        loading ? <LinearProgress/> : (
+            userProjects.length > 0 ? (
+                <li className={classes.listSection}>
+                    <ul className={classes.ul}>
+                        <Typography className={classes.subheader} variant="overline" >
+                            Recent checklists
+                        </Typography>
+                        {userProjects.map(userProject => (
+                            <UserProjectsListRow
+                                key={userProject[DB.ID]}
+                                userProject={userProject}
+                            />
+                        ))}
+                    </ul>
+                </li>
+            ) : null
+        )
     )
 }
