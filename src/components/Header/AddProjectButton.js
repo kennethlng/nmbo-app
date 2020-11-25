@@ -12,9 +12,9 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
     checklist: {
-        [theme.breakpoints.down('xs')]: {
-            display: 'none'
-        }
+        // [theme.breakpoints.down('xs')]: {
+        //     display: 'none'
+        // }
     }
 }))
 
