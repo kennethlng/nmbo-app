@@ -15,6 +15,7 @@ import { useRouter } from 'next/router'
 import LogoButton from './LogoButton'
 import Typography from '@material-ui/core/Typography'
 import EmailButton from '../EmailButton'
+import EmailListItem from '../EmailListItem'
 import TwitterButton from '../TwitterButton'
 import GithubButton from '../GithubButton'
 import RecentAuthUserProjects from '../RecentAuthUserProjects'
@@ -35,17 +36,13 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'none'
         },
-        width: '75%',
         margin: 'auto',
-        marginBottom: theme.spacing(3),
-        paddingLeft: theme.spacing(3)
+        textAlign: 'center',
+        marginBottom: theme.spacing(3)
     },
     footer: {
         padding: theme.spacing(2),
         // marginTop: theme.spacing(6)
-    },
-    social: {
-        // marginTop: theme.spacing(3)
     },
     divider: {
         margin: theme.spacing(2)
@@ -64,29 +61,22 @@ export default function Sider() {
             </div>
             <List subheader={<li/>}>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
-                    {/* <ListItemIcon>
+                    <ListItemIcon>
                         <HomeRoundedIcon/>
-                    </ListItemIcon> */}
+                    </ListItemIcon>
                     <ListItemText primary="Home"/>
                 </ListItem>
-                {/* <ListItem button onClick={() => router.push(ROUTES.ABOUT)}>
-                    <ListItemText primary="About"/>
-                </ListItem> */}
+                <Divider className={classes.divider}/>
+                <RecentAuthUserProjects/>
                 <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
-                    {/* <ListItemIcon>
+                    <ListItemIcon>
                         <FeedbackRoundedIcon/>
-                    </ListItemIcon> */}
+                    </ListItemIcon>
                     <ListItemText primary="Send Feedback"/>
                 </ListItem>
+                <EmailListItem/>
             </List>
-            <Divider className={classes.divider}/>
-            <RecentAuthUserProjects/>
             <div className={classes.footer}>
-                <div className={classes.social}>
-                    <EmailButton/>
-                    <TwitterButton/>
-                    <GithubButton/>
-                </div>
                 <Typography variant="caption">
                     © Copyright NMBO 2020
                 </Typography>
