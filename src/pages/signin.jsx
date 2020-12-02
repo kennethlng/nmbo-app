@@ -20,6 +20,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles';
+import SignInWithGoogleButton from '../components/SignInWithGoogleButton'; 
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -205,7 +206,7 @@ export default function SignIn() {
                         error={passwordHelp === '' ? false : true}
                         onChange={handlePasswordChange}
                     />
-                    <Grid container>
+                    <Grid container spacing={3}>
                         <Grid item xs={12} sm={3}>
                             <Button
                                 className={classes.submit}
@@ -220,6 +221,9 @@ export default function SignIn() {
                             >
                                 Sign In
                             </Button>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <SignInWithGoogleButton/>
                         </Grid>
                         <Grid item xs={12}>
                             <Link variant="body2" onClick={handleSignUpClick}>
