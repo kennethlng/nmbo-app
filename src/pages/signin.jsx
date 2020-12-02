@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'; 
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container'
+import Divider from '@material-ui/core/Divider'; 
 import { makeStyles } from '@material-ui/core/styles';
 import SignInWithGoogleButton from '../components/SignInWithGoogleButton'; 
 
@@ -207,7 +208,7 @@ export default function SignIn() {
                         onChange={handlePasswordChange}
                     />
                     <Grid container spacing={3}>
-                        <Grid item xs={12} sm={3}>
+                        <Grid item xs={12}>
                             <Button
                                 className={classes.submit}
                                 type="submit"
@@ -223,7 +224,15 @@ export default function SignIn() {
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
+                            <Typography variant="subtitle1" align="center">
+                                or
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
                             <SignInWithGoogleButton/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Divider/>
                         </Grid>
                         <Grid item xs={12}>
                             <Link variant="body2" onClick={handleSignUpClick}>
