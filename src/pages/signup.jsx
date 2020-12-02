@@ -20,6 +20,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container'
 import Link from '@material-ui/core/Link';
+import Divider from '@material-ui/core/Divider';
+import SignUpWithGoogleButton from '../components/SignUpWithGoogleButton';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -183,8 +185,8 @@ export default function SignUp() {
                         error={passwordHelp === '' ? false : true}
                         onChange={handlePasswordChange}
                     />
-                    <Grid container>
-                        <Grid item xs={12} sm={4}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
                             <Button
                                 className={classes.submit}
                                 type="submit"
@@ -198,6 +200,17 @@ export default function SignUp() {
                             >
                                 Create Account
                             </Button>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1" align="center">
+                                or
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <SignUpWithGoogleButton/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Divider/>
                         </Grid>
                         <Grid item xs={12}>
                             <Link variant="body2" onClick={handleSignInClick}>
