@@ -5,13 +5,16 @@ import * as CONTENT_ID from '../../constants/contentId';
 import * as CONTENT_TYPE from '../../constants/contentType'; 
 import * as EVENTS from '../../constants/events'; 
 import * as METHODS from '../../constants/methods'; 
-import * as SNACKBAR from '../../constants/snackbar'
+import * as SNACKBAR from '../../constants/snackbar';
+import * as ROUTES from '../../constants/routes'; 
 import { useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar'; 
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { useRouter } from 'next/router'; 
 
 export default function SignInWithGoogleButton() {
+    const router = useRouter(); 
     const [loading, setLoading] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState(''); 
@@ -45,6 +48,9 @@ export default function SignInWithGoogleButton() {
                 setSnackbarMessage("You're signed in!");
 
                 setLoading(false); 
+
+                // Push route
+                router.push(ROUTES.HOME);
             })
             .catch(function (error) {
                 // Handle Errors here.
