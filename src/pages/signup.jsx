@@ -22,6 +22,7 @@ import Container from '@material-ui/core/Container'
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
 import SignUpWithGoogleButton from '../components/SignUpWithGoogleButton';
+import SignUpWithFacebookButton from '../components/SignUpWithFacebookButton'; 
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -208,6 +209,9 @@ export default function SignUp() {
                         </Grid>
                         <Grid item xs={12}>
                             <SignUpWithGoogleButton/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <SignUpWithFacebookButton/>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider/>
