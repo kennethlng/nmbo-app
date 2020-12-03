@@ -7,6 +7,7 @@ import * as EVENTS from '../../constants/events';
 import * as METHODS from '../../constants/methods'; 
 import * as SNACKBAR from '../../constants/snackbar';
 import * as ROUTES from '../../constants/routes'; 
+import * as ERROR_CODES from '../../constants/errorCodes';
 import { useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar'; 
 import IconButton from '@material-ui/core/IconButton';
@@ -57,7 +58,7 @@ export default function SignInWithGoogleButton() {
                 var errorCode = error.code;
                 var errorMessage = error.message;
 
-                console.log("Error signing in with Google: ", errorMessage)
+                console.log("Error signing in with Google: ", error)
 
                 // The email of the user's account used.
                 var email = error.email;
@@ -72,8 +73,14 @@ export default function SignInWithGoogleButton() {
                 })
 
                 // Snackbar
+                switch (errorCode) {
+                    case ERROR_CODES.ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL:
+                        setSnackbarMessage("An account already exists with this email.")
+                        break;
+                    default:
+                        setSnackbarMessage("Oops! Something went wrong. Please try again.");
+                }
                 setSnackbarOpen(true); 
-                setSnackbarMessage("Oops! Something went wrong.");
 
                 setLoading(false); 
             });

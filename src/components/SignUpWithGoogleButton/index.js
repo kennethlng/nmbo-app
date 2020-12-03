@@ -7,6 +7,7 @@ import * as EVENTS from '../../constants/events';
 import * as METHODS from '../../constants/methods'; 
 import * as SNACKBAR from '../../constants/snackbar';
 import * as ROUTES from '../../constants/routes'; 
+import * as ERROR_CODES from '../../constants/errorCodes'; 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Snackbar from '@material-ui/core/Snackbar'; 
@@ -57,7 +58,7 @@ export default function SignUpWithGoogleButton() {
                 var errorCode = error.code;
                 var errorMessage = error.message;
 
-                console.log("Error linking anonymous account with Google: ", errorMessage)
+                console.log("Error linking anonymous account with Google: ", error)
 
                 // Log event for sign in error
                 firebase.analytics().logEvent(EVENTS.SIGN_UP_ERROR, {
@@ -66,8 +67,17 @@ export default function SignUpWithGoogleButton() {
                 })
 
                 // Snackbar
+                switch (errorCode) {
+                    case ERROR_CODES.EMAIL_ALREADY_IN_USE:
+                        setSnackbarMessage("This email address is already in use.");
+                        break;
+                    case ERROR_CODES.CREDENTIAL_ALREADY_IN_USE:
+                        setSnackbarMessage("This email address is already in use.");
+                        break;
+                    default:
+                        setSnackbarMessage("Oops! Something went wrong.");
+                }
                 setSnackbarOpen(true); 
-                setSnackbarMessage("Oops! Something went wrong.");
 
                 setLoading(false); 
             });
