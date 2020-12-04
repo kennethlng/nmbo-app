@@ -19,7 +19,6 @@ import { generateRandomDisplayName } from '../lib/generateRandomDisplayName'
 export default function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false); 
-  const [displayName, setDisplayName] = useState(''); 
   const [routeLoading, setRouteLoading] = useState(false); 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(''); 
@@ -54,32 +53,29 @@ export default function MyApp({ Component, pageProps }) {
         if (!authUser.displayName) {
           let displayName = generateRandomDisplayName(); 
 
-          setDisplayName(displayName); 
-
           authUser.updateProfile({ displayName })
-          .catch(function(error) {
-            console.log("Error updating displayname: ", error);
-          })
+            .catch(function (error) {
+              console.log("Error updating displayname: ", error);
+            })
         }
       } else {
         setAuthUser(null);
 
         // Sign in anonymously
         auth.signInAnonymously()
-        .catch(function (error) {
-          console.log("Error updating displayname: ", error);
-        });
+          .catch(function (error) {
+            console.log("Error updating displayname: ", error);
+          });
       }
     })
 
-    return () => unsubscribe()
+    return () => unsubscribe();
   }, [])
 
   return (
     <AppStateContext.Provider value={{
       drawerOpen,
       setDrawerOpen: (open) => setDrawerOpen(open),
-      displayName,
       routeLoading,
       snackbarOpen,
       setSnackbarOpen: (open) => setSnackbarOpen(open),
