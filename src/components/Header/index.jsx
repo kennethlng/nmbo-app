@@ -12,9 +12,6 @@ import { useRouter } from 'next/router'
 import * as ROUTES from '../../constants/routes'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
@@ -29,8 +26,11 @@ const useStyles = makeStyles((theme) => ({
       display: 'none'
     },
   },
-  endButton: {
-    marginLeft: theme.spacing(1)
+  buttons: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    }
   }
 }))
 
@@ -54,9 +54,9 @@ const Header = () => {
         <div className={classes.logoContainer}>
           <LogoButton/>
         </div>
-        <div className={classes.spacer}/>   
-        {router.pathname === ROUTES.HOME ? null : <AddProjectButton/> }
-        <div className={classes.endButton}>
+        <div className={classes.spacer}/> 
+        <div className={classes.buttons}>
+          {router.pathname === ROUTES.HOME ? null : <AddProjectButton/> }
           <AccountButton />
         </div>
       </Toolbar>
