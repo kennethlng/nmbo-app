@@ -13,12 +13,10 @@ import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
 import { useContext } from 'react'; 
 import { useRouter } from 'next/router'
 import LogoButton from './LogoButton'
-import Typography from '@material-ui/core/Typography'
-import EmailButton from '../EmailButton'
 import EmailListItem from '../EmailListItem'
-import TwitterButton from '../TwitterButton'
-import GithubButton from '../GithubButton'
 import RecentAuthUserProjects from '../RecentAuthUserProjects'
+import Footer from '../Footer'
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -71,10 +69,9 @@ export default function Sider() {
                 </ListItem>
                 <EmailListItem/>
             </List>
+            <Divider variant="middle"/>
             <div className={classes.footer}>
-                <Typography variant="caption">
-                    © Copyright NMBO 2020
-                </Typography>
+                <Footer/>
             </div>
         </div>
     )
