@@ -1,0 +1,19 @@
+export const names = [
+    "Santa",
+    "Giraffe",
+    "Grandma",
+    "Grandpa",
+    "Doggie",
+    "Cat",
+    "Boomer",
+    "Bear",
+    "Wizard",
+    "Lover",
+    "Alien",
+    "Pirate",
+    "Bot",
+    "Pumpkin",
+    "Poopoo",
+    "Ninja",
+    "Baby"
+];
