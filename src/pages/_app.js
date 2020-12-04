@@ -21,6 +21,8 @@ export default function MyApp({ Component, pageProps }) {
   const [drawerOpen, setDrawerOpen] = useState(false); 
   const [displayName, setDisplayName] = useState(''); 
   const [routeLoading, setRouteLoading] = useState(false); 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState(''); 
 
   useEffect(() => {
     // Necessary for server-side rendering with Material UI and Next.js
@@ -78,7 +80,11 @@ export default function MyApp({ Component, pageProps }) {
       drawerOpen,
       setDrawerOpen: (open) => setDrawerOpen(open),
       displayName,
-      routeLoading
+      routeLoading,
+      snackbarOpen,
+      setSnackbarOpen: (open) => setSnackbarOpen(open),
+      snackbarMessage,
+      setSnackbarMessage: (message) => setSnackbarMessage(message)
     }}>
       <AuthUserContext.Provider value={authUser}>
         <ToastContainer
