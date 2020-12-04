@@ -72,7 +72,6 @@ export default function ProjectTaskTitleInput(props) {
                 onKeyPress={handleKeyPress}
                 onChange={e => setTitle(e.target.value)}
                 multiline
-                rowsMax={3}
                 endAdornment={title === task[DB.TITLE] ? null : (
                     <Button
                         color="primary"
