@@ -3,9 +3,13 @@ import Header from '../Header'
 import Sider from '../Sider'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { AppStateContext } from '../AppState'
+import * as SNACKBAR from '../../constants/snackbar'
+import Snackbar from '@material-ui/core/Snackbar'; 
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    paddingTop: theme.spacing(6)
+    paddingTop: theme.spacing(6),
+    marginBottom: theme.spacing(6)
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -32,6 +37,23 @@ const App = ({ children }) => {
       <Backdrop className={classes.backdrop} open={appState.routeLoading}>
         <CircularProgress/>
       </Backdrop>
+      <Snackbar
+        anchorOrigin={{
+          vertical: SNACKBAR.VERTICAL_ANCHOR,
+          horizontal: SNACKBAR.HORIZONTAL_ANCHOR
+        }}
+        open={appState.snackbarOpen}
+        autoHideDuration={SNACKBAR.AUTO_HIDE_DURATION}
+        onClose={() => appState.setSnackbarOpen(false)}
+        message={appState.snackbarMessage}
+        action={
+          <React.Fragment>
+            <IconButton size="small" color="inherit" onClick={() => appState.setSnackbarOpen(false)}>
+              <CloseIcon />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
       <div className={classes.content}>
         <Toolbar/>
         {children}
