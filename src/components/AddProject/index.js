@@ -6,31 +6,26 @@ import * as CONTENT_TYPE from '../../constants/contentType';
 import * as CONTENT_ID from '../../constants/contentId';
 import * as EVENTS from '../../constants/events'; 
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
 export default function AddProject(props) {
     const { onSuccess, onError } = props; 
     const authUser = useContext(AuthUserContext); 
-    const [newProjectTitle, setNewProjectTitle] = useState(''); 
     const [loading, setLoading] = useState(false); 
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); 
-        
+    const handleSubmit = () => {
         // Log Google Analytics event for button click 
         firebase.analytics().logEvent('select_content', {
             content_type: CONTENT_TYPE.BUTTON,
             content_id: CONTENT_ID.HOME_PAGE_ADD_PROJECT_BUTTON
         })
         
-        if (newProjectTitle === '' || loading || !authUser) {
+        if (loading || !authUser) {
             return 
         }
 
         setLoading(true); 
 
         db.collection(DB.PROJECTS).add({
-            [DB.TITLE]: newProjectTitle,
             [DB.CREATED_BY]: authUser.uid
         })
         .then(function(docRef) {
@@ -58,30 +53,17 @@ export default function AddProject(props) {
     }
 
     return (
-        <form noValidate onSubmit={handleSubmit}>
-            <TextField
-                variant="outlined"
-                margin="normal"
-                autoFocus
-                label="Checklist Name"
-                fullWidth
-                name="name"
-                type="text"
-                disabled={loading}
-                onChange={e => setNewProjectTitle(e.target.value)}
-            />
-            <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                disabled={loading}
-                disableElevation
-                disableRipple
-                size="large"
-                fullWidth
-            >
-                Create Checklist
-            </Button>
-        </form>
+        <Button
+            color="primary"
+            variant="contained"
+            disabled={loading}
+            disableElevation
+            disableRipple
+            size="large"
+            fullWidth
+            onClick={handleSubmit}
+        >
+            Create Checklist
+        </Button>
     )
 }
