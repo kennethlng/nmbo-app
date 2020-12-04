@@ -1,8 +1,8 @@
-import { avatars } from '../constants/avatars'
+import { names } from '../constants/names'
 import { adjectives } from '../constants/adjectives'
 
-function getRandomAvatar() {
-    return avatars[Math.floor(Math.random() * avatars.length)];
+function getRandomName() {
+    return names[Math.floor(Math.random() * names.length)];
 }
 
 function getRandomAdjective() {
@@ -10,6 +10,6 @@ function getRandomAdjective() {
 }
 
 export function generateRandomDisplayName() {
-    let string = getRandomAdjective() + ' ' + getRandomAvatar(); 
+    let string = getRandomAdjective() + ' ' + getRandomName(); 
     return string; 
 }
