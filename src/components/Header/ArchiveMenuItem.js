@@ -23,7 +23,7 @@ export default function ArchiveMenuItem() {
         <MenuItem
             onClick={handleClick}
         >
-            🗓 Archive
+            🕙 Archive
         </MenuItem>
     )
 }
