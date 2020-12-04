@@ -1,166 +1,84 @@
 import App from '../components/App'; 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as ROUTES from '../constants/routes'; 
 import * as META from '../constants/meta'; 
-import * as TOAST from '../constants/toast'
-import * as EVENTS from '../constants/events'
-import * as METHODS from '../constants/methods'
 import * as PAGE_TITLE from '../constants/pageTitle'
-import * as CONTENT_TYPE from '../constants/contentType'
-import * as CONTENT_ID from '../constants/contentId'
+import * as ERROR_CODES from '../constants/errorCodes';
 import { useRouter } from 'next/router';
-import { auth, firebase } from '../lib/firebase'
+import { firebase } from '../lib/firebase'
+import { AppStateContext } from '../components/AppState';
 import Head from 'next/head'
-import * as EmailValidator from 'email-validator'
-import { toast } from 'react-toastify'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'; 
-import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container'
-import Divider from '@material-ui/core/Divider'; 
-import { makeStyles } from '@material-ui/core/styles';
 import SignInWithGoogleButton from '../components/SignInWithGoogleButton'; 
 import SignInWithFacebookButton from '../components/SignInWithFacebookButton'; 
+import SignInWithEmailAndPasswordForm from '../components/SignInWithEmailAndPasswordForm'
+import SignUpLink from '../components/SignUpLink'; 
+import { makeStyles } from '@material-ui/core/styles'; 
+import ForgotPasswordLink from '../components/ForgotPasswordLink';
 
 const useStyles = makeStyles(theme => ({
-    form: {
-        width: '100%', 
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(2, 0, 2)
+    body: {
+        marginTop: theme.spacing(3),
     }
 }))
 
 export default function SignIn() {
-    const classes = useStyles(); 
     const router = useRouter();
-    const [email, setEmail] = useState(''); 
-    const [password, setPassword] = useState(''); 
-    const [loading, setLoading] = useState(false);
-    const [emailHelp, setEmailHelp] = useState(''); 
-    const [passwordHelp, setPasswordHelp] = useState(''); 
+    const classes = useStyles(); 
+    const appState = useContext(AppStateContext); 
 
     useEffect(() => {
         // Log Google Analytics event for page view 
-        firebase.analytics().logEvent(EVENTS.PAGE_VIEW, {
+        firebase.analytics().logEvent('page_view', {
             page_path: router.pathname,
             page_title: PAGE_TITLE.SIGN_IN,
             page_location: window.location.href
         }); 
     }, [])
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); 
+    const handleSuccess = (result) => {
+        var user = result.user;
 
-        // Log event for sign in button click 
-        firebase.analytics().logEvent('select_content', {
-            content_id: CONTENT_ID.SIGN_IN_PAGE_SIGN_IN_BUTTON,
-            content_type: CONTENT_TYPE.BUTTON
-        })
+        console.log("Successfully signed in as: ", user);
 
-        if (loading) return;
+        // Snackbar
+        appState.setSnackbarMessage("You're signed in!");
+        appState.setSnackbarOpen(true); 
 
-        // Validate email
-        if (!EmailValidator.validate(email)) {
-            setEmailHelp('Please enter a valid email');
-            return 
+        // Push route
+        router.push(ROUTES.HOME);
+    }
+
+    const handleError = (error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.log("Error signing in: ", error)
+
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+
+        // Snackbar
+        switch (errorCode) {
+            case ERROR_CODES.ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL:
+                appState.setSnackbarMessage("An account already exists with this email.");
+                break;
+            case ERROR_CODES.USER_NOT_FOUND:
+                appState.setSnackbarMessage("An account with this email doesn't exist.");
+                break;
+            case ERROR_CODES.WRONG_PASSWORD:
+                appState.setSnackbarMessage("Wrong password");
+                break;
+            default:
+                appState.setSnackbarMessage("Oops! Something went wrong. Please try again.");
         }
-
-        setLoading(true); 
-
-        // Sign in
-        auth.signInWithEmailAndPassword(email, password)
-        .then(function() {
-            // Log event for successful login 
-            firebase.analytics().logEvent(EVENTS.LOGIN, {
-                method: METHODS.PASSWORD
-            })
-
-            setLoading(false); 
-
-            toast('Successfully signed in!', {
-                autoClose: TOAST.autoClose,
-                hideProgressBar: true
-            })
-
-            // Push route
-            router.push(ROUTES.HOME);
-        })
-        .catch(function(error) {
-            var errorMessage = error.message; 
-            var errorCode = error.code;
-
-            // Log event for sign in error
-            firebase.analytics().logEvent(EVENTS.LOGIN_ERROR, {
-                error_code: errorCode,
-                error_message: errorMessage
-            })
-
-            setPasswordHelp(errorMessage); 
-
-            // toast(error.message, {
-            //     autoClose: TOAST.autoClose,
-            //     hideProgressBar: true
-            // })
-
-            setLoading(false); 
-        });
-    }
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-        setEmailHelp('');
-    }
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-        setPasswordHelp(''); 
-    }
-
-    const handleSignUpClick = () => {
-        // Log event for sign up button click 
-        firebase.analytics().logEvent('select_content', {
-            content_id: CONTENT_ID.SIGN_IN_PAGE_SIGN_UP_BUTTON,
-            content_type: CONTENT_TYPE.BUTTON
-        })
-
-        // Push route 
-        router.push(ROUTES.SIGN_UP)
-    }
-
-    const handleForgotPassword = () => {
-        // Log event for forgot password button click 
-        firebase.analytics().logEvent('select_content', {
-            content_id: CONTENT_ID.SIGN_IN_PAGE_FORGOT_PASSWORD_BUTTON,
-            content_type: CONTENT_TYPE.BUTTON
-        })
-
-        // If the email is valid
-        if (EmailValidator.validate(email)) {
-            auth.sendPasswordResetEmail(email)
-            .then(function() {
-                toast('An email with instructions on how to reset your password was sent', {
-                    hideProgressBar: true
-                })
-            })
-            .catch(function(error) {
-                console.log(error)
-            })
-        } else {
-            toast('Please enter a valid email', {
-                autoClose: TOAST.autoClose,
-                hideProgressBar: true
-            })
-        }
-    }
-
-    const handleEnterKeyPress = (e) => {
-        if (e.key === "Enter") {
-            handleSubmit(e);
-        }
+        appState.setSnackbarOpen(true); 
     }
 
     return (    
@@ -174,82 +92,47 @@ export default function SignIn() {
                 <meta property="twitter:title" content={META.SIGN_IN_TITLE} />
             </Head>
             <Container maxWidth="sm">
-                <Typography component="h1" variant="h3" paragraph>
+                <Typography component="h1" variant="h3" align="center">
                     Sign in
                 </Typography>
-                {/* <Typography component="h3" variant="h5">
+                <Typography component="h3" variant="subtitle1" align="center">
                     Access your checklists anywhere you go.
-                </Typography> */}
-                <form className={classes.form} onSubmit={handleSubmit}>
-                    <TextField
-                        variant="outlined"
-                        required
-                        margin="normal"
-                        fullWidth
-                        label="Email"
-                        name="email"
-                        autoComplete="email"
-                        disabled={loading}
-                        helperText={emailHelp}
-                        error={emailHelp === '' ? false : true}
-                        onChange={handleEmailChange}
-                    />
-                    <TextField
-                        variant="outlined"
-                        required
-                        type="password"
-                        margin="normal"
-                        fullWidth
-                        label="Password"
-                        name="password"
-                        autoComplete="password"
-                        disabled={loading}
-                        helperText={passwordHelp}
-                        error={passwordHelp === '' ? false : true}
-                        onChange={handlePasswordChange}
-                    />
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <Button
-                                className={classes.submit}
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                disableElevation
-                                disableRipple
-                                fullWidth
-                                disabled={loading}
-                                size="large"
-                            >
-                                Sign In
-                            </Button>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="subtitle1" align="center">
-                                or
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <SignInWithGoogleButton/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <SignInWithFacebookButton/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Link variant="body2" onClick={handleSignUpClick}>
-                                Need an account? Register
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            {/* <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link> */}
-                        </Grid>
+                </Typography>
+                <Grid container spacing={3} className={classes.body}>
+                    <Grid item xs={12}>
+                        <SignInWithGoogleButton 
+                            onSuccess={handleSuccess}
+                            onError={handleError}
+                        />
                     </Grid>
-                </form>
+                    {/* <Grid item xs={12}>
+                        <SignInWithFacebookButton 
+                            onSuccess={handleSuccess}
+                            onError={handleError}
+                        />
+                    </Grid> */}
+                    <Grid item xs={12}>
+                        <Typography variant="subtitle1" align="center">
+                            or
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SignInWithEmailAndPasswordForm
+                            onSuccess={handleSuccess}
+                            onError={handleError}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography align="center">
+                            <SignUpLink/>   
+                        </Typography>
+                    </Grid>
+                    {/* <Grid item>
+                        <ForgotPasswordLink
+                            email={email}
+                        />
+                    </Grid> */}
+                </Grid>
             </Container>
         </App>
     )
