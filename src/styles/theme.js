@@ -28,7 +28,7 @@ const theme = createMuiTheme({
             fontWeight: 900
         },
         h4: {
-            // fontWeight: 800
+            fontWeight: 800
         },
         h5: {
             fontWeight: 700
@@ -53,7 +53,7 @@ const theme = createMuiTheme({
             '"Segoe UI Symbol"'
         ].join(','),
         button: {
-            textTransform: 'capitalize',
+            textTransform: 'none',
             fontWeight: 900
         }
     },
