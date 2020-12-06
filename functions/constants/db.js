@@ -3,6 +3,7 @@ module.exports = {
     PROJECTS: "projects",
     USER_PROJECTS: "user_projects",
     PROJECT_TASKS: "project_tasks",
+    PROJECT_USERS: "project_users",
     CREATED_ON: "created_on",
     CREATED_BY: "created_by",
     MODIFIED_ON: "modified_on",
@@ -16,5 +17,7 @@ module.exports = {
     NUM_TASKS_TOTAL: "num_tasks_total",
     NUM_TASKS_COMPLETED: "num_tasks_completed",
     IS_COMPLETED: "is_completed",
-    IS_HEARTED: "is_hearted"
+    IS_HEARTED: "is_hearted",
+    DISPLAY_NAME: "display_name",
+    PHOTO_URL: "photo_url"
 }
