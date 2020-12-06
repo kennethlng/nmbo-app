@@ -12,10 +12,11 @@ import SignInMenuItem from './SignInMenuItem'
 import ArchiveMenuItem from './ArchiveMenuItem';
 import { getDisplayNameEmojiAvatar } from '../../lib/getDisplayNameEmojiAvatar';
 import { useRouter } from 'next/router';
+import * as DB from '../../constants/db';
 import * as ROUTES from '../../constants/routes';
 import * as CONTENT_ID from '../../constants/contentId'; 
 import * as CONTENT_TYPE from '../../constants/contentType'; 
-import { firebase } from '../../lib/firebase'; 
+import { firebase, db } from '../../lib/firebase'; 
 
 const useStyles = makeStyles(theme => ({
     avatar: {
@@ -36,26 +37,32 @@ export default function AccountButton() {
     const classes = useStyles(); 
     const [anchorEl, setAnchorEl] = useState(null); 
     const [displayName, setDisplayName] = useState(null); 
-    const [isAnonymous, setIsAnonymous] = useState(false); 
     const [photoURL, setPhotoURL] = useState(null); 
     const open = Boolean(anchorEl);
     const router = useRouter(); 
 
     useEffect(() => {
-        if (authUser) {
-            setDisplayName(authUser.displayName); 
-            setPhotoURL(authUser.photoURL); 
-            setIsAnonymous(authUser.isAnonymous); 
+        var unsubscribe; 
+
+        if (authUser) {   
+            // Get the user's displayName and photoURL
+            unsubscribe = db.collection(DB.USERS).doc(authUser.uid).onSnapshot(function(doc) {
+                const data = doc.data(); 
+                if (data) {
+                    setDisplayName(data[DB.DISPLAY_NAME]); 
+                    setPhotoURL(data[DB.PHOTO_URL]); 
+                }
+            })
         }
-    }, [authUser, authUser && authUser.displayName, authUser && authUser.photoURL, authUser && authUser.isAnonymous])
 
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
-    }
+        return () => {
+            if (unsubscribe) unsubscribe(); 
+        }
+    }, [authUser])
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleClick = (e) => setAnchorEl(e.currentTarget);
+
+    const handleClose = () => setAnchorEl(null);
 
     const handleSignUp = () => {
         // Log analytics event
@@ -64,18 +71,8 @@ export default function AccountButton() {
             content_type: CONTENT_TYPE.BUTTON
         })
 
-        // Push route
+        // Push route to signup page
         router.push(ROUTES.SIGN_UP);
-    }
-
-    const handleSignIn = () => {
-        // Log analytics event
-        firebase.analytics().logEvent('select_content', {
-            content_id: CONTENT_ID.ACCOUNT_BUTTON_NOTIF_SIGN_IN_BUTTON,
-            content_type: CONTENT_TYPE.BUTTON
-        })
-
-        router.push(ROUTES.SIGN_IN);
     }
 
     return (
@@ -84,7 +81,7 @@ export default function AccountButton() {
                 onClick={handleClick}
                 disableElevation
                 disableRipple
-                color={isAnonymous ? "secondary" : "default"}
+                color={authUser && authUser.isAnonymous ? "secondary" : "default"}
                 startIcon={(
                     <Avatar
                         className={classes.avatar}
@@ -112,7 +109,7 @@ export default function AccountButton() {
                 onClose={handleClose}
                 onClick={handleClose}
             >
-                {isAnonymous ? (
+                {authUser && authUser.isAnonymous ? (
                     <div>
                         <div className={classes.text}>
                             <Typography  variant="body1" display="block" gutterBottom>
