@@ -1,5 +1,7 @@
 const DB = require('./db'); 
+const DISPLAY_NAME = require('./displayName'); 
 
 module.exports = {
-    DB
+    DB,
+    DISPLAY_NAME
 }
