@@ -9,11 +9,8 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import theme from '../styles/theme'
 import Head from 'next/head'
 import * as META from '../constants/meta'
-import NProgress from 'nprogress'
 import Router from 'next/router'
-import 'nprogress/nprogress.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { generateRandomDisplayName } from '../lib/generateRandomDisplayName'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
@@ -32,15 +29,12 @@ export default function MyApp({ Component, pageProps }) {
     
     // Next.js router change listeners
     Router.events.on('routeChangeStart', (url) => {
-      // NProgress.start()
       setRouteLoading(true); 
     })
     Router.events.on('routeChangeComplete', () => {
-      // NProgress.done()
       setRouteLoading(false); 
     })
     Router.events.on('routeChangeError', () => {
-      // NProgress.done()
       setRouteLoading(false); 
     })
 
@@ -48,16 +42,6 @@ export default function MyApp({ Component, pageProps }) {
     const unsubscribe = auth.onAuthStateChanged(function (authUser) {
       if (authUser) {
         setAuthUser(authUser); 
-
-        // If the authUser doesn't currently have a displayName, create one
-        if (!authUser.displayName) {
-          let displayName = generateRandomDisplayName(); 
-
-          authUser.updateProfile({ displayName })
-            .catch(function (error) {
-              console.log("Error updating displayname: ", error);
-            })
-        }
       } else {
         setAuthUser(null);
 
