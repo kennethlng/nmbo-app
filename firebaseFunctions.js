@@ -23,3 +23,8 @@ exports.onDeleteProject = require('./functions/lib/db/onDeleteProject').onDelete
 exports.onUpdateProjectTitle = require('./functions/lib/db/onUpdateProjectTitle').onUpdateProjectTitle;
 exports.onWriteUserProject = require('./functions/lib/db/onWriteUserProject').onWriteUserProject;
 exports.onWriteProjectTask = require('./functions/lib/db/onWriteProjectTask').onWriteProjectTask;
+exports.onUpdateUser = require('./functions/lib/db/onUpdateUser').onUpdateUser; 
+
+// Auth triggers
+exports.onCreateAuthUser = require('./functions/lib/auth/onCreateAuthUser').onCreateAuthUser; 
+exports.onDeleteAuthUser = require('./functions/lib/auth/onDeleteAuthUser').onDeleteAuthUser; 
