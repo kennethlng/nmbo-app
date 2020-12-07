@@ -9,25 +9,28 @@ exports.onWriteUserProject = functions.firestore.document(`${CONSTANTS.DB.USERS}
 
     // user_project doc is created or updated
     if (data) {
-        let obj = {}
-
         // Updated
         if (prevData) {
-            // If the visit counter hasn't incremented by 1, don't do anything
             const counter = data[CONSTANTS.DB.VISIT_COUNTER];
             const prevCounter = prevData[CONSTANTS.DB.VISIT_COUNTER]; 
-            if (counter - prevCounter < 1) return null; 
+
+            if (counter === prevCounter) {
+                // If the visit counter hasn't incremented by 1, don't do anything
+                return null; 
+            } else {
+                return change.after.ref.update({
+                    [CONSTANTS.DB.OPENED_ON]: timestamp
+                })
+            }
         }
-        // Created 
-        // User visits the project for the first time
+        // Created (user visits the project for the first time)
         else {
             // Store the 'relevant_on' field so it will show up in the recent user_projects list query
-            obj[CONSTANTS.DB.RELEVANT_ON] = timestamp;
+            return change.after.ref.update({
+                [CONSTANTS.DB.RELEVANT_ON]: timestamp,
+                [CONSTANTS.DB.OPENED_ON]: timestamp
+            })
         }
-
-        obj[CONSTANTS.DB.OPENED_ON] = timestamp;
-
-        return change.after.ref.update(obj)
     }
 
     return null; 
