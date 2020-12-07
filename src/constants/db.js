@@ -7,6 +7,7 @@ export const CREATED_ON = "created_on";
 export const CREATED_BY = "created_by";
 export const MODIFIED_ON = "modified_on";
 export const MODIFIED_BY = "modified_by";
+export const MODIFIED_BY_DISPLAY_NAME = "modified_by_display_name"; 
 export const OPENED_ON = "opened_on";
 export const RELEVANT_ON = "relevant_on";
 export const SNIPPET = "snippet"; 

@@ -8,6 +8,7 @@ module.exports = {
     CREATED_BY: "created_by",
     MODIFIED_ON: "modified_on",
     MODIFIED_BY: "modified_by",
+    MODIFIED_BY_DISPLAY_NAME: "modified_by_display_name",
     OPENED_ON: "opened_on",
     RELEVANT_ON: "relevant_on",
     SNIPPET: "snippet",
