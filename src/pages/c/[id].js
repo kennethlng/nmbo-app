@@ -14,6 +14,7 @@ import AddProjectTask from '../../components/AddProjectTask'
 import { AuthUserContext } from '../../components/Session'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 export default function Project({ data }) {
     const router = useRouter(); 
@@ -94,7 +95,7 @@ export default function Project({ data }) {
                                 />
                             </Grid>
                         </Grid>
-                    ) : null
+                    ) : <LinearProgress/>
                 ) : (
                     <ProjectDoesntExistPlaceholder/>
                 )}
