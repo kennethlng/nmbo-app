@@ -7,54 +7,62 @@ exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJEC
     let data = change.after.exists ? change.after.data() : null;
     let prevData = change.before.exists ? change.before.data() : null; 
     let timestamp = admin.firestore.FieldValue.serverTimestamp();
+    let snippet = '';
     let batch = db.batch(); 
     let userProjects = db.collectionGroup(CONSTANTS.DB.USER_PROJECTS).where(CONSTANTS.DB.ID, '==', context.params.projectId);
 
     // Task created or updated
     if (data) {
         let title = data[CONSTANTS.DB.TITLE];
-        let snippet = '';
-        let modifiedBy = data[CONSTANTS.DB.MODIFIED_BY]; 
+        let prevTitle = data[CONSTANTS.DB.TITLE]; 
+        let modifiedByDisplayName = data[CONSTANTS.DB.MODIFIED_BY_DISPLAY_NAME]
 
         // Task updated (previous document exists)
         if (prevData) {
-            // Only add snippet and modified_on field if user completed a task. Otherwise, don't do anything
-            let isCompleted = data[CONSTANTS.DB.IS_COMPLETED] && !prevData[CONSTANTS.DB.IS_COMPLETED]
-            if (!isCompleted) return null;
+            let checked = data[CONSTANTS.DB.IS_COMPLETED] && !prevData[CONSTANTS.DB.IS_COMPLETED];
+            let unchecked = !data[CONSTANTS.DB.IS_COMPLETED] && prevData[CONSTANTS.DB.IS_COMPLETED];
+            
+            // If the task was neither checked or unchecked (stayed the same)...
+            if (!checked && !unchecked) {
+                // If the title was not changed, don't do anything
+                if (title === prevTitle) return null; 
 
-            snippet = `Checked off: ${title}`;
+                snippet = `${modifiedByDisplayName} updated "${title}"`;
+            } else {
+                // If the task was checked off
+                if (checked) {
+                    snippet = `${modifiedByDisplayName} checked off "${title}"`;
+                }
+    
+                // If the task was unchecked
+                if (unchecked) {
+                    snippet = `${modifiedByDisplayName} unchecked "${title}"`;
+                }
+            }
         }
         // Task created (previous document doesn't exist)
         else {
-            snippet = `New: ${title}`;
+            snippet = `${modifiedByDisplayName} added "${title}"`;
         }
-
-        // return auth.getUser(modifiedBy)
-        // .then(function(user) {
-            
-        // })
-        // .catch(function(error) {
-        //     console.log('Error fetching user data:', error);
-        // });
-
-        // Update all user projects
-        return userProjects.get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                    batch.update(doc.ref, {
-                        [CONSTANTS.DB.SNIPPET]: snippet,
-                        [CONSTANTS.DB.MODIFIED_ON]: timestamp,
-                        [CONSTANTS.DB.RELEVANT_ON]: timestamp
-                    })
-                });
-
-                return batch.commit();
-            })
     }
     // Task deleted 
     else {
-        return null; 
+
     }
+
+    // Update all user projects
+    return userProjects.get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                batch.update(doc.ref, {
+                    [CONSTANTS.DB.SNIPPET]: snippet,
+                    [CONSTANTS.DB.MODIFIED_ON]: timestamp,
+                    [CONSTANTS.DB.RELEVANT_ON]: timestamp
+                })
+            });
+
+            return batch.commit();
+        })
 })
 
 // exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJECTS}/{projectId}/${CONSTANTS.DB.PROJECT_TASKS}/{taskId}`).onWrite((change, context) => {
