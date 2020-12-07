@@ -36,6 +36,7 @@ export default function AddProjectTask(props) {
             [DB.TITLE]: title,
             [DB.CREATED_BY]: authUser.uid,
             [DB.MODIFIED_BY]: authUser.uid,
+            [DB.MODIFIED_BY_DISPLAY_NAME]: authUser.displayName,
             [DB.IS_COMPLETED]: false 
         })
         .then(function(docRef) {

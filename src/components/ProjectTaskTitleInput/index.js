@@ -33,7 +33,8 @@ export default function ProjectTaskTitleInput(props) {
 
         task.ref.update({
             [DB.TITLE]: title,
-            [DB.MODIFIED_BY]: authUser.uid
+            [DB.MODIFIED_BY]: authUser.uid,
+            [DB.MODIFIED_BY_DISPLAY_NAME]: authUser.displayName
         })
         .then(function() {
             // Log event for success

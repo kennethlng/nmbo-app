@@ -29,7 +29,8 @@ export default function ProjectTaskCheckButton(props) {
 
         task.ref.update({
             [DB.IS_COMPLETED]: bool,
-            [DB.MODIFIED_BY]: authUser.uid
+            [DB.MODIFIED_BY]: authUser.uid,
+            [DB.MODIFIED_BY_DISPLAY_NAME]: authUser.displayName
         })
         .then(function() {
             // Log event for success
