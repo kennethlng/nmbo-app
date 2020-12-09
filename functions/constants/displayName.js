@@ -13,7 +13,8 @@ module.exports = {
         'Rich',
         'Raging',
         'Hot',
-        'Smokin'
+        'Smokin',
+        'Flaming'
     ],
     avatars: [
         "Santa",
@@ -30,7 +31,7 @@ module.exports = {
         "Pirate",
         "Bot",
         "Pumpkin",
-        "Poopoo",
+        "Poo",
         "Ninja",
         "Baby"
     ]
