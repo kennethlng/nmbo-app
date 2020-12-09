@@ -1,12 +1,15 @@
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
-import PrivacyPolicyLink from '../PrivacyPolicyLink'
+import PrivacyPolicyLink from './PrivacyLink'
+import ContactLink from './ContactLink'
+import FeedbackLink from './FeedbackLink'
+import AboutLink from './AboutLink'
 
 const useStyles = makeStyles(theme => ({
     links: {
         '& > * + *': {
-            marginLeft: theme.spacing(2),
+            marginLeft: theme.spacing(1),
         },
     },
 }))
@@ -18,6 +21,9 @@ export default function Footer() {
         <Grid container>
             <Grid item xs={12}>
                 <Typography className={classes.links} paragraph>
+                    <AboutLink/>
+                    <FeedbackLink/>
+                    <ContactLink/>
                     <PrivacyPolicyLink/>
                 </Typography>
             </Grid>
