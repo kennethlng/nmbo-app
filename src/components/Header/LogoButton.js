@@ -24,6 +24,7 @@ export default function LogoButton() {
     return (
         <Button
           onClick={handleClick}
+          color="inherit"
         >
           <div className={classes.logo}>
             <Logo/>
