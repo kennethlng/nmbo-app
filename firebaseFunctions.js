@@ -20,10 +20,10 @@ exports.nextjsFunc = https.onRequest((req, res) => {
 
 // Firestore triggers
 exports.onDeleteProject = require('./functions/lib/db/onDeleteProject').onDeleteProject;
-exports.onUpdateProjectTitle = require('./functions/lib/db/onUpdateProjectTitle').onUpdateProjectTitle;
+exports.onUpdateProject = require('./functions/lib/db/onUpdateProject').onUpdateProject;
 exports.onWriteUserProject = require('./functions/lib/db/onWriteUserProject').onWriteUserProject;
 exports.onWriteProjectTask = require('./functions/lib/db/onWriteProjectTask').onWriteProjectTask;
-exports.onUpdateUser = require('./functions/lib/db/onUpdateUser').onUpdateUser; 
+exports.onWriteUser = require('./functions/lib/db/onWriteUser').onWriteUser; 
 
 // Auth triggers
 exports.onCreateAuthUser = require('./functions/lib/auth/onCreateAuthUser').onCreateAuthUser; 
