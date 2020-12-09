@@ -16,10 +16,17 @@ import SignUpWithFacebookButton from '../components/SignUpWithFacebookButton';
 import SignUpWithEmailAndPasswordForm from '../components/SignUpWithEmailAndPasswordForm';
 import SignInLink from '../components/SignInLink';
 import { AppStateContext } from '../components/AppState';
+import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles(theme => ({
     body: {
         marginTop: theme.spacing(3),
+    },
+    paper: {
+        padding: theme.spacing(5)
+    },
+    signIn: {
+        marginTop: theme.spacing(3)
     }
 }))
 
@@ -88,42 +95,42 @@ export default function SignUp() {
                 <meta property="twitter:title" content={META.SIGN_UP_TITLE} />
             </Head>
             <Container maxWidth="sm">
-                <Typography component="h1" variant="h3" align="center">
-                    Create an account
+                <Paper elevation={0} className={classes.paper}>
+                    <Typography component="h1" variant="h3" align="center">
+                        Create an account
+                    </Typography>
+                    <Typography component="h3" variant="subtitle1" align="center">
+                        Sync your checklists anywhere you go.
+                    </Typography>
+                    <Grid container spacing={3} className={classes.body}>
+                        <Grid item xs={12}>
+                            <SignUpWithGoogleButton
+                                onSuccess={handleSuccess}
+                                onError={handleError}
+                            />
+                        </Grid>
+                        {/* <Grid item xs={12}>
+                            <SignUpWithFacebookButton
+                                onSuccess={handleSuccess}
+                                onError={handleError}
+                            />
+                        </Grid> */}
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1" align="center">
+                                or
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <SignUpWithEmailAndPasswordForm
+                                onSuccess={handleSuccess}
+                                onError={handleError}
+                            />
+                        </Grid>
+                    </Grid>
+                </Paper>
+                <Typography align="center" className={classes.signIn}>
+                    <SignInLink />
                 </Typography>
-                <Typography component="h3" variant="subtitle1" align="center">
-                    Sync your checklists anywhere you go.
-                </Typography>
-                <Grid container spacing={3} className={classes.body}>
-                    <Grid item xs={12}>
-                        <SignUpWithGoogleButton
-                            onSuccess={handleSuccess}
-                            onError={handleError}
-                        />
-                    </Grid>
-                    {/* <Grid item xs={12}>
-                        <SignUpWithFacebookButton
-                            onSuccess={handleSuccess}
-                            onError={handleError}
-                        />
-                    </Grid> */}
-                    <Grid item xs={12}>
-                        <Typography variant="subtitle1" align="center">
-                            or
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SignUpWithEmailAndPasswordForm
-                            onSuccess={handleSuccess}
-                            onError={handleError}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography align="center">
-                            <SignInLink/>
-                        </Typography>
-                    </Grid>
-                </Grid>
             </Container>
         </App>
     )

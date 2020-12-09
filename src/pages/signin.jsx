@@ -17,10 +17,17 @@ import SignInWithEmailAndPasswordForm from '../components/SignInWithEmailAndPass
 import SignUpLink from '../components/SignUpLink'; 
 import { makeStyles } from '@material-ui/core/styles'; 
 import ForgotPasswordLink from '../components/ForgotPasswordLink';
+import Paper from '@material-ui/core/Paper'; 
 
 const useStyles = makeStyles(theme => ({
     body: {
         marginTop: theme.spacing(3),
+    },
+    paper: {
+        padding: theme.spacing(5)
+    },
+    signUp: {
+        marginTop: theme.spacing(3)
     }
 }))
 
@@ -92,47 +99,47 @@ export default function SignIn() {
                 <meta property="twitter:title" content={META.SIGN_IN_TITLE} />
             </Head>
             <Container maxWidth="sm">
-                <Typography component="h1" variant="h3" align="center">
-                    Sign in
+                <Paper elevation={0} className={classes.paper}>
+                    <Typography component="h1" variant="h3" align="center">
+                        Sign in
+                    </Typography>
+                    <Typography component="h3" variant="subtitle1" align="center">
+                        Access your checklists anywhere you go.
+                    </Typography>
+                    <Grid container spacing={3} className={classes.body}>
+                        <Grid item xs={12}>
+                            <SignInWithGoogleButton 
+                                onSuccess={handleSuccess}
+                                onError={handleError}
+                            />
+                        </Grid>
+                        {/* <Grid item xs={12}>
+                            <SignInWithFacebookButton 
+                                onSuccess={handleSuccess}
+                                onError={handleError}
+                            />
+                        </Grid> */}
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1" align="center">
+                                or
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <SignInWithEmailAndPasswordForm
+                                onSuccess={handleSuccess}
+                                onError={handleError}
+                            />
+                        </Grid>
+                        {/* <Grid item>
+                            <ForgotPasswordLink
+                                email={email}
+                            />
+                        </Grid> */}
+                    </Grid>
+                </Paper>
+                <Typography align="center" className={classes.signUp}>
+                    <SignUpLink />
                 </Typography>
-                <Typography component="h3" variant="subtitle1" align="center">
-                    Access your checklists anywhere you go.
-                </Typography>
-                <Grid container spacing={3} className={classes.body}>
-                    <Grid item xs={12}>
-                        <SignInWithGoogleButton 
-                            onSuccess={handleSuccess}
-                            onError={handleError}
-                        />
-                    </Grid>
-                    {/* <Grid item xs={12}>
-                        <SignInWithFacebookButton 
-                            onSuccess={handleSuccess}
-                            onError={handleError}
-                        />
-                    </Grid> */}
-                    <Grid item xs={12}>
-                        <Typography variant="subtitle1" align="center">
-                            or
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SignInWithEmailAndPasswordForm
-                            onSuccess={handleSuccess}
-                            onError={handleError}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography align="center">
-                            <SignUpLink/>   
-                        </Typography>
-                    </Grid>
-                    {/* <Grid item>
-                        <ForgotPasswordLink
-                            email={email}
-                        />
-                    </Grid> */}
-                </Grid>
             </Container>
         </App>
     )
