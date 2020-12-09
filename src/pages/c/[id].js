@@ -1,5 +1,5 @@
 import App from '../../components/App'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { db, firebase } from '../../lib/firebase'
 import Head from 'next/head'
@@ -11,14 +11,31 @@ import ProjectTasks from '../../components/ProjectTasks'
 import ProjectDoesntExistPlaceholder from '../../components/ProjectDoesntExistPlaceholder'
 import ProjectTitleInput from '../../components/ProjectTitleInput'
 import AddProjectTask from '../../components/AddProjectTask'
+import ProjectUsersAvatarGroup from '../../components/ProjectUsersAvatarGroup'
+import ProjectUsersDialog from '../../components/ProjectUsersDialog'
 import { AuthUserContext } from '../../components/Session'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import Button from '@material-ui/core/Button'
+import CopyLinkButton from '../../components/CopyLinkButton'
+import Paper from '@material-ui/core/Paper'; 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    addTask: {
+        padding: theme.spacing(2)
+    },
+    paper: {
+        padding: theme.spacing(3)
+    }
+}))
 
 export default function Project({ data }) {
-    const router = useRouter(); 
+    const router = useRouter();
+    const classes = useStyles();  
     const authUser = useContext(AuthUserContext); 
+    const [dialogOpen, setDialogOpen] = useState(false); 
 
     useEffect(() => {
         // If the checklist exists
@@ -77,24 +94,50 @@ export default function Project({ data }) {
             <Container maxWidth="sm">
                 {data ? (
                     authUser ? (
-                        <Grid container spacing={1}>
-                            <Grid item xs={12}>
-                                <ProjectTitleInput
-                                    projectId={router.query.id}
-                                    initialValue={data[DB.TITLE]}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <AddProjectTask
-                                    projectId={router.query.id}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <ProjectTasks 
-                                    projectId={router.query.id}
-                                />
-                            </Grid>
-                        </Grid>
+                        <div>
+                            <Paper className={classes.paper} elevation={0}>
+                                <Grid container spacing={1}>
+                                    <Grid item xs={12}>
+                                        <ProjectTitleInput
+                                            projectId={router.query.id}
+                                            initialValue={data[DB.TITLE]}
+                                        />
+                                    </Grid>
+                                    <Grid container item xs={12}>                                    
+                                        <Grid item xs>
+                                            <Button
+                                                disableElevation
+                                                onClick={() => setDialogOpen(true)}
+                                            >
+                                                <ProjectUsersAvatarGroup
+                                                    projectId={router.query.id}
+                                                />
+                                            </Button>
+                                        </Grid>
+                                        <Grid item>
+                                            <CopyLinkButton
+                                                link={window.location.href}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <AddProjectTask
+                                            projectId={router.query.id}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <ProjectTasks 
+                                            projectId={router.query.id}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Paper>
+                            <ProjectUsersDialog
+                                projectId={router.query.id}
+                                open={dialogOpen}
+                                onClose={() => setDialogOpen(false)}
+                            />
+                        </div>
                     ) : <LinearProgress/>
                 ) : (
                     <ProjectDoesntExistPlaceholder/>
