@@ -14,14 +14,12 @@ exports.onCreateAuthUser = functions.auth.user().onCreate(user => {
     // If the user doesn't have a display name
     if (!user.displayName) {
         // Create a random display name 
-        const newName = displayNameHelpers.generateRandomDisplayName(); 
-        return auth.updateUser(user.uid, {
-            displayName: newName
-        })
-        .then((userRecord) => {
-            // Create the corresponding user doc in Firestore
-            createUser(user.uid, newName, user.photoURL); 
-        })
+        const newName = displayNameHelpers.generateRandomDisplayName();
+        return auth.updateUser(user.uid, { displayName: newName })
+            .then((userRecord) => {
+                // Create the corresponding user doc in Firestore
+                createUser(user.uid, newName, user.photoURL);
+            })
     } else {
         // Create the corresponding user doc in Firestore
         createUser(user.uid, user.displayName, user.photoURL);  
