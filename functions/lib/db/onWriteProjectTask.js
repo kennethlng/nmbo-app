@@ -1,7 +1,8 @@
 const functions = require('firebase-functions');
-const { db, auth } = require('../admin'); 
+const { auth } = require('../admin'); 
 const admin = require('firebase-admin');
 const CONSTANTS = require('../../constants'); 
+const userProjectsModule = require('./userProjects'); 
 
 exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJECTS}/{projectId}/${CONSTANTS.DB.PROJECT_TASKS}/{taskId}`).onWrite((change, context) => {
     let data = change.after.exists ? change.after.data() : null;
@@ -13,52 +14,58 @@ exports.onWriteProjectTask = functions.firestore.document(`${CONSTANTS.DB.PROJEC
     if (data) {
         let title = data[CONSTANTS.DB.TITLE];
         let isChecked = data[CONSTANTS.DB.IS_COMPLETED];
-        let modifiedByDisplayName = data[CONSTANTS.DB.MODIFIED_BY_DISPLAY_NAME]
+        let modifiedBy = data[CONSTANTS.DB.MODIFIED_BY]; 
 
-        // Task updated (previous document exists)
-        if (prevData) {
-            let prevTitle = prevData[CONSTANTS.DB.TITLE];  
-            let prevIsChecked = prevData[CONSTANTS.DB.IS_COMPLETED]; 
+        // Get the modifying user's displayName
+        return auth.getUser(modifiedBy)
+            .then(userRecord => {
+                const displayName = userRecord.displayName; 
 
-            // If there was no change to the task title or checkbox, don't do anything
-            if (title === prevTitle && isChecked === prevIsChecked) return null; 
+                // Task updated (previous document exists)
+                if (prevData) {
+                    let prevTitle = prevData[CONSTANTS.DB.TITLE];
+                    let prevIsChecked = prevData[CONSTANTS.DB.IS_COMPLETED];
 
-            // If the title was updated
-            if (title !== prevTitle) {
-                snippet = `${modifiedByDisplayName} updated "${title}"`;
-            }
+                    // If there was no change to the task title or checkbox, don't do anything
+                    if (title === prevTitle && isChecked === prevIsChecked) return null;
 
-            // If the checkbox was updated
-            if (isChecked !== prevIsChecked) {
-                // If the task was checked off
-                if (isChecked && !prevIsChecked) {
-                    snippet = `${modifiedByDisplayName} checked off "${title}"`;
-                } 
-                // If the task was unchecked
-                else if (!isChecked && prevIsChecked) {
-                    snippet = `${modifiedByDisplayName} unchecked "${title}"`;
+                    // If the title was updated
+                    if (title !== prevTitle) {
+                        snippet = `${displayName} updated "${title}"`;
+                    }
+
+                    // If the checkbox was updated
+                    if (isChecked !== prevIsChecked) {
+                        // If the task was checked off
+                        if (isChecked && !prevIsChecked) {
+                            snippet = `${displayName} checked off "${title}"`;
+                        }
+                        // If the task was unchecked
+                        else if (!isChecked && prevIsChecked) {
+                            snippet = `${displayName} unchecked "${title}"`;
+                        }
+                    }
                 }
-            }
-        }
-        // Task created (previous document doesn't exist)
-        else {
-            snippet = `${modifiedByDisplayName} added "${title}"`;
-        }
-    }
+                // Task created (previous document doesn't exist)
+                else {
+                    snippet = `${displayName} added "${title}"`;
+                }
 
-    // Update all user projects
-    return db.collectionGroup(CONSTANTS.DB.USER_PROJECTS).where(CONSTANTS.DB.ID, '==', context.params.projectId).get()
-        .then(function (querySnapshot) {
-            let batch = db.batch();
-
-            querySnapshot.forEach(function (doc) {
-                batch.update(doc.ref, {
+                return userProjectsModule.updateUserProjectsByProjectId(context.params.projectId, {
                     [CONSTANTS.DB.SNIPPET]: snippet,
                     [CONSTANTS.DB.MODIFIED_ON]: timestamp,
                     [CONSTANTS.DB.RELEVANT_ON]: timestamp
-                })
-            });
+                });
+            })
+    }
+    // Task deleted 
+    else {
+        let prevTitle = prevData[CONSTANTS.DB.TITLE];
 
-            return batch.commit();
-        })
+        return userProjectsModule.updateUserProjectsByProjectId(context.params.projectId, {
+            [CONSTANTS.DB.SNIPPET]: `Removed: "${prevTitle}"`,
+            [CONSTANTS.DB.MODIFIED_ON]: timestamp,
+            [CONSTANTS.DB.RELEVANT_ON]: timestamp
+        });
+    }
 })
