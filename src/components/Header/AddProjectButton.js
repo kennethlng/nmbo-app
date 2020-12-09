@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button'
-import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded'
+import Icon from '@material-ui/core/Icon'
 import { useRouter } from 'next/router'
 import * as ROUTES from '../../constants/routes'
 import * as DB from '../../constants/db'
@@ -50,15 +50,14 @@ export default function AddProjectButton() {
 
     return (
         <Button
-            variant="outlined"
-            color="primary"
+            color="inherit"
             onClick={handleClick}
             disabled={loading}
-            disableRipple
             disableElevation
-            startIcon={<PlaylistAddRoundedIcon/>}
+            endIcon={<Icon className="fas fa-tasks"/>}
         >
-            <span>New <span className={classes.checklist}>Checklist</span></span>
+            New
+            {/* <span>New <span className={classes.checklist}>Checklist</span></span> */}
         </Button>
     )
 }
