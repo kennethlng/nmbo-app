@@ -7,24 +7,33 @@ import { makeStyles } from '@material-ui/core/styles'
 import { AppStateContext } from '../AppState'
 import AccountButton from './AccountButton'
 import AddProjectButton from './AddProjectButton'
-import LogoButton from './LogoButton'; 
+import LogoButton from './LogoButton'
 import { useRouter } from 'next/router'
 import * as ROUTES from '../../constants/routes'
+import * as STYLES from '../../constants/styles'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${STYLES.DRAWER_WIDTH}px)`,
+      marginLeft: STYLES.DRAWER_WIDTH,
+    },
+    backgroundColor: theme.palette.background.default
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    }
+  },
+  logoContainer: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
   },
   spacer: {
     flexGrow: 1
-  },
-  logoContainer: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
-    },
   },
   buttons: {
     display: 'flex',
@@ -51,9 +60,9 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <div className={classes.logoContainer}>
-          <LogoButton/>
-        </div>
+        {/* <div className={classes.logoContainer}>
+          <LogoButton/> 
+        </div> */}
         <div className={classes.spacer}/> 
         <div className={classes.buttons}>
           {router.pathname === ROUTES.HOME ? null : <AddProjectButton/> }

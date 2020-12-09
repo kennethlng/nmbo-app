@@ -1,22 +1,20 @@
 import Drawer from '@material-ui/core/Drawer';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { AppStateContext } from '../AppState'
 import * as STYLES from '../../constants/styles'
 import * as ROUTES from '../../constants/routes';
-import * as SOCIAL from '../../constants/social'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
+import Icon from '@material-ui/core/Icon';
 import { useContext } from 'react'; 
 import { useRouter } from 'next/router'
-import LogoButton from './LogoButton'
-import EmailListItem from '../EmailListItem'
 import RecentAuthUserProjects from '../RecentAuthUserProjects'
 import Footer from '../Footer'
 import Divider from '@material-ui/core/Divider'
+import Hidden from '@material-ui/core/Hidden';
+import Logo from '../Logo';
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -26,48 +24,50 @@ const useStyles = makeStyles((theme) => ({
     drawerContainer: {
         overflow: 'auto'
     },
+    drawer: {
+        [theme.breakpoints.up('md')]: {
+            width: STYLES.DRAWER_WIDTH,
+            flexShrink: 0,
+        },
+    },
     margin: {
         margin: theme.spacing(2)
     },
     logo: {
-        [theme.breakpoints.up('sm')]: {
-            display: 'none'
-        },
+        // [theme.breakpoints.up('md')]: {
+        //     display: 'none'
+        // },
+        height: '35px',
+        width: '100%',
         margin: 'auto',
-        textAlign: 'center',
-        marginBottom: theme.spacing(3)
+        // textAlign: 'center',
+        marginBottom: theme.spacing(3),
+        paddingLeft: theme.spacing(2)
     },
     footer: {
-        padding: theme.spacing(2),
-        // marginTop: theme.spacing(6)
+        padding: theme.spacing(2)
     }
 }))
 
 export default function Sider() {
     const classes = useStyles(); 
     const router = useRouter(); 
+    const theme = useTheme(); 
     const appState = useContext(AppStateContext);
 
     const drawer = (
         <div className={classes.drawerContainer} onClick={() => appState.setDrawerOpen(false)}>
             <div className={classes.logo}>
-                <LogoButton/>
+                <Logo/>
             </div>
             <List subheader={<li/>}>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
                     <ListItemIcon>
-                        <HomeRoundedIcon/>
+                        <Icon className="far fa-clock" fontSize="default"/>
                     </ListItemIcon>
                     <ListItemText primary="Home"/>
                 </ListItem>
                 <RecentAuthUserProjects/>
-                <ListItem button onClick={() => window.open(SOCIAL.FEEDBACK, '_blank')}>
-                    <ListItemIcon>
-                        <FeedbackRoundedIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Send Feedback"/>
-                </ListItem>
-                <EmailListItem/>
             </List>
             <Divider variant="middle"/>
             <div className={classes.footer}>
@@ -79,15 +79,34 @@ export default function Sider() {
     const handleDrawerToggle = () => appState.setDrawerOpen(!appState.drawerOpen);
 
     return (
-        <Drawer
-            anchor='left'
-            open={appState.drawerOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-        >
-            {drawer}
-        </Drawer>
+        <nav className={classes.drawer}>
+            <Hidden mdUp implementation="js">
+                <Drawer
+                    variant="temporary"
+                    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                    open={appState.drawerOpen}
+                    onClose={handleDrawerToggle}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+            </Hidden>
+            <Hidden smDown implementation="js">
+                <Drawer
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    variant="permanent"
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Hidden>
+        </nav>
     )
 }
