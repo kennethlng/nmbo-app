@@ -21,7 +21,7 @@ export default function Footer() {
         <Grid container>
             <Grid item xs={12}>
                 <Typography className={classes.links} paragraph>
-                    <AboutLink/>
+                    {/* <AboutLink/> */}
                     <FeedbackLink/>
                     <ContactLink/>
                     <PrivacyPolicyLink/>

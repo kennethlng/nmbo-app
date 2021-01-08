@@ -8,13 +8,18 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Icon from '@material-ui/core/Icon';
-import { useContext } from 'react'; 
+import { useContext, useState } from 'react'; 
 import { useRouter } from 'next/router'
 import RecentAuthUserProjects from '../RecentAuthUserProjects'
 import Footer from '../Footer'
 import Divider from '@material-ui/core/Divider'
 import Hidden from '@material-ui/core/Hidden';
 import Logo from '../Logo';
+import Collapse from '@material-ui/core/Collapse'; 
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button'; 
+import Typography from '@material-ui/core/Typography'; 
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -54,20 +59,39 @@ export default function Sider() {
     const router = useRouter(); 
     const theme = useTheme(); 
     const appState = useContext(AppStateContext);
+    const [recentListOpen, setRecentListOpen] = useState(true); 
 
     const drawer = (
         <div className={classes.drawerContainer} onClick={() => appState.setDrawerOpen(false)}>
             <div className={classes.logo}>
                 <Logo/>
             </div>
-            <List subheader={<li/>}>
+            <List>
                 <ListItem button onClick={() => router.push(ROUTES.HOME)}>
                     <ListItemIcon>
-                        <Icon className="far fa-clock" fontSize="default"/>
+                        <Icon className="fas fa-home" fontSize="default"/>
                     </ListItemIcon>
                     <ListItemText primary="Home"/>
                 </ListItem>
-                <RecentAuthUserProjects/>
+                <ListItem button onClick={() => setRecentListOpen(!recentListOpen)}>
+                    <ListItemIcon>
+                        <Icon className="far fa-clock" fontSize="default"/>
+                    </ListItemIcon>
+                    <ListItemText primary="Recent"/>
+                    {recentListOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={recentListOpen} timeout="auto" unmountOnExit>
+                    <RecentAuthUserProjects/>
+                    <ListItem button onClick={() => router.push(ROUTES.PROJECTS)}>
+                        <ListItemText 
+                            primary={
+                                <Typography variant="body2" color="primary">
+                                    <strong>See all checklists</strong>
+                                </Typography>
+                            } 
+                        />
+                    </ListItem>
+                </Collapse>
             </List>
             <Divider variant="middle"/>
             <div className={classes.footer}>

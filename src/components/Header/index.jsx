@@ -65,7 +65,7 @@ const Header = () => {
         </div> */}
         <div className={classes.spacer}/> 
         <div className={classes.buttons}>
-          {router.pathname === ROUTES.HOME ? null : <AddProjectButton/> }
+          <AddProjectButton/>
           <AccountButton />
         </div>
       </Toolbar>

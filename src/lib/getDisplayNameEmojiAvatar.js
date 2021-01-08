@@ -15,6 +15,8 @@ export function getDisplayNameEmojiAvatar(displayName) {
             return "👴";
         case "Doggie":
             return "🐶";
+        case "Dog":
+            return "🐶";
         case "Cat":
             return "🐱"; 
         case "Boomer": 

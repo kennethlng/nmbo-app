@@ -4,15 +4,13 @@ import * as META from '../constants/meta'
 import * as ROUTES from '../constants/routes'
 import * as EVENTS from '../constants/events'
 import * as PAGE_TITLE from '../constants/pageTitle'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import AddProject from '../components/AddProject'
 import { useRouter } from 'next/router'
 import { firebase } from '../lib/firebase'
-import RecentAuthUserProjects from '../components/RecentAuthUserProjects'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -48,8 +46,8 @@ const features = [
 ]
 
 export default function Home() {
-  const router = useRouter(); 
-  const classes = useStyles(); 
+  const router = useRouter();
+  const classes = useStyles();
 
   const handleSuccess = (id) => router.push(ROUTES.PROJECT(id))
 
@@ -62,7 +60,7 @@ export default function Home() {
   }, [])
 
   const Feature = (props) => {
-    const { emoji, title, description} = props;
+    const { emoji, title, description } = props;
 
     return (
       <div className={classes.feature}>
@@ -77,17 +75,17 @@ export default function Home() {
         </Typography>
       </div>
     )
-}
+  }
 
   return (
     <App>
       <Head>
         <title>{META.TITLE}</title>
-        <meta name="title" content={META.TITLE}/>
-        <meta property="og:url" content={META.URL}/>
-        <meta property="og:title" content={META.TITLE}/>
-        <meta property="twitter:url" content={META.URL}/>
-        <meta property="twitter:title" content={META.TITLE}/>
+        <meta name="title" content={META.TITLE} />
+        <meta property="og:url" content={META.URL} />
+        <meta property="og:title" content={META.TITLE} />
+        <meta property="twitter:url" content={META.URL} />
+        <meta property="twitter:title" content={META.TITLE} />
       </Head>
       <Container maxWidth="md">
         <Grid container spacing={10} >

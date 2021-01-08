@@ -6,6 +6,7 @@ import * as CONTENT_TYPE from '../../constants/contentType';
 import * as CONTENT_ID from '../../constants/contentId';
 import * as EVENTS from '../../constants/events'; 
 import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon'; 
 
 export default function AddProject(props) {
     const { onSuccess, onError } = props; 
@@ -62,6 +63,7 @@ export default function AddProject(props) {
             size="large"
             fullWidth
             onClick={handleSubmit}
+            startIcon={<Icon className="fas fa-tasks"/>}
         >
             Create Checklist
         </Button>

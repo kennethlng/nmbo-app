@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthUserContext } from '../Session'
 import SignOutMenuItem from './SignOutMenuItem'
 import SignInMenuItem from './SignInMenuItem'
+import SettingsMenuItem from './SettingsMenuItem'; 
 import { useRouter } from 'next/router';
 import * as DB from '../../constants/db';
 import * as ROUTES from '../../constants/routes';
@@ -37,8 +38,8 @@ export default function AccountButton() {
     const authUser = useContext(AuthUserContext); 
     const classes = useStyles(); 
     const [anchorEl, setAnchorEl] = useState(null); 
-    const [displayName, setDisplayName] = useState(null); 
-    const [photoURL, setPhotoURL] = useState(null); 
+    const [displayName, setDisplayName] = useState(''); 
+    const [photoURL, setPhotoURL] = useState(''); 
     const open = Boolean(anchorEl);
     const router = useRouter(); 
 
@@ -124,16 +125,17 @@ export default function AccountButton() {
                             <div>
                                 <Typography variant="body1" display="block" gutterBottom>
                                     You are <strong className={classes.anonymous}>anonymous {displayName}</strong>.
-                           </Typography>
+                                </Typography>
                                 <Typography variant="body2" gutterBottom>
                                     This is how you will appear to others in a checklist.
-                           </Typography>
+                                </Typography>
                                 <Typography variant="body2" gutterBottom color="error">
                                     Checklists you create or open will only be remembered on this device. <Link component="button" variant="body2" onClick={handleSignUp}><strong>Create an account</strong></Link> to save your checklists and access them anywhere.
-                           </Typography>
+                                </Typography>
                             </div> 
                         ) : null}
                     </div>
+                    {authUser && authUser.isAnonymous ? null : <SettingsMenuItem/>}
                     <Divider/> 
                     {authUser && authUser.isAnonymous ? (
                         <SignInMenuItem/>

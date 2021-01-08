@@ -10,6 +10,7 @@ import * as SNACKBAR from '../../constants/snackbar'
 import Snackbar from '@material-ui/core/Snackbar'; 
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import SettingsDialog from '../SettingsDialog'; 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +54,10 @@ const App = ({ children }) => {
             </IconButton>
           </React.Fragment>
         }
+      />
+      <SettingsDialog 
+        open={appState.settingsOpen}
+        onClose={() => appState.setSettingsOpen(false)}
       />
       <div className={classes.content}>
         <Toolbar/>

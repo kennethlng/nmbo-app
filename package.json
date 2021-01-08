@@ -34,7 +34,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-toastify": "^6.1.0",
-    "sass": "^1.29.0"
+    "sass": "^1.29.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.1.6",

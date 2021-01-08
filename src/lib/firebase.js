@@ -3,6 +3,7 @@ import { config } from '../config/firebase';
 import 'firebase/auth';
 import 'firebase/firestore'; 
 import 'firebase/analytics'; 
+import 'firebase/storage'; 
 
 try {
     firebase.initializeApp(config)
@@ -19,5 +20,6 @@ if (typeof window !== 'undefined') {
 
 const auth = firebase.auth();
 const db = firebase.firestore(); 
+const storage = firebase.storage(); 
 
-export { auth, db, firebase }
+export { auth, db, storage, firebase }
